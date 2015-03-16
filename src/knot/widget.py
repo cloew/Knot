@@ -9,6 +9,7 @@ class Widget:
         """ Initialize the widget with its painters """
         self.painter = painter
         self.children = []
+        self.parent = None
         
     def draw(self):
         """ Draw the widget given its parent """
@@ -17,6 +18,7 @@ class Widget:
     def addChild(self, child):
         """ Add the Child to this widget """
         self.children.append(child)
+        child.parent = self
         
     @property
     def height(self):
