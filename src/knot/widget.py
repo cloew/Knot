@@ -49,3 +49,8 @@ class Widget:
     def top(self):
         """ Return the widget's top y coordinate """
         return self._qwidget.y()
+
+    @top.setter
+    def top(self, value):
+        self._qwidget.move(self.left, value)
+        self._qwidget.show()
