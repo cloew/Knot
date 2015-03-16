@@ -11,7 +11,14 @@ class LeftToRightPainter:
         """ Draw the Text Painter """
         qwidget = QWidget()
         self.drawChildren(widget, qwidget)
+        self.shrinkContainer(widget, qwidget)
         return qwidget
+        
+    def shrinkContainer(self, widget, qwidget):
+        """ Shrink the container widget so it exactly fits its contents """
+        width = sum([child.width for child in widget.children])
+        height = max([child.height for child in widget.children])
+        qwidget.resize(width, height)
         
     def drawChildren(self, widget, qwidget):
         """ Draws the children widgets """

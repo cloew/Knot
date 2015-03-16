@@ -19,6 +19,11 @@ class Widget:
         self.children.append(child)
         
     @property
+    def height(self):
+        """ Return the widget's height """
+        return self._qwidget.height()
+        
+    @property
     def width(self):
         """ Return the widget's width """
         return self._qwidget.width()

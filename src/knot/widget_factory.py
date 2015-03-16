@@ -1,7 +1,10 @@
 from .widget import Widget
+
+from .core.painters.left_to_right_painter import LeftToRightPainter
 from .core.painters.text_painter import TextPainter
 
-widgets = {'text':{'painter':TextPainter}}
+widgets = {'div':{'painter':LeftToRightPainter},
+           'text':{'painter':TextPainter}}
 
 
 def BuildWidget(widgetType, content):
