@@ -1,7 +1,6 @@
-from .widget import Widget
-from knot.core.painters.text_painter import TextPainter
+from .widget_factory import BuildWidget
 
-from PySide.QtGui import QApplication, QLabel, QMainWindow
+from PySide.QtGui import QMainWindow
 
 class KnotWindow(QMainWindow):
     """ Represents the window the knot elements will be rendered in """
@@ -10,7 +9,7 @@ class KnotWindow(QMainWindow):
         """ Initialize the window """
         QMainWindow.__init__(self)
         self.setWindowTitle(title)
-        self.label = Widget(TextPainter("Some Text"))
+        self.label = BuildWidget('text', "Some Text")
         self.initUI()
 
     def initUI(self):
