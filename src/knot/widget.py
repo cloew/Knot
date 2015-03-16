@@ -8,6 +8,11 @@ class Widget:
         
     def draw(self, parent):
         """ Draw the widget given its parent """
-        widget = self.painter.draw()
-        widget.setParent(parent)
-        widget.show()
+        self.__qwidget = self.painter.draw()
+        self.__qwidget.setParent(parent)
+        self.__qwidget.show()
+        
+    @property
+    def width(self):
+        """ Return the widget's width """
+        return self.__qwidget.width()
