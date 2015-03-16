@@ -19,14 +19,20 @@ class Widget:
         
     @property
     def left(self):
-        """ Return the widget's left coordinate """
+        """ Return the widget's left x coordinate """
         return self.__qwidget.x()
 
     @left.setter
     def left(self, value):
         self.__qwidget.move(value, self.top)
+        self.__qwidget.show()
+        
+    @property
+    def right(self):
+        """ Return the widget's right x coordinate """
+        return self.left + self.width 
         
     @property
     def top(self):
-        """ Return the widget's top coordinate """
+        """ Return the widget's top y coordinate """
         return self.__qwidget.y()
