@@ -9,4 +9,6 @@ class TextPainter:
         
     def draw(self):
         """ Draw the Text Painter """
-        return QLabel(self.text)
+        widget = QLabel(self.text)
+        widget.resize(widget.sizeHint())
+        return widget
