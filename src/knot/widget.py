@@ -16,3 +16,17 @@ class Widget:
     def width(self):
         """ Return the widget's width """
         return self.__qwidget.width()
+        
+    @property
+    def left(self):
+        """ Return the widget's left coordinate """
+        return self.__qwidget.x()
+
+    @left.setter
+    def left(self, value):
+        self.__qwidget.move(value, self.top)
+        
+    @property
+    def top(self):
+        """ Return the widget's top coordinate """
+        return self.__qwidget.y()
