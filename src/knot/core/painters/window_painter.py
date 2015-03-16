@@ -7,8 +7,18 @@ class WindowPainter:
         """ Initialize the Painter with its internal content """
         pass
         
-    def draw(self):
+    def draw(self, widget):
         """ Draw the Text Painter """
-        widget = QMainWindow()
-        widget.showMaximized()
-        return widget
+        qwidget = QMainWindow()
+        qwidget.showMaximized()
+        
+        self.drawChildren(widget, qwidget)
+        
+        return qwidget
+        
+    def drawChildren(self, widget, qwidget):
+        """ Draws the children widgets """
+        for child in widget.children:
+            child.draw(widget)
+            child._qwidget.setParent(qwidget)
+            child.show()

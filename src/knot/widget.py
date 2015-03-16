@@ -1,17 +1,22 @@
 
+from kao_decorators import proxy_for
+
+@proxy_for('_qwidget', ['show'])
 class Widget:
     """ Represents a widget within Knot """
     
     def __init__(self, painter):
         """ Initialize the widget with its painters """
         self.painter = painter
+        self.children = []
         
     def draw(self, parent):
         """ Draw the widget given its parent """
-        self._qwidget = self.painter.draw()
-        if parent is not None:
-            self._qwidget.setParent(parent._qwidget)
-        self._qwidget.show()
+        self._qwidget = self.painter.draw(self)
+        
+    def addChild(self, child):
+        """ Add the Child to this widget """
+        self.children.append(child)
         
     @property
     def width(self):

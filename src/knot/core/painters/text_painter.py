@@ -7,8 +7,8 @@ class TextPainter:
         """ Initialize the Painter with its internal content """
         self.text = content
         
-    def draw(self):
+    def draw(self, widget):
         """ Draw the Text Painter """
-        widget = QLabel(self.text)
-        widget.resize(widget.sizeHint())
-        return widget
+        qwidget = QLabel(self.text)
+        qwidget.resize(qwidget.sizeHint())
+        return qwidget
