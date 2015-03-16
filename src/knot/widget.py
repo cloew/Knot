@@ -8,24 +8,25 @@ class Widget:
         
     def draw(self, parent):
         """ Draw the widget given its parent """
-        self.__qwidget = self.painter.draw()
-        self.__qwidget.setParent(parent)
-        self.__qwidget.show()
+        self._qwidget = self.painter.draw()
+        if parent is not None:
+            self._qwidget.setParent(parent._qwidget)
+        self._qwidget.show()
         
     @property
     def width(self):
         """ Return the widget's width """
-        return self.__qwidget.width()
+        return self._qwidget.width()
         
     @property
     def left(self):
         """ Return the widget's left x coordinate """
-        return self.__qwidget.x()
+        return self._qwidget.x()
 
     @left.setter
     def left(self, value):
-        self.__qwidget.move(value, self.top)
-        self.__qwidget.show()
+        self._qwidget.move(value, self.top)
+        self._qwidget.show()
         
     @property
     def right(self):
@@ -35,4 +36,4 @@ class Widget:
     @property
     def top(self):
         """ Return the widget's top y coordinate """
-        return self.__qwidget.y()
+        return self._qwidget.y()

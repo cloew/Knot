@@ -1,18 +1,22 @@
+from .widget import Widget
 from .widget_factory import BuildWidget
 
-from PySide.QtGui import QMainWindow
+from .core.painters.window_painter import WindowPainter
 
-class KnotWindow(QMainWindow):
+from kao_decorators import proxy_for
+
+@proxy_for('_qwidget', ['setWindowTitle'])
+class KnotWindow(Widget):
     """ Represents the window the knot elements will be rendered in """
     
-    def __init__(self, title):
+    def __init__(self):
         """ Initialize the window """
-        QMainWindow.__init__(self)
-        self.setWindowTitle(title)
+        Widget.__init__(self, WindowPainter(''))
         self.label = BuildWidget('text', "Some Text")
-        self.initUI()
-
-    def initUI(self):
-        """ Initialize the User Interface """
-        self.showMaximized()
+        self.label2 = BuildWidget('text', "Some Other Text")
+        
+    def draw(self):
+        """ Draw the widget given its parent """
+        parent = None # Since this is the window it has no parent
+        Widget.draw(self, parent)
         self.label.draw(self)

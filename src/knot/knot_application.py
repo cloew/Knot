@@ -9,8 +9,11 @@ class KnotApplication:
     def __init__(self):
         """ Initialize the Knot Application """
         self.app = QApplication(sys.argv)
-        self.window = KnotWindow("Knot Test -- Dun Dun DUN!")
+        self.title = "Knot Test -- Dun Dun DUN!"
+        self.window = KnotWindow()
         
     def run(self):
         """ Run the applciation """
+        self.window.draw()
+        self.window.setWindowTitle(self.title)
         self.app.exec_()
