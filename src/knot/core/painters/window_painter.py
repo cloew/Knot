@@ -18,7 +18,19 @@ class WindowPainter:
         
     def drawChildren(self, widget, qwidget):
         """ Draws the children widgets """
+        previous = None
         for child in widget.children:
-            child.draw(widget)
-            child._qwidget.setParent(qwidget)
-            child.show()
+            self.drawChild(child, qwidget)
+            self.positionChild(child, previous)
+            previous = child
+            
+    def drawChild(self, child, qwidget):
+        """ Draw the child """
+        child.draw()
+        child._qwidget.setParent(qwidget)
+        child.show()
+            
+    def positionChild(self, child, previous):
+        """ Draw the child """
+        if previous is not None:
+            child.left = previous.right

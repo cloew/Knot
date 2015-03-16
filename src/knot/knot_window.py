@@ -12,12 +12,6 @@ class KnotWindow(Widget):
     def __init__(self):
         """ Initialize the window """
         Widget.__init__(self, WindowPainter(''))
-        # self.label = BuildWidget('text', "Some Text")
         self.addChild(BuildWidget('text', "Some Text"))
-        # self.label2 = BuildWidget('text', "Some Other Text")
-        
-    def draw(self):
-        """ Draw the widget given its parent """
-        parent = None # Since this is the window it has no parent
-        Widget.draw(self, parent)
-        # self.label.draw(self)
+        self.addChild(BuildWidget('text', "Some Other Text"))
+        self.addChild(BuildWidget('text', "EVEN MORE TEXT!!!!!!"))
