@@ -8,5 +8,6 @@ setup(name='knot',
       packages=['knot',
                 'knot.core',
                 'knot.core.painters',
-                'knot.core.painters.positioning'],
+                'knot.core.painters.positioning',
+                'knot.core.painters.sizing'],
      )

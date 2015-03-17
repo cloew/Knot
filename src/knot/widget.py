@@ -1,7 +1,7 @@
 
 from kao_decorators import proxy_for
 
-@proxy_for('_qwidget', ['show'])
+@proxy_for('_qwidget', ['resize', 'show'])
 class Widget:
     """ Represents a widget within Knot """
     
