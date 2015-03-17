@@ -10,5 +10,6 @@ setup(name='knot',
                 'knot.core.painters',
                 'knot.core.painters.positioning',
                 'knot.core.painters.sizing',
-                'knot.events'],
+                'knot.events',
+                'knot.core.positioning'],
      )

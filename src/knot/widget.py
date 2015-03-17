@@ -1,3 +1,4 @@
+from .core.positioning.from_neighbor import FromNeighbor
 from .events.event_handler import EventHandler
 
 from kao_decorators import proxy_for
@@ -16,12 +17,12 @@ class Widget:
         self.parent = None
         self.mods = mods
         self.eventHandler = EventHandler(self)
+        self.positioning = FromNeighbor()
         
     def setQWidget(self, qwidget):
         """ Set the underlying Qt Widget for this widget """
         self._qwidget = qwidget
         self.eventHandler.attachEvents(qwidget)
-        # qwidget.resizeEvent = self.resizeHandler.fire
         
     def draw(self):
         """ Draw the widget given its parent """
@@ -31,7 +32,12 @@ class Widget:
     def addChild(self, child):
         """ Add the Child to this widget """
         self.children.append(child)
-        child.parent = self
+        child.attachToParent(self)
+        
+    def attachToParent(self, parent):
+        """ Add the Child to this widget """
+        self.parent = parent
+        self.positioning.applyToWidget(self)
         
     @property
     def height(self):
