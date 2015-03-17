@@ -1,19 +1,23 @@
 
 from kao_decorators import proxy_for
+from smart_defaults import smart_defaults, PerCall
 
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
 class Widget:
     """ Represents a widget within Knot """
     
-    def __init__(self, painter):
+    @smart_defaults
+    def __init__(self, painter, mods=PerCall([])):
         """ Initialize the widget with its painters """
         self.painter = painter
         self.children = []
         self.parent = None
+        self.mods = mods
         
     def draw(self):
         """ Draw the widget given its parent """
         self.painter.draw(self)
+        [mod.afterDraw(self) for mod in self.mods]
         
     def addChild(self, child):
         """ Add the Child to this widget """

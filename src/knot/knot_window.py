@@ -1,6 +1,7 @@
 from .widget import Widget
 from .widget_factory import BuildWidget
 
+from .core.mods.centerer import Centerer
 from .core.painters.window_painter import WindowPainter
 
 from kao_decorators import proxy_for
@@ -13,6 +14,7 @@ class KnotWindow(Widget):
         """ Initialize the window """
         Widget.__init__(self, WindowPainter(''))
         self.div = BuildWidget('div', "")
+        self.div.mods.append(Centerer())
         self.addChild(self.div)
         
         self.div.addChild(BuildWidget('text', "Some Text"))
