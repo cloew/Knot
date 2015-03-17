@@ -33,10 +33,6 @@ class Widget:
         self.children.append(child)
         child.parent = self
         
-    # def onResize(self, callback):
-        # """ Fire the given callback when resized """
-        # self.resizeHandler.addCallback(callback)
-        
     @property
     def height(self):
         """ Return the widget's height """

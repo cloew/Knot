@@ -3,7 +3,8 @@ from .event_callbacks import EventCallbacks
 
 class EventHandler:
     """ Handles all possible widget events for a Knot Widget """
-    EVENTS = {'onResize': 'resizeEvent'}
+    EVENTS = {'onMove': 'moveEvent',
+              'onResize': 'resizeEvent'}
     
     def __init__(self, parent):
         """ Initialize with the widget that can fire the event """
