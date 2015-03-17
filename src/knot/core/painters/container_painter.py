@@ -3,8 +3,9 @@ from .painter import Painter
 class ContainerPainter(Painter):
     """ Handles painting a collection of child widgets """
     
-    def __init__(self, positioner):
+    def __init__(self, sizing, positioner):
         """ Initialize the Container Painter with its method for positioning child widgets """
+        Painter.__init__(self, sizing)
         self.positioner = positioner
         
     def afterDrawWidget(self, widget, qwidget):
