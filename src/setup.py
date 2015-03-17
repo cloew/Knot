@@ -7,5 +7,6 @@ setup(name='knot',
       author_email='',
       packages=['knot',
                 'knot.core',
-                'knot.core.painters'],
+                'knot.core.painters',
+                'knot.core.painters.positioning'],
      )
