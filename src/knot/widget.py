@@ -1,8 +1,10 @@
+from .events.event_handler import EventHandler
 
 from kao_decorators import proxy_for
 from smart_defaults import smart_defaults, PerCall
 
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
+@proxy_for('eventHandler', EventHandler.EVENTS.keys())
 class Widget:
     """ Represents a widget within Knot """
     
@@ -13,6 +15,13 @@ class Widget:
         self.children = []
         self.parent = None
         self.mods = mods
+        self.eventHandler = EventHandler(self)
+        
+    def setQWidget(self, qwidget):
+        """ Set the underlying Qt Widget for this widget """
+        self._qwidget = qwidget
+        self.eventHandler.attachEvents(qwidget)
+        # qwidget.resizeEvent = self.resizeHandler.fire
         
     def draw(self):
         """ Draw the widget given its parent """
@@ -23,6 +32,10 @@ class Widget:
         """ Add the Child to this widget """
         self.children.append(child)
         child.parent = self
+        
+    # def onResize(self, callback):
+        # """ Fire the given callback when resized """
+        # self.resizeHandler.addCallback(callback)
         
     @property
     def height(self):

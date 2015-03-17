@@ -9,7 +9,7 @@ class Painter:
     def draw(self, widget):
         """ Draw the widget and perform any housekeeping operations """
         qwidget = self.buildQWidget(widget)
-        widget._qwidget = qwidget
+        widget.setQWidget(qwidget)
         self.afterDrawWidget(widget, qwidget)
         
         if self.sizing is not None:
