@@ -10,12 +10,14 @@ class LeftToRightPainter(ContainerPainter):
         """ Initialize the painter """
         ContainerPainter.__init__(self, LeftToRight())
         
-    def draw(self, widget):
-        """ Draw the Text Painter """
-        qwidget = QWidget()
-        self.drawChildren(widget, qwidget)
+    def buildQWidget(self, widget):
+        """ Draw the Widget to use as the container """
+        return QWidget()
+        
+    def afterDrawWidget(self, widget, qwidget):
+        """ Use the Container Painter's after draw then shrink this widget so it fits its children exactly """
+        ContainerPainter.afterDrawWidget(self, widget, qwidget)
         self.shrinkContainer(widget, qwidget)
-        return qwidget
         
     def shrinkContainer(self, widget, qwidget):
         """ Shrink the container widget so it exactly fits its contents """

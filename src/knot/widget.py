@@ -13,7 +13,7 @@ class Widget:
         
     def draw(self):
         """ Draw the widget given its parent """
-        self._qwidget = self.painter.draw(self)
+        self.painter.draw(self)
         
     def addChild(self, child):
         """ Add the Child to this widget """
