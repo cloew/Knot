@@ -9,7 +9,8 @@ ALL_EVENTS = GetGlobalsFrom(event_types)
 
 class EventHandler:
     """ Handles all possible widget events for a Knot Widget """
-    QEVENTS = {event_types.MOVED: 'moveEvent',
+    QEVENTS = {event_types.DISPLAYED: 'showEvent',
+               event_types.MOVED: 'moveEvent',
                event_types.RESIZED: 'resizeEvent'}
     
     def __init__(self, parent):
