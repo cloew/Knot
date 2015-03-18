@@ -2,18 +2,15 @@
 class Painter:
     """ Handles creation of the underlying Qt widget used by a Knot Widget """
     
-    def __init__(self, sizing):
+    def __init__(self, content=None):
         """ Initialize the painter with its content """
-        self.sizing = sizing
+        pass
         
     def draw(self, widget):
         """ Draw the widget and perform any housekeeping operations """
         qwidget = self.buildQWidget(widget)
         widget.setQWidget(qwidget)
         self.afterDrawWidget(widget, qwidget)
-        
-        if self.sizing is not None:
-            self.sizing.adjust(widget)
         
     def buildQWidget(self, widget):
         """ Build the underlying Qt Widget """

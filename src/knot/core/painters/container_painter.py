@@ -1,14 +1,9 @@
 from .painter import Painter
-from .sizing.shrink_to_contents import ShrinkToContents
 
 from PySide.QtGui import QWidget
 
 class ContainerPainter(Painter):
     """ Handles painting a collection of child widgets """
-    
-    def __init__(self, content, sizing=ShrinkToContents()):
-        """ Initialize the painter """
-        Painter.__init__(self, sizing)
         
     def buildQWidget(self, widget):
         """ Draw the Widget to use as the container """

@@ -1,5 +1,4 @@
 from .painter import Painter
-from .sizing.use_size_hint import UseSizeHint
 
 from PySide.QtGui import QLabel
 
@@ -8,7 +7,7 @@ class TextPainter(Painter):
     
     def __init__(self, content):
         """ Initialize the Painter with its internal content """
-        Painter.__init__(self, None)#UseSizeHint())
+        Painter.__init__(self)
         self.text = content
         
     def buildQWidget(self, widget):
