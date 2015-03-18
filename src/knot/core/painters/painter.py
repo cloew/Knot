@@ -1,6 +1,7 @@
 
 class Painter:
     """ Handles creation of the underlying Qt widget used by a Knot Widget """
+    DEFAULT_SIZING_CLS = None
     
     def __init__(self, content=None):
         """ Initialize the painter with its content """
