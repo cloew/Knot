@@ -16,9 +16,6 @@ class EventHandler:
         """ Initialize with the widget that can fire the event """
         self.callbacks = {event:EventCallbacks(parent) for event in ALL_EVENTS}
         
-        # for event in self.callbacks:
-            # setattr(self, event, self.callbacks[event].addCallback)
-        
     def attachEvents(self, qwidget):
         """ Attach the events to the Qt Widget """
         for key, qtMethod in self.QEVENTS.items():
@@ -28,6 +25,10 @@ class EventHandler:
     def on(self, eventType, callback):
         """ Add the given callback for the given event type """
         self.callbacks[eventType].addCallback(callback)
+            
+    def unregister(self, eventType, callback):
+        """ Unregister the given callback for the given event type """
+        self.callbacks[eventType].removeCallback(callback)
         
     def fire(self, eventType):
         """ Fire the callbacks for the given event """

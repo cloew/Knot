@@ -11,6 +11,10 @@ class EventCallbacks:
         """ Add the given callback to the list of events to fire """
         self.callbacks.append(callback)
         
+    def removeCallback(self, callback):
+        """ Remove the given callback from the list of events to fire """
+        self.callbacks.remove(callback)
+        
     def fire(self, event=None):
         """ Fires this event """
         [callback(self.parent, event) for callback in self.callbacks]

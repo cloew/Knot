@@ -6,7 +6,7 @@ from kao_decorators import proxy_for
 from smart_defaults import smart_defaults, PerCall
 
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
-@proxy_for('eventHandler', ['on'])
+@proxy_for('eventHandler', ['on', 'unregister'])
 class Widget:
     """ Represents a widget within Knot """
     

@@ -12,3 +12,8 @@ class EventGroup:
         """ Register this Event Group """
         for event in self.events:
             self.widget.on(event, self.callback)
+        
+    def unregister(self):
+        """ Unregister this Event Group """
+        for event in self.events:
+            self.widget.unregister(event, self.callback)
