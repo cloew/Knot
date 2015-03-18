@@ -14,10 +14,6 @@ class FromNeighbor:
         if previousSibling is not None:
             self.eventGroup = EventGroup(previousSibling, [MOVED, RESIZED], self.positionWidget)
             self.eventGroup.register()
-            # callback = self.getCallback(widget)
-            
-            # previousSibling.on(MOVED, callback)
-            # previousSibling.on(RESIZED, callback)
     
     def positionWidget(self, sibling, event):
         """ Position this widget relative to its sibling """
