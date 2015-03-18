@@ -1,5 +1,6 @@
 from .core.positioning.from_neighbor import FromNeighbor
 from .events.event_handler import EventHandler
+from .events.event_types import CHILD_ADDED
 
 from kao_decorators import proxy_for
 from smart_defaults import smart_defaults, PerCall
@@ -34,6 +35,7 @@ class Widget:
         """ Add the Child to this widget """
         self.children.append(child)
         child.attachToParent(self)
+        self.eventHandler.fire(CHILD_ADDED)
         
     def attachToParent(self, parent):
         """ Add the Child to this widget """

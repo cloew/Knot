@@ -11,6 +11,6 @@ class EventCallbacks:
         """ Add the given callback to the list of events to fire """
         self.callbacks.append(callback)
         
-    def fire(self, event):
+    def fire(self, event=None):
         """ Fires this event """
         [callback(self.parent, event) for callback in self.callbacks]

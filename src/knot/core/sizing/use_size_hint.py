@@ -5,7 +5,7 @@ class UseSizeHint:
     
     def applyToWidget(self, widget):
         """ Apply the policy to the neighbor """
-        widget.on(MOVE, self.resize)
+        widget.on(MOVED, self.resize)
     
     def resize(self, widget, event):
         """ Adjust the given widget so it is sized properly """

@@ -12,8 +12,8 @@ class FromNeighbor:
         if previousSibling is not None:
             callback = self.getCallback(widget)
             
-            previousSibling.on(MOVE, callback)
-            previousSibling.on(RESIZE, callback)
+            previousSibling.on(MOVED, callback)
+            previousSibling.on(RESIZED, callback)
         
     def getCallback(self, widget):
         """ Return the callback to position the given widget """

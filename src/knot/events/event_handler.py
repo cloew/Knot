@@ -9,8 +9,8 @@ ALL_EVENTS = GetGlobalsFrom(event_types)
 
 class EventHandler:
     """ Handles all possible widget events for a Knot Widget """
-    QEVENTS = {event_types.MOVE: 'moveEvent',
-               event_types.RESIZE: 'resizeEvent'}
+    QEVENTS = {event_types.MOVED: 'moveEvent',
+               event_types.RESIZED: 'resizeEvent'}
     
     def __init__(self, parent):
         """ Initialize with the widget that can fire the event """
@@ -28,3 +28,7 @@ class EventHandler:
     def on(self, eventType, callback):
         """ Add the given callback for the given event type """
         self.callbacks[eventType].addCallback(callback)
+        
+    def fire(self, eventType):
+        """ Fire the callbacks for the given event """
+        self.callbacks[eventType].fire()
