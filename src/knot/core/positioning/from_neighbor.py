@@ -1,3 +1,4 @@
+from knot.events.event_group import EventGroup
 from knot.events.event_types import *
 
 class FromNeighbor:
@@ -8,19 +9,19 @@ class FromNeighbor:
         
     def applyToWidget(self, widget):
         """ Apply the policy to the neighbor """
+        self.widget = widget
         previousSibling = self.getPreviousSibling(widget)
         if previousSibling is not None:
-            callback = self.getCallback(widget)
+            self.eventGroup = EventGroup(previousSibling, [MOVED, RESIZED], self.positionWidget)
+            self.eventGroup.register()
+            # callback = self.getCallback(widget)
             
-            previousSibling.on(MOVED, callback)
-            previousSibling.on(RESIZED, callback)
-        
-    def getCallback(self, widget):
-        """ Return the callback to position the given widget """
-        def positionWidget(sibling, event):
-            """ Position this widget relative to its sibling """
-            widget.left = sibling.right
-        return positionWidget
+            # previousSibling.on(MOVED, callback)
+            # previousSibling.on(RESIZED, callback)
+    
+    def positionWidget(self, sibling, event):
+        """ Position this widget relative to its sibling """
+        self.widget.left = sibling.right
         
     def getPreviousSibling(self, widget):
         """ Return the previous sibling of this widget """
