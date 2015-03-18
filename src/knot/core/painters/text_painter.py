@@ -8,13 +8,9 @@ class TextPainter(Painter):
     
     def __init__(self, content):
         """ Initialize the Painter with its internal content """
-        Painter.__init__(self, UseSizeHint())
+        Painter.__init__(self, None)#UseSizeHint())
         self.text = content
         
     def buildQWidget(self, widget):
         """ Build the QLabel """
         return QLabel(self.text)
-        
-    # def afterDrawWidget(self, widget, qwidget):
-        # """ Shrink the label so it uses its size hint """
-        # UseSizeHint().adjust(widget)

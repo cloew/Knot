@@ -10,7 +10,7 @@ class Widget:
     """ Represents a widget within Knot """
     
     @smart_defaults
-    def __init__(self, painter, mods=PerCall([])):
+    def __init__(self, painter, mods=PerCall([]), sizing=None):
         """ Initialize the widget with its painters """
         self.painter = painter
         self.children = []
@@ -18,6 +18,7 @@ class Widget:
         self.mods = mods
         self.eventHandler = EventHandler(self)
         self.positioning = FromNeighbor()
+        self.sizing = sizing
         
     def setQWidget(self, qwidget):
         """ Set the underlying Qt Widget for this widget """
@@ -38,6 +39,8 @@ class Widget:
         """ Add the Child to this widget """
         self.parent = parent
         self.positioning.applyToWidget(self)
+        if self.sizing is not None:
+            self.sizing.applyToWidget(self)
         
     @property
     def height(self):

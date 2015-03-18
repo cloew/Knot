@@ -7,8 +7,8 @@ widgets = {'div':{'painter':ContainerPainter},
            'text':{'painter':TextPainter}}
 
 
-def BuildWidget(widgetType, content):
+def BuildWidget(widgetType, content, sizing=None):
     """ Build the Widget based on its given type """
     widgetConfig = widgets[widgetType]
     painter = widgetConfig['painter'](content)
-    return Widget(painter)
+    return Widget(painter, sizing=sizing)

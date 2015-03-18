@@ -2,6 +2,10 @@
 class UseSizeHint:
     """ Represents sizing a widget by using its size hint """
     
-    def adjust(self, widget):
+    def applyToWidget(self, widget):
+        """ Apply the policy to the neighbor """
+        widget.onMove(self.resize)
+    
+    def resize(self, widget, event):
         """ Adjust the given widget so it is sized properly """
         widget.resize(widget.sizeHint())
