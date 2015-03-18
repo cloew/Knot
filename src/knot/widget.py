@@ -5,7 +5,7 @@ from kao_decorators import proxy_for
 from smart_defaults import smart_defaults, PerCall
 
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
-@proxy_for('eventHandler', EventHandler.EVENTS.keys())
+@proxy_for('eventHandler', ['on'])
 class Widget:
     """ Represents a widget within Knot """
     
@@ -65,7 +65,7 @@ class Widget:
     @property
     def right(self):
         """ Return the widget's right x coordinate """
-        return self.left + self.width 
+        return self.left + self.width
         
     @property
     def top(self):
@@ -76,3 +76,8 @@ class Widget:
     def top(self, value):
         self._qwidget.move(self.left, value)
         self._qwidget.show()
+        
+    @property
+    def bottom(self):
+        """ Return the widget's bottom y coordinate """
+        return self._qwidget.y() + self.height

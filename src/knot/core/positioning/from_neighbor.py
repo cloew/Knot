@@ -1,3 +1,4 @@
+from knot.events.event_types import *
 
 class FromNeighbor:
     """ Represents a positioning policy that works based on the edge of a neighbor """
@@ -11,8 +12,8 @@ class FromNeighbor:
         if previousSibling is not None:
             callback = self.getCallback(widget)
             
-            previousSibling.onMove(callback)
-            previousSibling.onResize(callback)
+            previousSibling.on(MOVE, callback)
+            previousSibling.on(RESIZE, callback)
         
     def getCallback(self, widget):
         """ Return the callback to position the given widget """
