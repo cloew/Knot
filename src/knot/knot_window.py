@@ -1,5 +1,5 @@
 from .widget import Widget
-from .loader.factory.widget_factory import BuildWidget
+from .loader.factory.widget_factory import WidgetFactory
 
 from .core.painters.window_painter import WindowPainter
 from .core.positioning.center import Center
@@ -13,12 +13,12 @@ class KnotWindow(Widget):
     def __init__(self):
         """ Initialize the window """
         Widget.__init__(self, WindowPainter(''))
-        # self.div = BuildWidget('div', "", positioning=Center())
+        # self.div = WidgetFactory.build('div', "", positioning=Center())
         # self.addChild(self.div)
         
-        # self.div.addChild(BuildWidget('text', "Some Text"))
-        # self.div.addChild(BuildWidget('text', "Some Other Text"))
-        # self.label3 = BuildWidget('text', "EVEN MORE TEXT!!!!!!")
+        # self.div.addChild(WidgetFactory.build('text', "Some Text"))
+        # self.div.addChild(WidgetFactory.build('text', "Some Other Text"))
+        # self.label3 = WidgetFactory.build('text', "EVEN MORE TEXT!!!!!!")
         # self.div.addChild(self.label3)
         
     def printSomething(self, div, event):

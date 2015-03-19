@@ -1,3 +1,5 @@
+from .knot_config_factory import KnotConfigFactory
+
 from knot.widget import Widget
 
 from knot.core.positioning.center import Center
@@ -11,6 +13,4 @@ def BuildPositioning(positioningType):
     positioningCls = positionings[positioningType]
     return positioningCls()
     
-def HasPositioningType(positioningType):
-    """ Return if the factory can build this Positioning Type """
-    return positioningType in positioning
+PositioningFactory = KnotConfigFactory(positionings, BuildPositioning)
