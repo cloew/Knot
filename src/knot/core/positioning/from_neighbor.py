@@ -12,12 +12,15 @@ class FromNeighbor:
         self.widget = widget
         previousSibling = self.getPreviousSibling(widget)
         if previousSibling is not None:
+            self.sibling = previousSibling
+            self.widget.on(DISPLAYED, self.positionWidget)
             self.eventGroup = EventGroup(previousSibling, [MOVED, RESIZED], self.positionWidget)
             self.eventGroup.register()
     
-    def positionWidget(self, sibling, event):
+    def positionWidget(self, aWidget, event):
         """ Position this widget relative to its sibling """
-        self.widget.left = sibling.right
+        if self.widget.canMove():
+            self.widget.left = self.sibling.right
         
     def getPreviousSibling(self, widget):
         """ Return the previous sibling of this widget """

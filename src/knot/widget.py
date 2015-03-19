@@ -20,6 +20,7 @@ class Widget:
         self.eventHandler = EventHandler(self)
         self.positioning = FromNeighbor()
         self.sizing = sizing
+        self._qwidget = None
         
     def setQWidget(self, qwidget):
         """ Set the underlying Qt Widget for this widget """
@@ -43,6 +44,10 @@ class Widget:
         self.positioning.applyToWidget(self)
         if self.sizing is not None:
             self.sizing.applyToWidget(self)
+            
+    def canMove(self):
+        """ Return if this widget can move """
+        return self._qwidget is not None
         
     @property
     def height(self):
