@@ -12,5 +12,6 @@ setup(name='knot',
                 'knot.core.sizing',
                 'knot.events',
                 'knot.loader',
-                'knot.loader.token'],
+                'knot.loader.token',
+                'knot.loader.token.parser'],
      )
