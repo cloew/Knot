@@ -4,6 +4,11 @@ class AttributeToken:
     """ Represents a tokenized Knot attribute """
     ROLE = ATTRIBUTE
     
+    @classmethod
+    def isValidFor(cls, section):
+        """ Return if this token is valid for the given section """
+        return section[0].strip().startswith('@')
+    
     def __init__(self, section):
         """ Initialize with the section for the attribute """
         pieces = section[0].split()

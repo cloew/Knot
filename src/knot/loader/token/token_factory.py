@@ -5,8 +5,6 @@ from .widget_token import WidgetToken
 from .detector.token_detector import TokenDetector
 from .parser.widget_type_parser import WidgetTypeParser
 
-from ..factory.widget_factory import WidgetFactory
-
 from kao_file import KaoFile, SectionFinder
 
 class TokenFactory:
@@ -36,12 +34,12 @@ class TokenFactory:
     
     def load(self, section):
         """ Load a token from the given section """
-        if self.isWidget(section):
+        if WidgetToken.isValidFor(section):
             return WidgetToken(section, self)
-        elif section[0].strip().startswith('@'):
-            return AttributeToken(section)
         else:
-            return ContentToken(section)
+            for tokenCls in [AttributeToken, ContentToken]:
+                if tokenCls.isValidFor(section):
+                    return tokenCls(section)
         
     def isWidget(self, section):
         """ Return if the given section if for a Widget """

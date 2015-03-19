@@ -1,13 +1,31 @@
 from .token_roles import WIDGET, CONTENT, ATTRIBUTE
 from .parser.widget_type_parser import WidgetTypeParser
 
+from ..factory.widget_factory import WidgetFactory
+
 class WidgetToken:
     """ Represents a tokenized widget from a knot file """
     ROLE = WIDGET
     
+    @classmethod
+    def isValidFor(cls, section):
+        """ Return if this token is valid for the given section """
+        widgetType = cls.getWidgetType(section)
+        return widgetType is not None and WidgetFactory.isValidType(widgetType)
+        
+    @staticmethod
+    def getWidgetType(section):
+        """ Find the widget type in the given section """
+        firstLine = section[0]
+        pieces = firstLine.split()
+        if len(pieces) == 1:
+            return pieces[0].strip()
+        else:
+            return None
+    
     def __init__(self, section, factory):
         """ Intialize the Widget Token with the section it was loaded from """
-        self.widgetType = WidgetTypeParser().find(section)
+        self.widgetType = self.getWidgetType(section)
         
         self.children = []
         self.attributes = {}
