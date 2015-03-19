@@ -6,7 +6,7 @@ from knot.core.positioning.center import Center
 from knot.core.positioning.from_neighbor import FromNeighbor
 
 positionings = {'center':Center,
-               'from-neighbor':FromNeighbor}
+                'from-neighbor':FromNeighbor}
 
 def BuildPositioning(positioningType):
     """ Build the Positioning based on its given type """
