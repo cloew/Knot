@@ -1,4 +1,4 @@
-from .knot_scope_detector import KnotScopeDetector
+from .detector.knot_scope_detector import KnotScopeDetector
 from .content_token import ContentToken
 from .widget_token import WidgetToken
 from .parser.widget_type_parser import WidgetTypeParser
