@@ -1,4 +1,4 @@
-from .detector.knot_scope_detector import KnotScopeDetector
+from .detector.token_detector import TokenDetector
 from .content_token import ContentToken
 from .widget_token import WidgetToken
 from .parser.widget_type_parser import WidgetTypeParser
@@ -13,7 +13,7 @@ class TokenFactory:
     def loadAllTokens(self, lines):
         """ Load and return all Widget Tokens at the same depth from the given lines """
         file = KaoFile(lines)
-        sectionFinder = SectionFinder(KnotScopeDetector())
+        sectionFinder = SectionFinder(TokenDetector())
         section = None
         nextSectionStartsOn = 0
         

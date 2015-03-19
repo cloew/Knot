@@ -4,7 +4,7 @@ class KnotScopeDetector:
     """ Detects the section of a knot file defining a new scope """
     
     def __init__(self, startingLine=None):
-        """ Initialize the function detector """
+        """ Initialize the Scope detector """
         self.startingLine = startingLine
     
     def isStart(self, line):

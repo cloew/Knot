@@ -9,3 +9,6 @@ class AttributeToken:
         pieces = section[0].split()
         self.attribute = pieces.split('@')[1]
         self.value = pieces[1]
+        
+    def __repr__(self):
+        return "<AttributeToken:@{0}:{1}>".format(self.attribute, self.value)
