@@ -1,3 +1,4 @@
+from .attributes import POSITION
 from .attribute_loader import AttributeLoader
 from .factory.widget_factory import WidgetFactory
 
@@ -10,7 +11,7 @@ class WidgetLoader:
         content = widgetToken.content.value if widgetToken.content is not None else None
         
         attrLoader = AttributeLoader()
-        positioning = attrLoader.load(widgetToken.attributes['position']) if 'position' in widgetToken.attributes else None
+        positioning = attrLoader.load(widgetToken.attributes[POSITION]) if POSITION in widgetToken.attributes else None
         
         widget = WidgetFactory.build(widgetType, content, positioning=positioning)
         
