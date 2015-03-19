@@ -1,5 +1,4 @@
 from .token_roles import CONTENT
-from .parser.content_parser import ContentParser
 
 class ContentToken:
     """ Represents a widget's content from a knot file """
@@ -12,7 +11,7 @@ class ContentToken:
     
     def __init__(self, section):
         """ Initialize the Content Token """
-        self.value = ContentParser().find(section)
+        self.value = section[0].strip()
         
     def isContent(self):
         """ Return if this token is content """

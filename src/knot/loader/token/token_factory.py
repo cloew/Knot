@@ -3,7 +3,6 @@ from .content_token import ContentToken
 from .widget_token import WidgetToken
 
 from .detector.token_detector import TokenDetector
-from .parser.widget_type_parser import WidgetTypeParser
 
 from kao_file import KaoFile, SectionFinder
 
@@ -40,8 +39,3 @@ class TokenFactory:
             for tokenCls in [AttributeToken, ContentToken]:
                 if tokenCls.isValidFor(section):
                     return tokenCls(section)
-        
-    def isWidget(self, section):
-        """ Return if the given section if for a Widget """
-        widgetType = WidgetTypeParser().find(section)
-        return widgetType is not None and WidgetFactory.isValidType(widgetType)

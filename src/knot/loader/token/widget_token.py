@@ -1,5 +1,4 @@
 from .token_roles import WIDGET, CONTENT, ATTRIBUTE
-from .parser.widget_type_parser import WidgetTypeParser
 
 from ..factory.widget_factory import WidgetFactory
 
