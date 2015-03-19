@@ -1,6 +1,8 @@
-from .detector.token_detector import TokenDetector
+from .attribute_token import AttributeToken
 from .content_token import ContentToken
 from .widget_token import WidgetToken
+
+from .detector.token_detector import TokenDetector
 from .parser.widget_type_parser import WidgetTypeParser
 
 from ..factory.widget_factory import WidgetFactory
@@ -36,6 +38,8 @@ class TokenFactory:
         """ Load a token from the given section """
         if self.isWidget(section):
             return WidgetToken(section, self)
+        elif section[0].startswith('@'):
+            return AttributeToken(section)
         else:
             return ContentToken(section)
         
@@ -43,4 +47,3 @@ class TokenFactory:
         """ Return if the given section if for a Widget """
         widgetType = WidgetTypeParser().find(section)
         return widgetType is not None and WidgetFactory.isValidType(widgetType)
-            

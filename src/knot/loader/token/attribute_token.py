@@ -7,7 +7,7 @@ class AttributeToken:
     def __init__(self, section):
         """ Initialize with the section for the attribute """
         pieces = section[0].split()
-        self.attribute = pieces.split('@')[1]
+        self.attribute = pieces[0].split('@')[1]
         self.value = pieces[1]
         
     def __repr__(self):
