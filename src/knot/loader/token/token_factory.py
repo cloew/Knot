@@ -38,7 +38,7 @@ class TokenFactory:
         """ Load a token from the given section """
         if self.isWidget(section):
             return WidgetToken(section, self)
-        elif section[0].startswith('@'):
+        elif section[0].strip().startswith('@'):
             return AttributeToken(section)
         else:
             return ContentToken(section)
