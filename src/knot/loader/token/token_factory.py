@@ -1,6 +1,7 @@
 from .knot_scope_detector import KnotScopeDetector
 from .content_token import ContentToken
 from .widget_token import WidgetToken
+from .parser.widget_type_parser import WidgetTypeParser
 
 from knot.widget_factory import HasWidgetType
 
@@ -40,7 +41,6 @@ class TokenFactory:
         
     def isWidget(self, section):
         """ Return if the given section if for a Widget """
-        firstLine = section[0]
-        pieces = firstLine.split()
-        return len(pieces) == 1 and HasWidgetType(pieces[0].strip())
+        widgetType = WidgetTypeParser().find(section)
+        return widgetType is not None and HasWidgetType(widgetType)
             

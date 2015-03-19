@@ -1,12 +1,11 @@
+from .parser.widget_type_parser import WidgetTypeParser
 
 class WidgetToken:
     """ Represents a tokenized widget from a knot file """
     
     def __init__(self, section, factory):
         """ Intialize the Widget Token with the section it was loaded from """
-        firstLine = section[0]
-        pieces = firstLine.split()
-        self.widgetType = pieces[0].strip()
+        self.widgetType = WidgetTypeParser().find(section)
         
         children = factory.loadAllTokens(section[1:])
         self.processChildren(children)
