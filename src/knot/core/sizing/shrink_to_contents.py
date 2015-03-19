@@ -20,8 +20,8 @@ class ShrinkToContents:
         height = lastChild.bottom
         self.widget.resize(width, height)
             
-    def findLastChild(self, widget, event=None):
-        """ Find the last child of the given widget """
+    def findLastChild(self, widget, newChild=None):
+        """ Find the last child, in case it changes """
         if len(widget.children) > 0:
             lastChild = widget.children[-1]
             

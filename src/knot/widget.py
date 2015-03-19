@@ -36,7 +36,7 @@ class Widget:
         """ Add the Child to this widget """
         self.children.append(child)
         child.attachToParent(self)
-        self.eventHandler.fire(CHILD_ADDED)
+        self.eventHandler.fire(CHILD_ADDED, event=child)
         
     def attachToParent(self, parent):
         """ Add the Child to this widget """

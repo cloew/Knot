@@ -31,6 +31,6 @@ class EventHandler:
         """ Unregister the given callback for the given event type """
         self.callbacks[eventType].removeCallback(callback)
         
-    def fire(self, eventType):
+    def fire(self, eventType, event=None):
         """ Fire the callbacks for the given event """
-        self.callbacks[eventType].fire()
+        self.callbacks[eventType].fire(event=event)
