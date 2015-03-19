@@ -1,5 +1,5 @@
 from .widget import Widget
-from .widget_factory import BuildWidget
+from .loader.factory.widget_factory import BuildWidget
 
 from .core.painters.window_painter import WindowPainter
 from .core.positioning.center import Center

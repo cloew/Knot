@@ -1,4 +1,4 @@
-from knot.widget_factory import BuildWidget
+from .factory.widget_factory import BuildWidget
 
 class WidgetLoader:
     """ Helper class to load widgets from knot tokens """

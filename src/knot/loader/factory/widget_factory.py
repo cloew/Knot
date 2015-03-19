@@ -1,7 +1,7 @@
-from .widget import Widget
+from knot.widget import Widget
 
-from .core.painters.container_painter import ContainerPainter
-from .core.painters.text_painter import TextPainter
+from knot.core.painters.container_painter import ContainerPainter
+from knot.core.painters.text_painter import TextPainter
 
 widgets = {'div':{'painter':ContainerPainter},
            'text':{'painter':TextPainter}}

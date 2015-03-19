@@ -3,7 +3,7 @@ from .content_token import ContentToken
 from .widget_token import WidgetToken
 from .parser.widget_type_parser import WidgetTypeParser
 
-from knot.widget_factory import HasWidgetType
+from ..factory.widget_factory import HasWidgetType
 
 from kao_file import KaoFile, SectionFinder
 

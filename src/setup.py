@@ -13,5 +13,6 @@ setup(name='knot',
                 'knot.events',
                 'knot.loader',
                 'knot.loader.token',
-                'knot.loader.token.parser'],
+                'knot.loader.token.parser',
+                'knot.loader.factory'],
      )
