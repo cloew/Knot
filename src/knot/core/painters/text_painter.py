@@ -1,6 +1,7 @@
 from .painter import Painter
 from knot.core.sizing.use_size_hint import UseSizeHint
 
+from PySide.QtCore import Qt
 from PySide.QtGui import QLabel
 
 class TextPainter(Painter):
@@ -14,4 +15,6 @@ class TextPainter(Painter):
         
     def buildQWidget(self, widget):
         """ Build the QLabel """
-        return QLabel(self.text)
+        label = QLabel(self.text) 
+        label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+        return label
