@@ -1,7 +1,9 @@
+from .token_roles import CONTENT
 from .parser.content_parser import ContentParser
 
 class ContentToken:
     """ Represents a widget's content from a knot file """
+    ROLE = CONTENT
     
     def __init__(self, section):
         """ Initialize the Content Token """
