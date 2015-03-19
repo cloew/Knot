@@ -3,7 +3,7 @@ from .events.event_handler import EventHandler
 from .events.event_types import CHILD_ADDED
 
 from kao_decorators import proxy_for
-from smart_defaults import smart_defaults, PerCall
+from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
 @proxy_for('eventHandler', ['on', 'unregister'])
@@ -11,14 +11,14 @@ class Widget:
     """ Represents a widget within Knot """
     
     @smart_defaults
-    def __init__(self, painter, mods=PerCall([]), sizing=None):
+    def __init__(self, painter, mods=PerCall([]), positioning=EvenIfNone(PerCall(FromNeighbor())), sizing=None):
         """ Initialize the widget with its painters """
         self.painter = painter
         self.children = []
         self.parent = None
         self.mods = mods
         self.eventHandler = EventHandler(self)
-        self.positioning = FromNeighbor()
+        self.positioning = positioning
         self.sizing = sizing
         self._qwidget = None
         

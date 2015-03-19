@@ -13,8 +13,7 @@ class KnotWindow(Widget):
     def __init__(self):
         """ Initialize the window """
         Widget.__init__(self, WindowPainter(''))
-        # self.div = BuildWidget('div', "")
-        # self.div.positioning = Center()
+        # self.div = BuildWidget('div', "", positioning=Center())
         # self.addChild(self.div)
         
         # self.div.addChild(BuildWidget('text', "Some Text"))
