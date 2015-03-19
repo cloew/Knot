@@ -24,5 +24,4 @@ class KnotLoader:
     def loadWidgets(self, tokens):
         """ Load the widgets from the given tokens """
         widgetLoader = WidgetLoader()
-        print(tokens)
         return [widgetLoader.load(token) for token in tokens if token.ROLE is WIDGET]
