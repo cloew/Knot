@@ -1,4 +1,4 @@
-from .token_roles import WIDGET, CONTENT
+from .token_roles import WIDGET, CONTENT, ATTRIBUTE
 from .parser.widget_type_parser import WidgetTypeParser
 
 class WidgetToken:
@@ -10,14 +10,16 @@ class WidgetToken:
         self.widgetType = WidgetTypeParser().find(section)
         
         self.children = []
+        self.attributes = {}
         self.content = None
         children = factory.loadAllTokens(section[1:])
         self.processChildren(children)
         
     def processChildren(self, children):
         """ Process the children so theya re stored correctly """
-        roleHandler = {WIDGET:self.addChild,
-                       CONTENT: self.setContent}
+        roleHandler = {WIDGET: self.addChild,
+                       CONTENT: self.setContent,
+                       ATTRIBUTE: self.setAttribute}
         
         for childToken in children:
             roleHandler[childToken.ROLE](childToken)
@@ -29,6 +31,10 @@ class WidgetToken:
     def setContent(self, content):
         """ Set the child content """
         self.content = content
+        
+    def setAttribute(self, token):
+        """ Set the attribute """
+        self.attributes[token.attribute] = token
         
     def __repr__(self):
         return "<WidgetToken:{0},{1}, [{2}]>".format(self.widgetType, self.content, ", ".join([repr(child) for child in self.children]))
