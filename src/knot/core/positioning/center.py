@@ -11,6 +11,7 @@ class Center:
         """ Apply the policy to the neighbor """
         self.widget = widget
         self.widget.on(DISPLAYED, self.positionWidget)
+        self.widget.on(RESIZED, self.positionWidget)
         self.widget.parent.on(RESIZED, self.positionWidget)
     
     def positionWidget(self, aWidget, event):
