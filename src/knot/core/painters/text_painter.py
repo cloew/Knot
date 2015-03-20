@@ -6,7 +6,7 @@ from PySide.QtGui import QLabel
 
 class TextPainter(Painter):
     """ Handles creation of the Qt widget for drawing text """
-    DEFAULT_SIZING_CLS = UseSizeHint
+    DEFAULT_SIZING = UseSizeHint()
     
     def __init__(self, content):
         """ Initialize the Painter with its internal content """

@@ -5,7 +5,7 @@ from PySide.QtGui import QWidget
 
 class ContainerPainter(Painter):
     """ Handles painting a collection of child widgets """
-    DEFAULT_SIZING_CLS = ShrinkToContents
+    DEFAULT_SIZING = ShrinkToContents()
         
     def buildQWidget(self, widget):
         """ Draw the Widget to use as the container """
