@@ -44,6 +44,11 @@ class Widget:
         self.positioning.applyToWidget(self)
         if self.sizing is not None:
             self.sizing.applyToWidget(self)
+        
+    @property
+    def siblings(self):
+        """ Return the given widget's siblings """
+        return [child for child in self.parent.children if child is not self]
             
     def canMove(self):
         """ Return if this widget can move """

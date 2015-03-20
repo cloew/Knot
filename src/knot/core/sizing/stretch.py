@@ -9,21 +9,17 @@ class Stretch:
         self.widget = widget
         
         self.siblingToResizeEventGroup = {}
-        self.addResizeEvents(self.getSiblings(widget))
+        self.addResizeEvents(widget.siblings)
         self.childrenEventGroup = EventGroup(widget.parent, [CHILD_ADDED], self.trackNewSibling)
         self.childrenEventGroup.register()
         
     def resize(self, aWidget, event):
         """ Adjust the given widget so it is sized properly """
-        siblings = self.getSiblings(self.widget)
+        siblings = self.widget.siblings
         requiredWidth = sum([sibling.width for sibling in siblings])
         
         width = self.widget.parent.width - requiredWidth
         self.widget.resize(width, self.widget.parent.height)
-        
-    def getSiblings(self, widget):
-        """ Return the given widget's siblings """
-        return [child for child in widget.parent.children if child is not widget]
         
     def addResizeEvents(self, siblings):
         """ Add Resizing Events to the siblings """
