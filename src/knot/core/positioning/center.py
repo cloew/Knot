@@ -1,4 +1,3 @@
-from knot.events.event_group import EventGroup
 from knot.events.event_types import DISPLAYED, RESIZED
 
 from knot.events.tracker.parent_tracker import ParentTracker
