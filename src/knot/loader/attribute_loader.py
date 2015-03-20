@@ -1,9 +1,15 @@
+from .attributes import POSITION, SIZING
+
 from .factory.positioning_factory import PositioningFactory
+from .factory.sizing_factory import SizingFactory
 
 class AttributeLoader:
     """ Helper class to load attributes from knot tokens """
+    ATTR_TO_FACTORY = {POSITION:PositioningFactory,
+                       SIZING:SizingFactory}
     
-    def load(self, attrToken):
+    def load(self, attribute, attrToken):
         """ Load the given attribute token """
-        positionType = attrToken.value
-        return PositioningFactory.build(positionType)
+        factory = self.ATTR_TO_FACTORY[attribute]
+        attributeType = attrToken.value
+        return factory.build(attributeType)
