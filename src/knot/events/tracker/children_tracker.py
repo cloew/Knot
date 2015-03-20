@@ -27,7 +27,3 @@ class ChildrenTracker:
         """ Return the event group """
         eventGroup = EventGroup(widget, self.events, eventCallback)
         eventGroup.register()
-        
-    def getSubject(self, widget):
-        """ Return the subject for the events """
-        return widget
