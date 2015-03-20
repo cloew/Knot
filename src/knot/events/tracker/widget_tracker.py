@@ -18,4 +18,8 @@ class WidgetTracker:
         
     def getEventGroup(self, widget, eventCallback):
         """ Return the event group """
-        return EventGroup(widget, self.events, eventCallback)
+        return EventGroup(self.getSubject(widget), self.events, eventCallback)
+        
+    def getSubject(self, widget):
+        """ Return the subject for the events """
+        return widget
