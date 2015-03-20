@@ -1,26 +1,25 @@
-from knot.events.event_group import EventGroup
-from knot.events.event_types import *
+from knot.events.event_types import DISPLAYED, MOVED, RESIZED
+from knot.events.tracker.previous_sibling_tracker import PreviousSiblingTracker
+from knot.events.tracker.widget_tracker import WidgetTracker
 
 class FromNeighbor:
     """ Represents a positioning policy that works based on the edge of a neighbor """
     
     def __init__(self):
         """ Initialize the Form neighbor policy with the edge it should clamp to """
+        self.widgetTracker = WidgetTracker([DISPLAYED], self.reposition)
+        self.prevSiblingTracker = PreviousSiblingTracker([MOVED, RESIZED], self.reposition)
         
     def applyToWidget(self, widget):
         """ Apply the policy to the neighbor """
-        self.widget = widget
-        previousSibling = self.getPreviousSibling(widget)
-        if previousSibling is not None:
-            self.sibling = previousSibling
-            self.widget.on(DISPLAYED, self.positionWidget)
-            self.eventGroup = EventGroup(previousSibling, [MOVED, RESIZED], self.positionWidget)
-            self.eventGroup.register()
+        self.widgetTracker.apply(widget)
+        self.prevSiblingTracker.apply(widget)
     
-    def positionWidget(self, aWidget, event):
+    def reposition(self, widget):
         """ Position this widget relative to its sibling """
-        if self.widget.canMove():
-            self.widget.left = self.sibling.right
+        sibling = self.getPreviousSibling(widget)
+        if sibling is not None and widget.canMove():
+            widget.left = sibling.right
         
     def getPreviousSibling(self, widget):
         """ Return the previous sibling of this widget """
