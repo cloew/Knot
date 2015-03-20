@@ -14,7 +14,6 @@ class Center:
         
     def applyToWidget(self, widget):
         """ Apply the policy to the neighbor """
-        self.widget = widget
         self.widgetTracker.apply(widget)
         self.parentTracker.apply(widget)
         
