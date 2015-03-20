@@ -13,8 +13,7 @@ class WidgetLoader:
         attrLoader = AttributeLoader()
         positioning = attrLoader.load(POSITION, widgetToken.attributes[POSITION]) if POSITION in widgetToken.attributes else None
         sizing = attrLoader.load(SIZING, widgetToken.attributes[SIZING]) if SIZING in widgetToken.attributes else None
-        print(widgetType)
-        print(sizing)
+        
         widget = WidgetFactory.build(widgetType, content, positioning=positioning, sizing=sizing)
         
         for childToken in widgetToken.children:
