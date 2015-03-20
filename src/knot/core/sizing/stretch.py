@@ -1,5 +1,4 @@
-from knot.events.event_group import EventGroup
-from knot.events.event_types import *
+from knot.events.event_types import MOVED, RESIZED
 from knot.events.tracker.siblings_tracker import SiblingsTracker
 
 class Stretch:
