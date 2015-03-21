@@ -1,6 +1,6 @@
 from .knot_config_factory import KnotConfigFactory
 
-from knot.widget import Widget
+from knot.widget.widget import Widget
 
 from knot.core.painters.container_painter import ContainerPainter
 from knot.core.painters.text_painter import TextPainter

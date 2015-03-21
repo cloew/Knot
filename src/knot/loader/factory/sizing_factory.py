@@ -1,7 +1,5 @@
 from .knot_config_factory import KnotConfigFactory
 
-from knot.widget import Widget
-
 from knot.core.sizing.use_size_hint import UseSizeHint
 from knot.core.sizing.shrink_to_contents import ShrinkToContents
 from knot.core.sizing.stretch import Stretch

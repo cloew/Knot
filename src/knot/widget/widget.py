@@ -1,6 +1,6 @@
-from .core.positioning.from_neighbor import FromNeighbor
-from .events.event_handler import EventHandler
-from .events.event_types import CHILD_ADDED
+from ..core.positioning.from_neighbor import FromNeighbor
+from ..events.event_handler import EventHandler
+from ..events.event_types import CHILD_ADDED
 
 from kao_decorators import proxy_for
 from smart_defaults import smart_defaults, EvenIfNone, PerCall
