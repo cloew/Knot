@@ -6,7 +6,7 @@ from kao_decorators import proxy_for
 from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
-@proxy_for('eventHandler', ['on', 'unregister'])
+@proxy_for('eventHandler', ['fire', 'on', 'unregister'])
 @proxy_for('treeHandler', ['parent', 'children', 'siblings', 'addChild', 'attachToParent'])
 class Widget:
     """ Represents a widget within Knot """

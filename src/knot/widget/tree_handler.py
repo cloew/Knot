@@ -13,7 +13,7 @@ class TreeHandler:
         """ Add the Child to this widget """
         self.children.append(child)
         child.attachToParent(self.widget)
-        self.widget.eventHandler.fire(CHILD_ADDED, event=child)
+        self.widget.fire(CHILD_ADDED, event=child)
         
     def attachToParent(self, parent):
         """ Add the Child to this widget """
