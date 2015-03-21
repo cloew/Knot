@@ -1,12 +1,13 @@
+from .tree_handler import TreeHandler
 from ..core.positioning.from_neighbor import FromNeighbor
 from ..events.event_handler import EventHandler
-from ..events.event_types import CHILD_ADDED
 
 from kao_decorators import proxy_for
 from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
 @proxy_for('eventHandler', ['on', 'unregister'])
+@proxy_for('treeHandler', ['parent', 'children', 'siblings', 'addChild', 'attachToParent'])
 class Widget:
     """ Represents a widget within Knot """
     
@@ -14,9 +15,8 @@ class Widget:
     def __init__(self, painter, mods=PerCall([]), positioning=EvenIfNone(PerCall(FromNeighbor())), sizing=None):
         """ Initialize the widget with its painters """
         self.painter = painter
-        self.children = []
-        self.parent = None
         self.mods = mods
+        self.treeHandler = TreeHandler(self)
         self.eventHandler = EventHandler(self)
         self.positioning = positioning
         self.sizing = sizing
@@ -32,24 +32,6 @@ class Widget:
         self.painter.draw(self)
         [mod.afterDraw(self) for mod in self.mods]
         
-    def addChild(self, child):
-        """ Add the Child to this widget """
-        self.children.append(child)
-        child.attachToParent(self)
-        self.eventHandler.fire(CHILD_ADDED, event=child)
-        
-    def attachToParent(self, parent):
-        """ Add the Child to this widget """
-        self.parent = parent
-        self.positioning.applyToWidget(self)
-        if self.sizing is not None:
-            self.sizing.applyToWidget(self)
-        
-    @property
-    def siblings(self):
-        """ Return the given widget's siblings """
-        return [child for child in self.parent.children if child is not self]
-            
     def canMove(self):
         """ Return if this widget can move """
         return self._qwidget is not None
