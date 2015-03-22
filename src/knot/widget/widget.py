@@ -1,3 +1,4 @@
+from .qt_handler import QtHandler
 from .tree_handler import TreeHandler
 from ..core.positioning.from_neighbor import FromNeighbor
 from ..events.event_handler import EventHandler
@@ -7,6 +8,7 @@ from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
 @proxy_for('eventHandler', ['fire', 'on', 'unregister'])
+@proxy_for('qtHandler', ['setQWidget', '_qwidget'])
 @proxy_for('treeHandler', ['parent', 'children', 'siblings', 'addChild', 'attachToParent'])
 class Widget:
     """ Represents a widget within Knot """
@@ -16,16 +18,11 @@ class Widget:
         """ Initialize the widget with its painters """
         self.painter = painter
         self.mods = mods
-        self.treeHandler = TreeHandler(self)
         self.eventHandler = EventHandler(self)
+        self.qtHandler = QtHandler(self)
+        self.treeHandler = TreeHandler(self)
         self.positioning = positioning
         self.sizing = sizing
-        self._qwidget = None
-        
-    def setQWidget(self, qwidget):
-        """ Set the underlying Qt Widget for this widget """
-        self._qwidget = qwidget
-        self.eventHandler.attachEvents(qwidget)
         
     def draw(self):
         """ Draw the widget given its parent """
