@@ -2,15 +2,14 @@ from .positioning_handler import PositioningHandler
 from .qt_handler import QtHandler
 from .sizing_handler import SizingHandler
 from .tree_handler import TreeHandler
-from ..core.positioning.from_neighbor import FromNeighbor
 from ..events.event_handler import EventHandler
 
 from kao_decorators import proxy_for
-from smart_defaults import smart_defaults, EvenIfNone, PerCall
+from smart_defaults import smart_defaults, PerCall
 
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
 @proxy_for('eventHandler', ['fire', 'on', 'unregister'])
-@proxy_for('positioningHandler', ['apply'])
+@proxy_for('positioningHandler', ['apply', 'getDefaultChildrenPolicy'])
 @proxy_for('qtHandler', ['setQWidget', '_qwidget'])
 @proxy_for('sizingHandler', ['apply'])
 @proxy_for('treeHandler', ['parent', 'children', 'siblings', 'addChild', 'attachToParent'])
@@ -18,15 +17,15 @@ class Widget:
     """ Represents a widget within Knot """
     
     @smart_defaults
-    def __init__(self, painter, mods=PerCall([]), positioning=EvenIfNone(PerCall(FromNeighbor())), sizing=None):
-        """ Initialize the widget with its painters """
+    def __init__(self, painter, mods=PerCall([]), positioning=None, sizing=None):
+        """ Initialize the widget with its painters and policies """
         self.painter = painter
         self.mods = mods
         self.eventHandler = EventHandler(self)
-        self.positioningHandler = PositioningHandler(self, positioning)
+        self.treeHandler = TreeHandler(self)
+        self.positioningHandler = PositioningHandler(self, policy=positioning)
         self.sizingHandler = SizingHandler(self, sizing)
         self.qtHandler = QtHandler(self)
-        self.treeHandler = TreeHandler(self)
         
     def draw(self):
         """ Draw the widget given its parent """
