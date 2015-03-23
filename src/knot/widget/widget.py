@@ -1,3 +1,4 @@
+from .positioning_handler import PositioningHandler
 from .qt_handler import QtHandler
 from .tree_handler import TreeHandler
 from ..core.positioning.from_neighbor import FromNeighbor
@@ -8,6 +9,7 @@ from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
 @proxy_for('eventHandler', ['fire', 'on', 'unregister'])
+@proxy_for('positioningHandler', ['apply'])
 @proxy_for('qtHandler', ['setQWidget', '_qwidget'])
 @proxy_for('treeHandler', ['parent', 'children', 'siblings', 'addChild', 'attachToParent'])
 class Widget:
@@ -19,9 +21,9 @@ class Widget:
         self.painter = painter
         self.mods = mods
         self.eventHandler = EventHandler(self)
+        self.positioningHandler = PositioningHandler(self, positioning)
         self.qtHandler = QtHandler(self)
         self.treeHandler = TreeHandler(self)
-        self.positioning = positioning
         self.sizing = sizing
         
     def draw(self):

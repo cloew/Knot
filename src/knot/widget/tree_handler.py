@@ -18,7 +18,7 @@ class TreeHandler:
     def attachToParent(self, parent):
         """ Add the Child to this widget """
         self.parent = parent
-        self.widget.positioning.applyToWidget(self.widget)
+        self.widget.positioningHandler.apply()
         if self.widget.sizing is not None:
             self.widget.sizing.applyToWidget(self.widget)
         
