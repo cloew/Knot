@@ -5,6 +5,8 @@ class SizingHandler:
     def __init__(self, widget, policy):
         """ Initialize the Handler with the widget and its sizing policy """
         self.widget = widget
+        if policy is None:
+            policy = widget.painter.DEFAULT_SIZING
         self.policy = policy
         
     def apply(self):
