@@ -19,8 +19,7 @@ class TreeHandler:
         """ Add the Child to this widget """
         self.parent = parent
         self.widget.positioningHandler.apply()
-        if self.widget.sizing is not None:
-            self.widget.sizing.applyToWidget(self.widget)
+        self.widget.sizingHandler.apply()
         
     @property
     def siblings(self):
