@@ -1,8 +1,9 @@
-from ..core.positioning.from_neighbor import FromNeighbor
+from knot.sides import LEFT
+from knot.core.positioning.from_neighbor import FromNeighbor
 
 class PositioningHandler:
     """ Handles the positioning policy(ies) for the parent widget """
-    DEFAULT_POLICY = FromNeighbor()
+    DEFAULT_POLICY = FromNeighbor(LEFT)
     
     def __init__(self, widget, policy=None):
         """ Initialize the Handler with the widget and its positioning policy """
