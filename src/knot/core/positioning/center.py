@@ -7,9 +7,9 @@ from knot.events.tracker.widget_tracker import WidgetTracker
 class Center:
     """ Modification that ensures its widget is centered in its parent """
     
-    def __init__(self):
+    def __init__(self, dimension=BOTH):
         """ Initialize the Centerer """
-        self.dimension = BOTH
+        self.dimension = dimension
         self.widgetTracker = WidgetTracker([DISPLAYED, RESIZED], self.reposition)
         self.parentTracker = WidgetTracker([RESIZED], self.reposition)
         
