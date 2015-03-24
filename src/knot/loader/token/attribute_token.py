@@ -1,4 +1,5 @@
 from .token_roles import ATTRIBUTE
+from .type_token import TypeToken
 
 class AttributeToken:
     """ Represents a tokenized Knot attribute """
@@ -13,7 +14,7 @@ class AttributeToken:
         """ Initialize with the section for the attribute """
         pieces = section[0].split()
         self.attribute = pieces[0].split('@')[1]
-        self.value = pieces[1]
+        self.type = TypeToken(pieces[1])
         
     def __repr__(self):
         return "<AttributeToken:@{0}:{1}>".format(self.attribute, self.value)

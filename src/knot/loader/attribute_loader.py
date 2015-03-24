@@ -11,5 +11,4 @@ class AttributeLoader:
     def load(self, attribute, attrToken):
         """ Load the given attribute token """
         factory = self.ATTR_TO_FACTORY[attribute]
-        attributeType = attrToken.value
-        return factory.build(attributeType)
+        return attrToken.type.build(factory)
