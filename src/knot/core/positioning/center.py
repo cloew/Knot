@@ -1,3 +1,4 @@
+from knot.dimensions import BOTH
 from knot.events.event_types import DISPLAYED, RESIZED
 
 from knot.events.tracker.parent_tracker import ParentTracker
@@ -8,8 +9,13 @@ class Center:
     
     def __init__(self):
         """ Initialize the Centerer """
+        self.dimension = BOTH
         self.widgetTracker = WidgetTracker([DISPLAYED, RESIZED], self.reposition)
         self.parentTracker = WidgetTracker([RESIZED], self.reposition)
+        
+    def handlesDimension(self, dimension):
+        """ Return if this policy positions widgets in the given dimension """
+        return self.dimension is BOTH or dimension is self.dimension
         
     def applyToWidget(self, widget):
         """ Apply the policy to the neighbor """

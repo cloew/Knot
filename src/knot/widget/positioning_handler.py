@@ -1,9 +1,12 @@
-from knot.sides import LEFT
+from knot.dimensions import HORIZONTAL, VERTICAL, BOTH
+from knot.sides import LEFT, TOP
 from knot.core.positioning.from_neighbor import FromNeighbor
 
 class PositioningHandler:
     """ Handles the positioning policy(ies) for the parent widget """
     DEFAULT_POLICY = FromNeighbor(LEFT)
+    DIMENSION_TO_POLICY = {HORIZONTAL:FromNeighbor(LEFT),
+                           VERTICAL:  FromNeighbor(TOP)}
     
     def __init__(self, widget, policy=None):
         """ Initialize the Handler with the widget and its positioning policy """
@@ -13,23 +16,36 @@ class PositioningHandler:
     def apply(self):
         """ Apply the positionig policy """
         if self.policy is None:
-            self.policy = self.getDefaultPolicy()
-        self.policy.applyToWidget(self.widget)
+            self.policies = self.getDefaultPolicy()
+        elif not self.policy.handlesDimension(HORIZONTAL):
+            self.policies = [self.policy] + self.getDefaultPolicy(HORIZONTAL)
+        elif not self.policy.handlesDimension(VERTICAL):
+            self.policies = [self.policy] + self.getDefaultPolicy(VERTICAL)
+        else:
+            self.policies = [self.policy]
         
-    def getDefaultPolicy(self):
+        for policy in self.policies:
+            policy.applyToWidget(self.widget)
+        
+    def getDefaultPolicy(self, dimension=BOTH):
         """ Return the default policy to be used for children """
-        policy = self.getContainerDefaultPolicy()
-        if policy is None:
-            policy = self.DEFAULT_POLICY
-        return policy
+        policies = self.getContainerDefaultPolicy(dimension=dimension)
+        if policies is None:
+            policies = self.getDefaultChildrenPolicy(dimension=dimension)
+        return policies
         
-    def getContainerDefaultPolicy(self):
+    def getContainerDefaultPolicy(self, dimension=BOTH):
         """ Return the Container's default positioning policy """
         if self.widget.parent is not None:
-            return self.widget.parent.getDefaultChildrenPolicy()
+            return self.widget.parent.getDefaultChildrenPolicy(dimension=dimension)
         else:
             return None
         
-    def getDefaultChildrenPolicy(self):
+    def getDefaultChildrenPolicy(self, dimension=BOTH):
         """ Return the default policy to be used for children """
-        return self.DEFAULT_POLICY
+        policies = []
+        if dimension is BOTH or dimension is HORIZONTAL:
+            policies.append(self.DIMENSION_TO_POLICY[HORIZONTAL])
+        if dimension is BOTH or dimension is VERTICAL:
+            policies.append(self.DIMENSION_TO_POLICY[VERTICAL])
+        return policies

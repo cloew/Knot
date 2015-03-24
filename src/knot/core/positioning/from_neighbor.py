@@ -13,6 +13,10 @@ class FromNeighbor:
         self.widgetTracker = WidgetTracker([DISPLAYED], self.reposition)
         self.prevSiblingTracker = PreviousSiblingTracker([MOVED, RESIZED], self.reposition)
         
+    def handlesDimension(self, dimension):
+        """ Return if this policy positions widgets in the given dimension """
+        return dimension is self.side.dimension
+        
     def applyToWidget(self, widget):
         """ Apply the policy to the neighbor """
         self.widgetTracker.apply(widget)
