@@ -1,4 +1,4 @@
-from knot.dimensions import BOTH
+from knot.dimensions import BOTH, HORIZONTAL, VERTICAL
 from knot.events.event_types import DISPLAYED, RESIZED
 
 from knot.events.tracker.parent_tracker import ParentTracker
@@ -28,5 +28,14 @@ class Center:
         centerx = parent.width/2
         centery = parent.height/2
         
-        widget.left = centerx - widget.width/2
-        widget.top = centery - widget.height/2
+        newLeft = widget.left
+        newTop = widget.top
+        
+        if self.dimension is BOTH or self.dimension is HORIZONTAL:
+            newLeft = centerx - widget.width/2
+        
+        if self.dimension is BOTH or self.dimension is VERTICAL:
+            newTop = centery - widget.height/2
+        
+        widget.left = newLeft
+        widget.top = newTop
