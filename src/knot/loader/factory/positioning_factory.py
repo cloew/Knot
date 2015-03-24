@@ -6,9 +6,9 @@ from knot.core.positioning.from_neighbor import FromNeighbor
 positionings = {'center':Center,
                 'from-neighbor':FromNeighbor}
 
-def BuildPositioning(positioningType):
+def BuildPositioning(positioningType, *args):
     """ Build the Positioning based on its given type """
     positioningCls = positionings[positioningType]
-    return positioningCls()
+    return positioningCls(*args)
     
 PositioningFactory = KnotConfigFactory(positionings, BuildPositioning)

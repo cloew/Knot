@@ -8,9 +8,9 @@ sizings = {'shrink':UseSizeHint,
            'shrink-to-contents':ShrinkToContents,
            'stretch':Stretch}
            
-def BuildSizing(sizingType):
+def BuildSizing(sizingType, *args):
     """ Build the Sizing based on its given type """
     sizingCls = sizings[sizingType]
-    return sizingCls()
+    return sizingCls(*args)
     
 SizingFactory = KnotConfigFactory(sizings, BuildSizing)

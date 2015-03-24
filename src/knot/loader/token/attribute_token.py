@@ -12,7 +12,7 @@ class AttributeToken:
     
     def __init__(self, section):
         """ Initialize with the section for the attribute """
-        pieces = section[0].split()
+        pieces = section[0].split(maxsplit=1)
         self.attribute = pieces[0].split('@')[1]
         self.type = TypeToken(pieces[1])
         
