@@ -1,11 +1,13 @@
+from knot.dimensions import HORIZONTAL, VERTICAL, BOTH
 from knot.events.event_types import DISPLAYED, RESIZED
 from knot.events.tracker.widget_tracker import WidgetTracker
 
 class UseSizeHint:
     """ Represents sizing a widget by using its size hint """
     
-    def __init__(self):
+    def __init__(self, dimension=BOTH):
         """ Initialize the Centerer """
+        self.dimension = dimension
         self.widgetTracker = WidgetTracker([DISPLAYED, RESIZED], self.resize)
     
     def applyToWidget(self, widget):
@@ -14,4 +16,13 @@ class UseSizeHint:
     
     def resize(self, widget):
         """ Adjust the given widget so it is sized properly """
-        widget.resize(widget.sizeHint())
+        size = widget.sizeHint()
+        width = widget.width
+        height = widget.height
+        
+        if self.dimension is BOTH or self.dimension is HORIZONTAL:
+            width = size.width()
+        if self.dimension is BOTH or self.dimension is VERTICAL:
+            height = size.height()
+        
+        widget.resize(width, height)
