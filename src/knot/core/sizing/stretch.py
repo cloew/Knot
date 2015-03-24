@@ -9,6 +9,10 @@ class Stretch:
         """ Initialize the Centerer """
         self.dimension = dimension
         self.siblingsTracker = SiblingsTracker([MOVED, RESIZED], self.resize)
+        
+    def handlesDimension(self, dimension):
+        """ Return if this policy positions widgets in the given dimension """
+        return self.dimension is BOTH or dimension is self.dimension
     
     def applyToWidget(self, widget):
         """ Apply the policy to the neighbor """
