@@ -1,18 +1,18 @@
 {
     "widgets":[{"name":"div",
-                "painter":"knot.core.painters.ContainerPainter"},
+                "painter":"knot.core.painters.container_painter.ContainerPainter"},
                {"name":"button",
-                "painter":"knot.core.painters.ButtonPainter"},
+                "painter":"knot.core.painters.button_painter.ButtonPainter"},
                {"name":"text",
-                "painter":"knot.core.painters.TextPainter"}],
+                "painter":"knot.core.painters.text_painter.TextPainter"}],
     "positioning":[{"name":"center",
-                    "class":"knot.core.positioning.Center"},
+                    "class":"knot.core.positioning.center.Center"},
                    {"name":"from-neighbor",
-                    "class":"knot.core.positioning.FromNeighbor"}],
+                    "class":"knot.core.positioning.from_neighbor.FromNeighbor"}],
     "sizing":[{"name":"shrink",
-               "class":"knot.core.sizing.UseSizeHint"},
+               "class":"knot.core.sizing.use_size_hint.UseSizeHint"},
               {"name":"shrink-to-contents",
-               "class":"knot.core.sizing.ShrinkToContents"},
+               "class":"knot.core.sizing.shrink_to_contents.ShrinkToContents"},
               {"name":"stretch",
-               "class":"knot.core.sizing.Stretch"}]
+               "class":"knot.core.sizing.stretch.Stretch"}]
 }
