@@ -9,6 +9,10 @@ from kao_file import KaoFile, SectionFinder
 class TokenFactory:
     """ Represents a tokenized widget from a knot file """
     
+    def __init__(self, config):
+        """ Initialize the loader with the configuration to use """
+        self.config = config
+    
     def loadAllTokens(self, lines):
         """ Load and return all Widget Tokens at the same depth from the given lines """
         file = KaoFile(lines)
@@ -33,7 +37,7 @@ class TokenFactory:
     
     def load(self, section):
         """ Load a token from the given section """
-        if WidgetToken.isValidFor(section):
+        if WidgetToken.isValidFor(section, self.config):
             return WidgetToken(section, self)
         else:
             for tokenCls in [AttributeToken, ContentToken]:

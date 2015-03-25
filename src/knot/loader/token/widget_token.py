@@ -1,16 +1,14 @@
 from .token_roles import WIDGET, CONTENT, ATTRIBUTE
 
-from ..factory.widget_factory import WidgetFactory
-
 class WidgetToken:
     """ Represents a tokenized widget from a knot file """
     ROLE = WIDGET
     
     @classmethod
-    def isValidFor(cls, section):
+    def isValidFor(cls, section, config):
         """ Return if this token is valid for the given section """
         widgetType = cls.getWidgetType(section)
-        return widgetType is not None and WidgetFactory.isValidType(widgetType)
+        return widgetType is not None and config.widgetFactory.isValidType(widgetType)
         
     @staticmethod
     def getWidgetType(section):
