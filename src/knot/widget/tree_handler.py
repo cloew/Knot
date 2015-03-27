@@ -1,4 +1,5 @@
 from ..events.event_types import CHILD_ADDED
+from knot.sides import LEFT
 
 class TreeHandler:
     """ Handle Widget Tree data for a particular widget """
@@ -25,6 +26,13 @@ class TreeHandler:
     def siblings(self):
         """ Return the given widget's siblings """
         return [child for child in self.parent.children if child is not self.widget]
+        
+    def getSiblingOn(self, side):
+        """ Return the sibling on the given side """
+        if side is LEFT:
+            return self.getPreviousSibling()
+        else:
+            return None
         
     def getPreviousSibling(self):
         """ Return the previous sibling of this widget """
