@@ -10,3 +10,8 @@ LEFT = Side(HORIZONTAL)
 RIGHT = Side(HORIZONTAL)
 TOP = Side(VERTICAL)
 BOTTOM = Side(VERTICAL)
+
+LEFT.oppositeSide = RIGHT
+RIGHT.oppositeSide = LEFT
+TOP.oppositeSide = BOTTOM
+BOTTOM.oppositeSide = TOP
