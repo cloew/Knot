@@ -26,4 +26,4 @@ class FromNeighbor:
         """ Position this widget relative to its sibling """
         sibling = widget.getSiblingOn(self.side)
         if sibling is not None and widget.canMove():
-            widget.left = sibling.right
+            widget.left = sibling.getSidePosition(self.side.oppositeSide)

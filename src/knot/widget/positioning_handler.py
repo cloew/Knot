@@ -1,7 +1,7 @@
 from .policies_handler import PoliciesHandler
 
 from knot.dimensions import HORIZONTAL, VERTICAL, BOTH
-from knot.sides import LEFT, TOP
+from knot.sides import LEFT, RIGHT, TOP, BOTTOM
 from knot.core.positioning.from_neighbor import FromNeighbor
 
 class PositioningHandler(PoliciesHandler):
@@ -32,3 +32,14 @@ class PositioningHandler(PoliciesHandler):
         if dimension is BOTH or dimension is VERTICAL:
             policies.append(self.DIMENSION_TO_POLICY[VERTICAL])
         return policies
+        
+    def getSidePosition(self, side):
+        """ Return the pixel position of the given side """
+        if side is LEFT:
+            return self.widget.left
+        elif side is RIGHT:
+            return self.widget.right
+        elif side is TOP:
+            return self.widget.top
+        elif side is BOTTOM:
+            return self.widget.bottom
