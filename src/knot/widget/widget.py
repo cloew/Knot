@@ -9,7 +9,7 @@ from smart_defaults import smart_defaults, PerCall
 
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
 @proxy_for('eventHandler', ['fire', 'on', 'unregister'])
-@proxy_for('positioningHandler', ['apply', 'getDefaultChildrenPolicy', 'getSidePosition'])
+@proxy_for('positioningHandler', ['apply', 'getDefaultChildrenPolicy', 'getSidePosition', 'setSidePosition'])
 @proxy_for('qtHandler', ['setQWidget', '_qwidget'])
 @proxy_for('sizingHandler', ['apply'])
 @proxy_for('treeHandler', ['parent', 'children', 'siblings', 'addChild', 'attachToParent', 'getSiblingOn', 'getPreviousSibling'])

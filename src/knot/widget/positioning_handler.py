@@ -43,3 +43,14 @@ class PositioningHandler(PoliciesHandler):
             return self.widget.top
         elif side is BOTTOM:
             return self.widget.bottom
+        
+    def setSidePosition(self, side, value):
+        """ Set the pixel position of the given side """
+        if side is LEFT:
+            self.widget.left = value
+        elif side is RIGHT:
+            self.widget.right = value
+        elif side is TOP:
+            self.widget.top = value
+        elif side is BOTTOM:
+            self.widget.bottom = value
