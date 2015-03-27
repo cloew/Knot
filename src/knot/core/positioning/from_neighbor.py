@@ -25,15 +25,6 @@ class FromNeighbor:
     def reposition(self, widget):
         """ Position this widget relative to its sibling """
         if self.side is LEFT:
-            sibling = self.getPreviousSibling(widget)
+            sibling = widget.getPreviousSibling()
             if sibling is not None and widget.canMove():
                 widget.left = sibling.right
-        
-    def getPreviousSibling(self, widget):
-        """ Return the previous sibling of this widget """
-        siblings = widget.parent.children
-        currentWidgetIndex = siblings.index(widget)
-        if currentWidgetIndex == 0:
-            return None
-        else:
-            return siblings[currentWidgetIndex-1]

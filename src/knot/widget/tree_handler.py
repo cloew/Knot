@@ -25,3 +25,12 @@ class TreeHandler:
     def siblings(self):
         """ Return the given widget's siblings """
         return [child for child in self.parent.children if child is not self.widget]
+        
+    def getPreviousSibling(self):
+        """ Return the previous sibling of this widget """
+        siblings = self.parent.children
+        currentWidgetIndex = siblings.index(self.widget)
+        if currentWidgetIndex == 0:
+            return None
+        else:
+            return siblings[currentWidgetIndex-1]
