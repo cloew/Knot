@@ -60,6 +60,11 @@ class Widget:
     def right(self):
         """ Return the widget's right x coordinate """
         return self.left + self.width
+
+    @right.setter
+    def right(self, value):
+        self._qwidget.move(value-self.width, self.top)
+        self._qwidget.show()
         
     @property
     def top(self):
@@ -75,3 +80,8 @@ class Widget:
     def bottom(self):
         """ Return the widget's bottom y coordinate """
         return self._qwidget.y() + self.height
+
+    @bottom.setter
+    def bottom(self, value):
+        self._qwidget.move(value-self.height, self.top)
+        self._qwidget.show()
