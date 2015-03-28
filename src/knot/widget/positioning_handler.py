@@ -44,6 +44,17 @@ class PositioningHandler(PoliciesHandler):
         elif side is BOTTOM:
             return self.widget.bottom
         
+    def getInternalSidePosition(self, side):
+        """ Return the pixel position of the given side for use for children """
+        if side is LEFT:
+            return 0
+        elif side is RIGHT:
+            return self.widget.width
+        elif side is TOP:
+            return 0
+        elif side is BOTTOM:
+            return self.widget.height
+        
     def setSidePosition(self, side, value):
         """ Set the pixel position of the given side """
         if side is LEFT:

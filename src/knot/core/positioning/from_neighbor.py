@@ -24,7 +24,11 @@ class FromNeighbor:
     
     def reposition(self, widget):
         """ Position this widget relative to its sibling """
-        sibling = widget.getSiblingOn(self.side)
-        if sibling is not None and widget.canMove():
-            edgePosition = sibling.getSidePosition(self.side.oppositeSide)
+        if widget.canMove():
+            sibling = widget.getSiblingOn(self.side)
+            edgePosition = None
+            if sibling is not None:
+                edgePosition = sibling.getSidePosition(self.side.oppositeSide)
+            else:
+                edgePosition = widget.parent.getInternalSidePosition(self.side)
             widget.setSidePosition(self.side, edgePosition)
