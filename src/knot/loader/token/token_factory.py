@@ -1,5 +1,6 @@
 from .attribute_token import AttributeToken
 from .content_token import ContentToken
+from .import_token import ImportToken
 from .widget_token import WidgetToken
 
 from .detector.token_detector import TokenDetector
@@ -12,6 +13,10 @@ class TokenFactory:
     def __init__(self, config):
         """ Initialize the loader with the configuration to use """
         self.config = config
+        
+    def loadImportTokens(self, lines):
+        """ Load the import tokens """
+        return [ImportToken(line) for line in lines if ImportToken.isValidFor(line)]
     
     def loadAllTokens(self, lines):
         """ Load and return all Widget Tokens at the same depth from the given lines """
