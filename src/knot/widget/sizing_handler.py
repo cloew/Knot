@@ -7,4 +7,4 @@ class SizingHandler(PoliciesHandler):
         
     def getDefaultPolicy(self, dimension=BOTH):
         """ Return the default policy to be used for children """
-        return [self.widget.painter.DEFAULT_SIZING[dimension]]
+        return self.widget.painter.DEFAULT_SIZING[dimension]

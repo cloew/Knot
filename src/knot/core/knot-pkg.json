@@ -3,6 +3,8 @@
                 "painter":"knot.core.painters.container_painter.ContainerPainter"},
                {"name":"button",
                 "painter":"knot.core.painters.button_painter.ButtonPainter"},
+               {"name":"p",
+                "painter":"knot.core.painters.multi_line_text_painter.MultiLineTextPainter"},
                {"name":"text",
                 "painter":"knot.core.painters.text_painter.TextPainter"}],
     "positioning":[{"name":"center",

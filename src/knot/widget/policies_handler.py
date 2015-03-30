@@ -12,6 +12,8 @@ class PoliciesHandler:
         """ Apply the positionig policy """
         if self.policy is None:
             self.policies = self.getDefaultPolicy(BOTH)
+            if type(self.policies) is not list:
+                self.policies = [self.policies]
         elif not self.policy.handlesDimension(HORIZONTAL):
             self.policies = [self.policy] + self.getDefaultPolicy(HORIZONTAL)
         elif not self.policy.handlesDimension(VERTICAL):
