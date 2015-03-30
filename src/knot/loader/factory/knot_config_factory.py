@@ -1,8 +1,12 @@
+from kao_decorators import proxy_for
+from smart_defaults import smart_defaults, PerCall
 
+@proxy_for('config', ['update'])
 class KnotConfigFactory:
     """ Factory for creating objects via a configuration for a type """
     
-    def __init__(self, configs):
+    @smart_defaults
+    def __init__(self, configs=PerCall({})):
         """ Initialize the factory with its configs """
         self.config = {config.name:config for config in configs}
         

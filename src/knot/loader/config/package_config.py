@@ -4,6 +4,9 @@ class PackageConfig:
     
     def __init__(self, widgetConfigs, positioningConfigs, sizingConfigs):
         """ Initialize the widget config with its widgets, positioning policies and sizing policies """
-        self.widgetConfigs = widgetConfigs
-        self.positioningConfigs = positioningConfigs
-        self.sizingConfigs = sizingConfigs
+        self.widgetConfigs = self.convertConfigsToDictionary(widgetConfigs)
+        self.positioningConfigs = self.convertConfigsToDictionary(positioningConfigs)
+        self.sizingConfigs = self.convertConfigsToDictionary(sizingConfigs)
+        
+    def convertConfigsToDictionary(self, configs):
+        return {config.name:config for config in configs}

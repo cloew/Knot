@@ -14,12 +14,19 @@ class LoaderConfig:
     
     def __init__(self):
         """ Initialize the loader config """
-        self.packageConfig = self.loadPackage(self.CORE_KNOT_PACKAGE)
-        
-        self.widgetFactory = KnotConfigFactory(self.packageConfig.widgetConfigs)
+        self.widgetFactory = KnotConfigFactory()#self.packageConfig.widgetConfigs)
         self.attributesFactory = {}
-        self.attributesFactory[POSITION] = KnotConfigFactory(self.packageConfig.positioningConfigs)
-        self.attributesFactory[SIZING] = KnotConfigFactory(self.packageConfig.sizingConfigs)
+        self.attributesFactory[POSITION] = KnotConfigFactory()#self.packageConfig.positioningConfigs)
+        self.attributesFactory[SIZING] = KnotConfigFactory()#self.packageConfig.sizingConfigs)
+        
+        self.importPackage(self.CORE_KNOT_PACKAGE)
+        
+    def importPackage(self, package):
+        """ Import the given package and add its public Knot Entities to the relevant factories """
+        packageConfig = self.loadPackage(package)
+        self.widgetFactory.update(packageConfig.widgetConfigs)
+        self.attributesFactory[POSITION].update(packageConfig.positioningConfigs)
+        self.attributesFactory[SIZING].update(packageConfig.sizingConfigs)
         
     def loadPackage(self, package):
         """ Load the given package """
