@@ -1,10 +1,12 @@
+from .import_loader import ImportLoader
 from .widget_loader import WidgetLoader
 from .config.loader_config import LoaderConfig
 
 from .token.token_factory import TokenFactory
-from .token.token_roles import WIDGET
+from .token.token_roles import IMPORT, WIDGET
+from .token.detector.imports_detector import ImportsDetector
 
-from kao_file import KaoFile
+from kao_file import KaoFile, SectionFinder
 
 class KnotLoader:
     """ Loads Knot files and converts them to the proper widget tree """
@@ -12,20 +14,36 @@ class KnotLoader:
     def __init__(self, filename):
         """ Initialize with the file to load from """
         self.filename = filename
+        self.file = KaoFile.open(self.filename)
         self.config = LoaderConfig()
+        self.factory = TokenFactory(self.config)
         
     def load(self):
         """ Load the widgets from the filename """
-        tokens = self.getTokens()
-        return self.loadWidgets(tokens)
+        self.findSections()
+        self.loadImports()
+        return self.loadWidgets()
         
-    def getTokens(self):
-        """ Return the widget token tree """
-        factory = TokenFactory(self.config)
+    def findSections(self):
+        """ Find the imports and widgets sections of the Knot File """
         file = KaoFile.open(self.filename)
-        return factory.loadAllTokens(file.lines)
+        sectionFinder = SectionFinder(ImportsDetector())
+        importsSection = sectionFinder.find(file)
+        if importsSection is not None:
+            self.importsLines = importsSection.lines
+            self.widgetsLines = file.lines[importsSection.endIndex+1:]
+        else:
+            self.importsLines = []
+            self.widgetsLines = file.lines
         
-    def loadWidgets(self, tokens):
-        """ Load the widgets from the given tokens """
+    def loadImports(self):
+        """ Load the widget section of the Knot File """
+        tokens = self.factory.loadImportTokens(self.importsLines)
+        importLoader = ImportLoader(self.config)
+        return [importLoader.load(token) for token in tokens if token.ROLE is IMPORT]
+        
+    def loadWidgets(self):
+        """ Load the widget section of the Knot File """
+        tokens = self.factory.loadAllTokens(self.widgetsLines)
         widgetLoader = WidgetLoader(self.config)
         return [widgetLoader.load(token) for token in tokens if token.ROLE is WIDGET]
