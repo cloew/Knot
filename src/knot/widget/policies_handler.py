@@ -15,9 +15,9 @@ class PoliciesHandler:
             if type(self.policies) is not list:
                 self.policies = [self.policies]
         elif not self.policy.handlesDimension(HORIZONTAL):
-            self.policies = [self.policy] + self.getDefaultPolicy(HORIZONTAL)
+            self.policies = [self.policy] + [self.getDefaultPolicy(HORIZONTAL)]
         elif not self.policy.handlesDimension(VERTICAL):
-            self.policies = [self.policy] + self.getDefaultPolicy(VERTICAL)
+            self.policies = [self.policy] + [self.getDefaultPolicy(VERTICAL)]
         else:
             self.policies = [self.policy]
         
