@@ -1,8 +1,7 @@
-from .painter import Painter
 from knot.dimensions import HORIZONTAL, VERTICAL, BOTH
+from knot.core.painters.painter import Painter
 from knot.core.sizing.use_size_hint import UseSizeHint
 
-from PySide.QtCore import Qt
 from PySide.QtGui import QPushButton
 
 class ButtonPainter(Painter):

@@ -1,0 +1,4 @@
+{
+    "widgets":[{"name":"button",
+                "painter":"knot.forms.painters.button_painter.ButtonPainter"}]
+}
