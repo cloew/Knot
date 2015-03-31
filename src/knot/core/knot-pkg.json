@@ -17,5 +17,7 @@
               {"name":"shrink-to-contents",
                "class":"knot.core.sizing.shrink_to_contents.ShrinkToContents"},
               {"name":"stretch",
-               "class":"knot.core.sizing.stretch.Stretch"}]
+               "class":"knot.core.sizing.stretch.Stretch"}],
+    "services":[{"name":"fileLoader",
+                 "class":"knot.core.services.file_loader.FileLoader"}]
 }

@@ -19,5 +19,6 @@ setup(name='knot',
                 'knot.events.tracker',
                 'knot.loader.config',
                 'knot.core.controllers',
-                'knot.loader.token.value'],
+                'knot.loader.token.value',
+                'knot.core.services'],
      )
