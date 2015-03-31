@@ -1,4 +1,4 @@
-from .value_token import ValueToken
+from .value.value_factory import ValueFactory
 
 class TypeToken:
     """ Represents a tokenized type to be used to load from a factory """
@@ -11,7 +11,7 @@ class TypeToken:
         
     def getArguments(self, argumentText):
         """ Return the arguments """
-        return [ValueToken(arg.strip()) for arg in argumentText.split(')')[0].split(',') if arg.strip() != '']
+        return [ValueFactory.build(arg.strip()) for arg in argumentText.split(')')[0].split(',') if arg.strip() != '']
         
     @property
     def arguments(self):
