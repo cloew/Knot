@@ -12,7 +12,7 @@ class KnotApplication:
     
     def __init__(self, filename, root):
         """ Initialize the Knot Application """
-        self.root = self.getRootDirectory(root)
+        self.root_dir = self.getRootDirectory(root)
         self.app = QApplication(sys.argv)
         self.title = "Knot Test -- Dun Dun DUN!"
         self.window = KnotWindow()
