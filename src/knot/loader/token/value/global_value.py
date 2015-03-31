@@ -2,7 +2,7 @@ from knot.dimensions import HORIZONTAL, VERTICAL
 from knot.sides import LEFT, RIGHT, TOP, BOTTOM
 
 class GlobalValue:
-    """ Represents a tokenized value to retrieve from the scope """
+    """ Represents a tokenized global value """
     GLOBAL_SCOPE = {"HORIZONTAL":HORIZONTAL,
                     "VERTICAL":VERTICAL,
                     "LEFT":LEFT,
@@ -15,10 +15,10 @@ class GlobalValue:
         """ Return if this class is valid for the given value text """
         return valueText in cls.GLOBAL_SCOPE
     
-    def __init__(self, valueText):
+    def __init__(self, varName):
         """ Initialize the value token """
-        self.valueText = valueText
+        self.varName = varName
         
     def getValue(self):
         """ Return the actual value of the given token """
-        return self.GLOBAL_SCOPE[self.valueText]
+        return self.GLOBAL_SCOPE[self.varName]
