@@ -1,4 +1,5 @@
 from .token_roles import WIDGET, CONTENT, ATTRIBUTE
+from .type_token import TypeToken
 
 class WidgetToken:
     """ Represents a tokenized widget from a knot file """
@@ -16,13 +17,13 @@ class WidgetToken:
         firstLine = section[0]
         pieces = firstLine.split()
         if len(pieces) == 1:
-            return pieces[0].strip()
+            return pieces[0].split('(')[0].strip()
         else:
             return None
     
     def __init__(self, section, factory):
         """ Intialize the Widget Token with the section it was loaded from """
-        self.widgetType = self.getWidgetType(section)
+        self.widgetType = TypeToken(section[0])
         
         self.children = []
         self.attributes = {}

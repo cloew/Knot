@@ -13,6 +13,11 @@ class TypeToken:
         """ Return the arguments """
         return [ValueToken(arg.strip()) for arg in argumentText.split(')')[0].split(',') if arg.strip() != '']
         
+    @property
+    def arguments(self):
+        """ Return the argument values """
+        return [arg.getValue() for arg in self.args]
+        
     def build(self, factory):
         """ Build this type form the factory """
-        return factory.build(self.type, *[arg.getValue() for arg in self.args])
+        return factory.build(self.type, *self.arguments)
