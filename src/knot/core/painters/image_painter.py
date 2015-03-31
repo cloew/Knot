@@ -11,13 +11,14 @@ class ImagePainter(Painter):
                       HORIZONTAL:UseSizeHint(dimension=HORIZONTAL),
                       VERTICAL:  UseSizeHint(dimension=VERTICAL)}
     
-    def __init__(self, content):
+    def __init__(self, content, controller):
         """ Initialize the Painter with its internal content """
         Painter.__init__(self)
+        self.filename = controller.filename
         
     def buildQWidget(self, widget):
         """ Build the QLabel """
         label = QLabel() 
         label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
-        label.setPixmap(QPixmap("placeholder.png"))
+        label.setPixmap(QPixmap(self.filename))
         return label
