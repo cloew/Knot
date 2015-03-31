@@ -17,8 +17,9 @@ class Widget:
     """ Represents a widget within Knot """
     
     @smart_defaults
-    def __init__(self, painter, mods=PerCall([]), positioning=None, sizing=None):
+    def __init__(self, painter, controller=None, mods=PerCall([]), positioning=None, sizing=None):
         """ Initialize the widget with its painters and policies """
+        self.controller = controller
         self.painter = painter
         self.mods = mods
         self.eventHandler = EventHandler(self)
