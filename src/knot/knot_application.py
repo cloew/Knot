@@ -4,18 +4,26 @@ from .loader.knot_loader import KnotLoader
 
 from PySide.QtGui import QApplication
 
+import os
 import sys
 
 class KnotApplication:
     """ Represents a Knot Application """
     
-    def __init__(self, filename):
+    def __init__(self, filename, root):
         """ Initialize the Knot Application """
+        self.root = self.getRootDirectory(root)
         self.app = QApplication(sys.argv)
         self.title = "Knot Test -- Dun Dun DUN!"
         self.window = KnotWindow()
         ServiceManager.addService('app', self)
         self.loadWidgets(filename)
+        
+    def getRootDirectory(self, root):
+        """ Return the proper root directory """
+        if not os.path.isdir(root):
+            root = os.path.dirname(root)
+        return root
         
     def loadWidgets(self, filename):
         """ Load the widgets onto the window """
