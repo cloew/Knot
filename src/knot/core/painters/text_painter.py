@@ -11,7 +11,7 @@ class TextPainter(Painter):
                       HORIZONTAL:UseSizeHint(dimension=HORIZONTAL),
                       VERTICAL:  UseSizeHint(dimension=VERTICAL)}
     
-    def __init__(self, content):
+    def __init__(self, content, controller=None):
         """ Initialize the Painter with its internal content """
         Painter.__init__(self)
         self.text = content
