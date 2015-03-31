@@ -18,7 +18,7 @@ class ServiceManager:
     def getService(self, name): 
         """ Return the requested service """
         if name not in self.nameToService:
-            self.addService(name, self.nameToClass[name])
+            self.addService(name, self.nameToClass[name]())
             
         return self.nameToService[name]
         

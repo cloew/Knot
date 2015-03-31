@@ -9,4 +9,4 @@ class ServiceProvider:
         
     def getValue(self, argument, *args, **kwargs):
         """ Return the value for this default """
-        return ServiceManager.getService(argument)
+        return ServiceManager.getService(argument.argName)
