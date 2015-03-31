@@ -1,5 +1,7 @@
 from .knot_window import KnotWindow
+from .service_manager import ServiceManager
 from .loader.knot_loader import KnotLoader
+
 from PySide.QtGui import QApplication
 
 import sys
@@ -12,6 +14,7 @@ class KnotApplication:
         self.app = QApplication(sys.argv)
         self.title = "Knot Test -- Dun Dun DUN!"
         self.window = KnotWindow()
+        ServiceManager.addService('app', self)
         self.loadWidgets(filename)
         
     def loadWidgets(self, filename):
