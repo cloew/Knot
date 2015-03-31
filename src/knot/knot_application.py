@@ -2,9 +2,9 @@ from .knot_window import KnotWindow
 from .service_manager import ServiceManager
 from .loader.knot_loader import KnotLoader
 
+from kao_resources import ResourceDirectory
 from PySide.QtGui import QApplication
 
-import os
 import sys
 
 class KnotApplication:
@@ -12,18 +12,12 @@ class KnotApplication:
     
     def __init__(self, filename, root):
         """ Initialize the Knot Application """
-        self.root_dir = self.getRootDirectory(root)
+        self.resourceDirectory = ResourceDirectory(root)
         self.app = QApplication(sys.argv)
         self.title = "Knot Test -- Dun Dun DUN!"
         self.window = KnotWindow()
         ServiceManager.addService('app', self)
         self.loadWidgets(filename)
-        
-    def getRootDirectory(self, root):
-        """ Return the proper root directory """
-        if not os.path.isdir(root):
-            root = os.path.dirname(root)
-        return root
         
     def loadWidgets(self, filename):
         """ Load the widgets onto the window """
