@@ -1,7 +1,6 @@
-from knot.service_provider import ServiceProvider
+from knot import KnotService, use_knot_services
 
 from kao_decorators import proxy_for
-from smart_defaults import smart_defaults
 
 import os
 
@@ -9,7 +8,7 @@ import os
 class Window:
     """ Service to provide interaction with the main window """
     
-    @smart_defaults
-    def __init__(self, app=ServiceProvider()):
+    @use_knot_services
+    def __init__(self, app=KnotService):
         """ Initialize the Window Service with the app service """
         self.window = app.window 
