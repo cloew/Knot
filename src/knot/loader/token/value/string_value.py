@@ -23,6 +23,6 @@ class StringValue:
         """ Initialize the value token """
         self.stringValue = valueText[1:-1]
         
-    def getValue(self):
+    def getValue(self, scope):
         """ Return the actual value of the given token """
         return self.stringValue

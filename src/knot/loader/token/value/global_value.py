@@ -19,6 +19,6 @@ class GlobalValue:
         """ Initialize the value token """
         self.varName = varName
         
-    def getValue(self):
+    def getValue(self, scope):
         """ Return the actual value of the given token """
         return self.GLOBAL_SCOPE[self.varName]
