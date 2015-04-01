@@ -1,3 +1,4 @@
+from kao_xobj import xobj_attrgetter
 
 class ScopeValue:
     """ Represents a Value from the current scope """
@@ -9,8 +10,8 @@ class ScopeValue:
     
     def __init__(self, valueText):
         """ Initialize the value token """
-        self.varName = valueText.split('$.', 1)[1]
+        self.attrgetter = xobj_attrgetter(valueText.split('$.', 1)[1])
         
     def getValue(self, scope):
         """ Return the actual value of the given token """
-        return getattr(scope, self.varName)
+        return self.attrgetter(scope)
