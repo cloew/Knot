@@ -7,7 +7,7 @@ from ..events.event_handler import EventHandler
 from knot.core.painters.container_painter import ContainerPainter
 
 from kao_decorators import proxy_for
-from smart_defaults import smart_defaults, PerCall
+from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
 @proxy_for('eventHandler', ['fire', 'on', 'unregister'])
@@ -19,7 +19,7 @@ class Widget:
     """ Represents a widget within Knot """
     
     @smart_defaults
-    def __init__(self, painter=ContainerPainter(), controller=None, mods=PerCall([]), positioning=None, sizing=None):
+    def __init__(self, painter=EvenIfNone(ContainerPainter()), controller=None, mods=PerCall([]), positioning=None, sizing=None):
         """ Initialize the widget with its painters and policies """
         self.controller = controller
         self.painter = painter

@@ -9,6 +9,7 @@ from kao_factory.Parameter.primitive_parameter import PrimitiveParameter
 
 widgetParameters = [PrimitiveParameter("name"),
                     PrimitiveParameter("painter", optional=True),
+                    PrimitiveParameter("template", optional=True),
                     PrimitiveParameter("controller", optional=True)]
                      
 WidgetConfigFactory = Factory(WidgetConfig, widgetParameters)

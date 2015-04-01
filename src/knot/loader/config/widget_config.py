@@ -1,23 +1,44 @@
 from knot.widget.widget import Widget
+
 from kao_modules import NamespacedClass
+from kao_resources import ResourceDirectory
 
 class WidgetConfig:
     """ Represents the configuration for a widget """
     
-    def __init__(self, name, painterClassname=None, controllerClassname=None):
+    def __init__(self, name, painterClassname=None, template=None, controllerClassname=None):
         """ Initialize the widget config with its name and the painter classname """
         self.name = name
         self.controllerClassname = controllerClassname
         self.painterClassname = painterClassname
+        self.template = template
         
         self.namespacedPainterClass = self.tryToBuildNamespacedClass(painterClassname)
         self.namespacedControllerClass = self.tryToBuildNamespacedClass(controllerClassname)
+        
+    def setPackageFilename(self, filename):
+        """ Set the package filename """
+        self.packageDirectory = ResourceDirectory(filename)
         
     def build(self, content, *args, positioning=None, sizing=None, **kwargs):
         """ Return the proper widget object """
         controller = self.tryToIntantiateClass(self.namespacedControllerClass, *args, **kwargs)
         painter = self.tryToIntantiateClass(self.namespacedPainterClass, content, controller)
-        return Widget(painter, controller=controller, positioning=positioning, sizing=sizing)
+        
+        widget = Widget(painter, controller=controller, positioning=positioning, sizing=sizing)
+        self.tryToLoadChildren(widget)
+        return widget
+        
+    def tryToLoadChildren(self, widget):
+        """ Load children for this widget based on its configuration """
+        if self.template is None:
+            return
+            
+        from ..knot_loader import KnotLoader
+        knotLoader = KnotLoader(self.packageDirectory.getProperPath(self.template))
+        children = knotLoader.load()
+        for child in children:
+            widget.addChild(child)
         
     def __repr__(self):
         """ Return the string representation of the config """

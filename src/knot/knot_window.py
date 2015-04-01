@@ -13,7 +13,7 @@ class KnotWindow(Widget):
         """ Initialize the window """
         Widget.__init__(self, WindowPainter(''))
         
-    def printChildren(self, parent=None):
+    def printChildren(self, parent=None, event=None):
         """ """
         if parent is None:
             parent = self

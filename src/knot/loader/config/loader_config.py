@@ -33,7 +33,9 @@ class LoaderConfig:
         filename = self.findKnotPackageFilename(package)
         source = JsonSource(filename)
         data = source.data
-        return PackageConfigFactory.load(data)
+        packageConfig = PackageConfigFactory.load(data)
+        packageConfig.setPackageFilename(filename)
+        return packageConfig
     
     def findKnotPackageFilename(self, package):
         """ Return the core Knot package filename """

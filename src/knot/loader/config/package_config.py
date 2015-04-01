@@ -9,5 +9,11 @@ class PackageConfig:
         self.sizingConfigs = self.convertConfigsToDictionary(sizingConfigs)
         self.serviceConfigs = self.convertConfigsToDictionary(serviceConfigs)
         
+    def setPackageFilename(self, filename):
+        """ Set the package filename """
+        self.filename = filename
+        for name in self.widgetConfigs:
+            self.widgetConfigs[name].setPackageFilename(filename)
+        
     def convertConfigsToDictionary(self, configs):
         return {config.name:config for config in configs}
