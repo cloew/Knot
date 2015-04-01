@@ -12,7 +12,7 @@ from smart_defaults import smart_defaults, EvenIfNone, PerCall
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
 @proxy_for('eventHandler', ['fire', 'on', 'unregister'])
 @proxy_for('positioningHandler', ['apply', 'getDefaultChildrenPolicy', 'getSidePosition', 'getInternalSidePosition', 'setSidePosition'])
-@proxy_for('qtHandler', ['setQWidget', '_qwidget'])
+@proxy_for('qtHandler', ['hasQWidget', 'setQWidget', '_qwidget'])
 @proxy_for('sizingHandler', ['apply'])
 @proxy_for('treeHandler', ['parent', 'children', 'siblings', 'addChild', 'attachToParent', 'getSiblingOn', 'getPreviousSibling'])
 class Widget:
@@ -37,7 +37,7 @@ class Widget:
         
     def canMove(self):
         """ Return if this widget can move """
-        return self._qwidget is not None
+        return self.hasQWidget()
         
     @property
     def height(self):

@@ -14,8 +14,7 @@ class KnotApplication:
         """ Initialize the Knot Application """
         self.resourceDirectory = ResourceDirectory(root)
         self.app = QApplication(sys.argv)
-        self.title = "Knot Test -- Dun Dun DUN!"
-        self.window = KnotWindow()
+        self.window = KnotWindow(title="Knot Test -- Dun Dun DUN!")
         ServiceManager.addService('app', self)
         self.loadWidgets(filename)
         
@@ -29,5 +28,4 @@ class KnotApplication:
     def run(self):
         """ Run the applciation """
         self.window.draw()
-        self.window.setWindowTitle(self.title)
         self.app.exec_()
