@@ -14,10 +14,10 @@ class LoaderConfig:
     
     def __init__(self):
         """ Initialize the loader config """
-        self.widgetFactory = KnotConfigFactory()#self.packageConfig.widgetConfigs)
+        self.widgetFactory = KnotConfigFactory()
         self.attributesFactory = {}
-        self.attributesFactory[POSITION] = KnotConfigFactory()#self.packageConfig.positioningConfigs)
-        self.attributesFactory[SIZING] = KnotConfigFactory()#self.packageConfig.sizingConfigs)
+        self.attributesFactory[POSITION] = KnotConfigFactory()
+        self.attributesFactory[SIZING] = KnotConfigFactory()
         
         self.importPackage(self.CORE_KNOT_PACKAGE)
         
