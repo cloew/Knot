@@ -1,5 +1,6 @@
 from .import_loader import ImportLoader
 from .widget_loader import WidgetLoader
+from .scope_getter import GetScopeFor
 from .config.loader_config import LoaderConfig
 
 from .token.token_factory import TokenFactory
@@ -20,15 +21,15 @@ class KnotLoader:
         
     def loadOnto(self, widget):
         """ Load the contents of the given file and place them on the given widget """
-        children = self.load()
+        children = self.load(scope=GetScopeFor(widget))
         for child in children:
             widget.addChild(child)
         
-    def load(self):
+    def load(self, scope=None):
         """ Load the widgets from the filename """
         self.findSections()
         self.loadImports()
-        return self.loadWidgets()
+        return self.loadWidgets(scope=scope)
         
     def findSections(self):
         """ Find the imports and widgets sections of the Knot File """
@@ -48,8 +49,8 @@ class KnotLoader:
         importLoader = ImportLoader(self.config)
         return [importLoader.load(token) for token in tokens if token.ROLE is IMPORT]
         
-    def loadWidgets(self):
+    def loadWidgets(self, scope=None):
         """ Load the widget section of the Knot File """
         tokens = self.factory.loadAllTokens(self.widgetsLines)
         widgetLoader = WidgetLoader(self.config)
-        return [widgetLoader.load(token) for token in tokens if token.ROLE is WIDGET]
+        return [widgetLoader.load(token, scope=scope) for token in tokens if token.ROLE is WIDGET]

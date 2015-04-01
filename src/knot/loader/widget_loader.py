@@ -1,5 +1,6 @@
 from .attributes import POSITION, SIZING
 from .attribute_loader import AttributeLoader
+from .scope_getter import GetScopeFor
 
 class WidgetLoader:
     """ Helper class to load widgets from knot tokens """
@@ -8,7 +9,7 @@ class WidgetLoader:
         """ Initialize the loader with the configuration to use """
         self.config = config
     
-    def load(self, widgetToken):
+    def load(self, widgetToken, scope=None):
         """ Load the given widget token """
         widgetType = widgetToken.widgetType
         content = widgetToken.content.value if widgetToken.content is not None else None
@@ -19,7 +20,8 @@ class WidgetLoader:
         
         widget = self.config.widgetFactory.build(widgetType.type, content, *widgetType.arguments, positioning=positioning, sizing=sizing)
         
+        scope = GetScopeFor(widget, currentScope=scope)
         for childToken in widgetToken.children:
-            child = self.load(childToken)
+            child = self.load(childToken, scope=scope)
             widget.addChild(child)
         return widget
