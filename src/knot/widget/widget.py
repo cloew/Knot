@@ -4,6 +4,8 @@ from .sizing_handler import SizingHandler
 from .tree_handler import TreeHandler
 from ..events.event_handler import EventHandler
 
+from knot.core.painters.container_painter import ContainerPainter
+
 from kao_decorators import proxy_for
 from smart_defaults import smart_defaults, PerCall
 
@@ -17,7 +19,7 @@ class Widget:
     """ Represents a widget within Knot """
     
     @smart_defaults
-    def __init__(self, painter, controller=None, mods=PerCall([]), positioning=None, sizing=None):
+    def __init__(self, painter=ContainerPainter(), controller=None, mods=PerCall([]), positioning=None, sizing=None):
         """ Initialize the widget with its painters and policies """
         self.controller = controller
         self.painter = painter
