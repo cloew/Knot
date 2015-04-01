@@ -50,7 +50,7 @@ class WidgetToken:
         
     def build(self, factory, scope, **kwargs):
         """ Build this type form the factory """
-        content = self.content.value if self.content is not None else None
+        content = self.content.getValue(scope) if self.content is not None else None
         return factory.build(self.widgetType.type, content, *self.widgetType.getArgumentValues(scope), **kwargs)
         
     def __repr__(self):
