@@ -20,5 +20,6 @@ setup(name='knot',
                 'knot.loader.config',
                 'knot.core.controllers',
                 'knot.loader.token.value',
-                'knot.core.services'],
+                'knot.core.services',
+                'knot.scope'],
      )
