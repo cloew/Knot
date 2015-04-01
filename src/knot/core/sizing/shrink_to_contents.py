@@ -23,21 +23,23 @@ class ShrinkToContents:
         width = widget.width
         height = widget.height
         
-        newWidth, newHeight = self.getWidthAndHeight(widget)
-        
         if self.dimension is BOTH or self.dimension is HORIZONTAL:
-            width = newWidth
+            width = self.getWidth(widget)
         if self.dimension is BOTH or self.dimension is VERTICAL:
-            height = newHeight
+            height = self.getHeight(widget)
             
         widget.resize(width, height)
         
-    def getWidthAndHeight(self, widget):
-        """ Return the new width and height """
+    def getWidth(self, widget):
+        """ Return the proper width for the widget """
         width = 0
+        if len(widget.children) > 0:
+            width = max([child.right for child in widget.children])
+        return width
+        
+    def getHeight(self, widget):
+        """ Return the proper height for the widget """
         height = 0
         if len(widget.children) > 0:
-            lastChild = widget.children[-1]
-            width = lastChild.right
-            height = lastChild.bottom
-        return width, height
+            height = max([child.bottom for child in widget.children])
+        return height
