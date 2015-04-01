@@ -18,6 +18,12 @@ class KnotLoader:
         self.config = LoaderConfig()
         self.factory = TokenFactory(self.config)
         
+    def loadOnto(self, widget):
+        """ Load the contents of the given file and place them on the given widget """
+        children = self.load()
+        for child in children:
+            widget.addChild(child)
+        
     def load(self):
         """ Load the widgets from the filename """
         self.findSections()
