@@ -19,5 +19,7 @@
               {"name":"stretch",
                "class":"knot.core.sizing.stretch.Stretch"}],
     "services":[{"name":"fileLoader",
-                 "class":"knot.core.services.file_loader.FileLoader"}]
+                 "class":"knot.core.services.file_loader.FileLoader"},
+                {"name":"window",
+                 "class":"knot.core.services.window.Window"}]
 }
