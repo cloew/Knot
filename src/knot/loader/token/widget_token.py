@@ -48,5 +48,10 @@ class WidgetToken:
         """ Set the attribute """
         self.attributes[token.attribute] = token
         
+    def build(self, factory, scope, **kwargs):
+        """ Build this type form the factory """
+        content = self.content.value if self.content is not None else None
+        return factory.build(self.widgetType.type, content, *self.widgetType.getArgumentValues(scope), **kwargs)
+        
     def __repr__(self):
         return "<WidgetToken:{0},{1}, [{2}]>".format(self.widgetType, self.content, ", ".join([repr(child) for child in self.children]))
