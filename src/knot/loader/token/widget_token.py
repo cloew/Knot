@@ -9,21 +9,17 @@ class WidgetToken:
     def isValidFor(cls, section, config):
         """ Return if this token is valid for the given section """
         widgetType = cls.getWidgetType(section)
-        return widgetType is not None and config.widgetFactory.isValidType(widgetType)
+        return widgetType is not None and config.widgetFactory.isValidType(widgetType.type)
         
     @staticmethod
     def getWidgetType(section):
         """ Find the widget type in the given section """
         firstLine = section[0]
-        pieces = firstLine.split()
-        if len(pieces) == 1:
-            return pieces[0].split('(')[0].strip()
-        else:
-            return None
+        return TypeToken(firstLine)
     
     def __init__(self, section, factory):
         """ Intialize the Widget Token with the section it was loaded from """
-        self.widgetType = TypeToken(section[0])
+        self.widgetType = self.getWidgetType(section)
         
         self.children = []
         self.attributes = {}
