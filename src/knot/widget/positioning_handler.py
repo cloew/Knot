@@ -6,7 +6,6 @@ from knot.core.positioning.from_neighbor import FromNeighbor
 
 class PositioningHandler(PoliciesHandler):
     """ Handles the positioning policy(ies) for the parent widget """
-    DEFAULT_POLICY = FromNeighbor(LEFT)
     DIMENSION_TO_POLICY = {HORIZONTAL:FromNeighbor(LEFT),
                            VERTICAL:  FromNeighbor(TOP)}
         
