@@ -22,5 +22,6 @@ setup(name='knot',
                 'knot.loader.token.value',
                 'knot.core.services',
                 'knot.scope',
-                'knot.forms.controllers'],
+                'knot.forms.controllers',
+                'knot.policy'],
      )
