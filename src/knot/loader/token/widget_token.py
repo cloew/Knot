@@ -57,7 +57,10 @@ class WidgetToken:
     def build(self, factory, scope, **kwargs):
         """ Build this type form the factory """
         content = self.content.getValue(scope) if self.content is not None else None
-        return factory.build(self.widgetType.type, content, *self.widgetType.getArgumentValues(scope), **kwargs)
+        widget = factory.build(self.widgetType.type, content, *self.widgetType.getArgumentValues(scope), **kwargs)
+        for signal in self.signals:
+            signal.attach(widget.controller, scope)
+        return widget
         
     def __repr__(self):
         return "<WidgetToken:{0},{1}, [{2}]>".format(self.widgetType, self.content, ", ".join([repr(child) for child in self.children]))

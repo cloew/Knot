@@ -16,5 +16,9 @@ class SignalToken:
         self.signalName, valueText = [piece.strip() for piece in pieces[1].split('->')]
         self.value = ScopeValue(valueText)
         
+    def attach(self, controller, scope):
+        """ Attach the signal and its callback """
+        getattr(controller, self.signalName).register(self.value.getValue(scope))
+        
     def __repr__(self):
         return "<ScopeToken:{0}:{1}>".format(self.signalName, self.value)
