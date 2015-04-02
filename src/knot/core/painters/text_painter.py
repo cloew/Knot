@@ -18,5 +18,4 @@ class TextPainter(Painter):
         """ Build the QLabel """
         label = QLabel(self.content.text) 
         label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
-        self.content.changed.register(label.setText)
         return label

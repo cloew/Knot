@@ -22,5 +22,4 @@ class MultiLineTextPainter(Painter):
         label = QLabel(self.content.text) 
         label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
         label.setWordWrap(True)
-        self.content.changed.register(label.setText)
         return label
