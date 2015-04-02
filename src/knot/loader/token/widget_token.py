@@ -1,4 +1,4 @@
-from .token_roles import WIDGET, CONTENT, ATTRIBUTE
+from .token_roles import WIDGET, CONTENT, ATTRIBUTE, SIGNAL
 from .type_token import TypeToken
 
 class WidgetToken:
@@ -22,6 +22,7 @@ class WidgetToken:
         self.widgetType = self.getWidgetType(section)
         
         self.children = []
+        self.signals = []
         self.attributes = {}
         self.content = None
         children = factory.loadAllTokens(section[1:])
@@ -31,6 +32,7 @@ class WidgetToken:
         """ Process the children so theya re stored correctly """
         roleHandler = {WIDGET: self.addChild,
                        CONTENT: self.setContent,
+                       SIGNAL: self.setSignal,
                        ATTRIBUTE: self.setAttribute}
         
         for childToken in children:
@@ -43,6 +45,10 @@ class WidgetToken:
     def setContent(self, content):
         """ Set the child content """
         self.content = content
+        
+    def setSignal(self, signal):
+        """ Set the child content """
+        self.signals.append(signal)
         
     def setAttribute(self, token):
         """ Set the attribute """
