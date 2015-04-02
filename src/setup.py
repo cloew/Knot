@@ -23,5 +23,6 @@ setup(name='knot',
                 'knot.core.services',
                 'knot.scope',
                 'knot.forms.controllers',
-                'knot.policy'],
+                'knot.policy',
+                'knot.watches'],
      )
