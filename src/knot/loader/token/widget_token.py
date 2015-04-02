@@ -56,7 +56,7 @@ class WidgetToken:
         
     def build(self, factory, scope, **kwargs):
         """ Build this type form the factory """
-        content = self.content.getText(scope) if self.content is not None else None
+        content = self.content.build(scope) if self.content is not None else None
         widget = factory.build(self.widgetType.type, content, *self.widgetType.getArgumentValues(scope), **kwargs)
         for signal in self.signals:
             signal.attach(widget.controller, scope)

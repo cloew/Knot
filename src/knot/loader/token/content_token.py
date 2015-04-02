@@ -1,6 +1,8 @@
 from .token_roles import CONTENT
 from .value.scope_value import ScopeValue
 
+from knot.widget.content import Content
+
 from kao_decorators import proxy_for
 
 class ContentToken:
@@ -26,9 +28,9 @@ class ContentToken:
             text = '{}'
         return text
         
-    def getText(self, scope):
-        """ Return the text """
-        return self.text.format(*[value.getValue(scope) for value in self.valueTokens])
+    def build(self, scope):
+        """ Return the Content """
+        return Content(self.text, self.valueTokens, scope)
         
     def __repr__(self):
         return "<ContentToken:{0}>".format(self.value)

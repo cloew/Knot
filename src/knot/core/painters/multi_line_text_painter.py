@@ -15,11 +15,11 @@ class MultiLineTextPainter(Painter):
     def __init__(self, content, controller=None):
         """ Initialize the Painter with its internal content """
         Painter.__init__(self)
-        self.text = content
+        self.content = content
         
     def buildQWidget(self, widget):
         """ Build the QLabel """
-        label = QLabel(self.text) 
+        label = QLabel(self.content.text) 
         label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
         label.setWordWrap(True)
         return label

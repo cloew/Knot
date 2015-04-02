@@ -12,9 +12,9 @@ class ButtonPainter(Painter):
     def __init__(self, content, controller=None):
         """ Initialize the Painter with its internal content """
         Painter.__init__(self)
-        self.text = content
+        self.content = content
         
     def buildQWidget(self, widget):
         """ Build the QPushButton """
-        button = QPushButton(self.text)
+        button = QPushButton(self.content.text)
         return button
