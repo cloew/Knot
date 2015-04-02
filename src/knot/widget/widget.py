@@ -30,6 +30,9 @@ class Widget:
         self.sizingHandler = SizingHandler(self, sizing)
         self.qtHandler = QtHandler(self)
         
+        if self.controller is not None and hasattr(self.controller, 'attachWidget'):
+            self.controller.attachWidget(self)
+        
     def draw(self):
         """ Draw the widget given its parent """
         self.painter.draw(self)
