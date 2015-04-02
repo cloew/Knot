@@ -1,4 +1,5 @@
 from knot.dimensions import HORIZONTAL, VERTICAL
+from knot.events.event_types import WIDGET_CREATED
 from .widget.widget import Widget
 
 from .core.painters.window_painter import WindowPainter
@@ -13,19 +14,7 @@ class KnotWindow(Widget):
         """ Initialize the window """
         Widget.__init__(self, WindowPainter(''))
         self.title = title
-        
-    def draw(self, *args, **kwargs):
-        """ Draw the widget """
-        Widget.draw(self, *args, **kwargs)
-        self._setWindowTitle()
-        
-    def printChildren(self, parent=None, event=None):
-        """ """
-        if parent is None:
-            parent = self
-        for child in parent.children:
-            print(child, child._qwidget.geometry())
-            self.printChildren(parent=child)
+        self.on(WIDGET_CREATED, self._setWindowTitle)
             
     @property
     def title(self):
@@ -38,7 +27,15 @@ class KnotWindow(Widget):
         self.__title = value
         self._setWindowTitle()
         
-    def _setWindowTitle(self):
+    def _setWindowTitle(self, parent=None, event=None):
         """ Set the title on the window """
         if self.hasQWidget():
             self.setWindowTitle(self.__title)
+        
+    def printChildren(self, parent=None, event=None):
+        """ """
+        if parent is None:
+            parent = self
+        for child in parent.children:
+            print(child, child._qwidget.geometry())
+            self.printChildren(parent=child)
