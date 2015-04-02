@@ -11,20 +11,13 @@ class PoliciesHandler:
     def apply(self):
         """ Apply the positionig policy """
         if self.policy is None:
-            self.policies = self.getDefaultPolicyAsList(BOTH)
+            self.policies = self.getDefaultPolicies(BOTH)
         elif not self.policy.handlesDimension(HORIZONTAL):
-            self.policies = [self.policy] + self.getDefaultPolicyAsList(HORIZONTAL)
+            self.policies = [self.policy] + self.getDefaultPolicies(HORIZONTAL)
         elif not self.policy.handlesDimension(VERTICAL):
-            self.policies = [self.policy] + self.getDefaultPolicyAsList(VERTICAL)
+            self.policies = [self.policy] + self.getDefaultPolicies(VERTICAL)
         else:
             self.policies = [self.policy]
         
         for policy in self.policies:
             policy.applyToWidget(self.widget)
-            
-    def getDefaultPolicyAsList(self, dimension):
-        """ Return the requested default policies as a list if necessary """
-        policies = self.getDefaultPolicy(dimension)
-        if type(policies) is not list:
-            policies = [policies]
-        return policies

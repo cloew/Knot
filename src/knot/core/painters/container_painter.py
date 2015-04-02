@@ -1,14 +1,12 @@
 from .painter import Painter
-from knot.dimensions import HORIZONTAL, VERTICAL, BOTH
+from knot.policy.default_policies_via_class import DefaultPoliciesViaClass
 from knot.core.sizing.shrink_to_contents import ShrinkToContents
 
 from PySide.QtGui import QWidget
 
 class ContainerPainter(Painter):
     """ Handles painting a collection of child widgets """
-    DEFAULT_SIZING = {BOTH:      ShrinkToContents(),
-                      HORIZONTAL:ShrinkToContents(dimension=HORIZONTAL),
-                      VERTICAL:  ShrinkToContents(dimension=VERTICAL)}
+    DEFAULT_SIZING = DefaultPoliciesViaClass(ShrinkToContents)
         
     def buildQWidget(self, widget):
         """ Draw the Widget to use as the container """

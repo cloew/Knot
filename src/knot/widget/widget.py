@@ -11,7 +11,7 @@ from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
 @proxy_for('eventHandler', ['fire', 'on', 'unregister'])
-@proxy_for('positioningHandler', ['apply', 'getDefaultChildrenPolicy', 'getSidePosition', 'getInternalSidePosition', 'setSidePosition'])
+@proxy_for('positioningHandler', ['apply', 'getDefaultChildrenPolicies', 'getSidePosition', 'getInternalSidePosition', 'setSidePosition'])
 @proxy_for('qtHandler', ['hasQWidget', 'setQWidget', '_qwidget'])
 @proxy_for('sizingHandler', ['apply'])
 @proxy_for('treeHandler', ['parent', 'children', 'siblings', 'addChild', 'attachToParent', 'getSiblingOn', 'getPreviousSibling'])

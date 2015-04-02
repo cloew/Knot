@@ -5,6 +5,6 @@ from knot.dimensions import HORIZONTAL, VERTICAL, BOTH
 class SizingHandler(PoliciesHandler):
     """ Handles the sizing policy(ies) for the parent widget """
         
-    def getDefaultPolicy(self, dimension=BOTH):
-        """ Return the default policy to be used for children """
-        return self.widget.painter.DEFAULT_SIZING[dimension]
+    def getDefaultPolicies(self, dimension=BOTH):
+        """ Return the default policies to be used for children """
+        return self.widget.painter.DEFAULT_SIZING.getPolicies(dimension)

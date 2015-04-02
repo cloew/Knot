@@ -10,22 +10,22 @@ class PositioningHandler(PoliciesHandler):
     DEFAULT_POSITIONING = DefaultPolicies({HORIZONTAL:FromNeighbor(LEFT),
                                            VERTICAL:  FromNeighbor(TOP)})
         
-    def getDefaultPolicy(self, dimension=BOTH):
-        """ Return the default policy to be used for children """
-        policies = self.getContainerDefaultPolicy(dimension=dimension)
+    def getDefaultPolicies(self, dimension=BOTH):
+        """ Return the default policies to be used for children """
+        policies = self.getContainerDefaultPolicies(dimension=dimension)
         if policies is None:
-            policies = self.getDefaultChildrenPolicy(dimension=dimension)
+            policies = self.getDefaultChildrenPolicies(dimension=dimension)
         return policies
         
-    def getContainerDefaultPolicy(self, dimension=BOTH):
-        """ Return the Container's default positioning policy """
+    def getContainerDefaultPolicies(self, dimension=BOTH):
+        """ Return the Container's default positioning policies """
         if self.widget.parent is not None:
-            return self.widget.parent.getDefaultChildrenPolicy(dimension=dimension)
+            return self.widget.parent.getDefaultChildrenPolicies(dimension=dimension)
         else:
             return None
         
-    def getDefaultChildrenPolicy(self, dimension=BOTH):
-        """ Return the default policy to be used for children """
+    def getDefaultChildrenPolicies(self, dimension=BOTH):
+        """ Return the default policies to be used for children """
         return self.DEFAULT_POSITIONING.getPolicies(dimension)
         
     def getSidePosition(self, side):

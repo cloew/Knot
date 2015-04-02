@@ -1,5 +1,6 @@
 from .painter import Painter
-from knot.dimensions import HORIZONTAL, VERTICAL, BOTH
+from knot.dimensions import HORIZONTAL, VERTICAL
+from knot.policy.default_policies import DefaultPolicies
 from knot.core.sizing.stretch import Stretch
 from knot.core.sizing.use_size_hint import UseSizeHint
 
@@ -8,9 +9,8 @@ from PySide.QtGui import QLabel
 
 class MultiLineTextPainter(Painter):
     """ Handles creation of the Qt widget for drawing multi-line text """
-    DEFAULT_SIZING = {BOTH:     [Stretch(dimension=HORIZONTAL), UseSizeHint(dimension=VERTICAL)],
-                      HORIZONTAL:Stretch(dimension=HORIZONTAL),
-                      VERTICAL:  UseSizeHint(dimension=VERTICAL)}
+    DEFAULT_SIZING = DefaultPolicies({HORIZONTAL:Stretch(dimension=HORIZONTAL),
+                                      VERTICAL:  UseSizeHint(dimension=VERTICAL)})
     
     def __init__(self, content, controller=None):
         """ Initialize the Painter with its internal content """

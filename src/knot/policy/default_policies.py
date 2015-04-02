@@ -19,4 +19,5 @@ class DefaultPolicies:
         
     def convertPolicyToList(self, dimension):
         """ Convert the policy for the given Dimension to a list """
-        self.dimensionToPolicy[dimension] = [self.dimensionToPolicy[dimension]]
+        if dimension in self.dimensionToPolicy:
+            self.dimensionToPolicy[dimension] = [self.dimensionToPolicy[dimension]]
