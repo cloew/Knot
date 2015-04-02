@@ -17,4 +17,5 @@ class ButtonPainter(Painter):
     def buildQWidget(self, widget):
         """ Build the QPushButton """
         button = QPushButton(self.content.text)
+        self.content.changed.register(button.setText)
         return button

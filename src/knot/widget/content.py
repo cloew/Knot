@@ -1,3 +1,5 @@
+from knot.service_manager import ServiceManager
+from knot.events.signal import Signal
 
 class Content:
     """ Represents the content in a widget """
@@ -7,6 +9,10 @@ class Content:
         self.textFormat = text
         self.valueTokens = valueTokens
         self.scope = scope
+        self.changed = Signal()
+        
+        app = ServiceManager.getService('app')
+        app.watch(self, 'text', self.changed.emit)
         
     @property
     def text(self):
