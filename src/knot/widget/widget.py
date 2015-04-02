@@ -13,7 +13,7 @@ from smart_defaults import smart_defaults, EvenIfNone, PerCall
 @proxy_for('eventHandler', ['fire', 'on', 'unregister'])
 @proxy_for('positioningHandler', ['apply', 'getDefaultChildrenPolicies', 'getSidePosition', 'getInternalSidePosition', 'setSidePosition'])
 @proxy_for('qtHandler', ['hasQWidget', 'setQWidget', '_qwidget'])
-@proxy_for('sizingHandler', ['apply'])
+@proxy_for('sizingHandler', ['apply', 'resizeWithPolicies'])
 @proxy_for('treeHandler', ['parent', 'children', 'siblings', 'addChild', 'attachToParent', 'getSiblingOn', 'getPreviousSibling'])
 class Widget:
     """ Represents a widget within Knot """

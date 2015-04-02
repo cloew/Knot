@@ -11,7 +11,8 @@ class Content:
         self.scope = scope
         self.changed = Signal()
         
-        app = ServiceManager.getService('app')
+    def addWatch(self, app):
+        """ Add the watch for this content to the app """
         app.watch(self, 'text', self.changed.emit)
         
     @property

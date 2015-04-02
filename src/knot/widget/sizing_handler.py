@@ -8,3 +8,7 @@ class SizingHandler(PoliciesHandler):
     def getDefaultPolicies(self, dimension=BOTH):
         """ Return the default policies to be used for children """
         return self.widget.painter.DEFAULT_SIZING.getPolicies(dimension)
+        
+    def resizeWithPolicies(self):
+        """ Resize the widget """
+        [policy.resize(self.widget) for policy in self.policies]
