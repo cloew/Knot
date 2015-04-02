@@ -14,4 +14,4 @@ class ButtonController:
         
     def attachSignal(self, widget, event=None):
         """ Attach the signal to the qt signal """
-        widget._qtwidget.clicked.connect(self.clicked.emit)
+        widget._qwidget.clicked.connect(self.clicked.emit)
