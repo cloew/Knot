@@ -1,4 +1,5 @@
 {
     "widgets":[{"name":"button",
-                "painter":"knot.forms.painters.button_painter.ButtonPainter"}]
+                "painter":"knot.forms.painters.button_painter.ButtonPainter",
+                "controller":"knot.forms.controllers.button_controller.ButtonController"}]
 }
