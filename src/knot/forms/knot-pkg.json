@@ -2,5 +2,7 @@
     "widgets":[{"name":"button",
                 "painter":"knot.forms.painters.button_painter.ButtonPainter",
                 "controller":"knot.forms.controllers.button_controller.ButtonController",
-                "req-mods":[{"class":"knot.core.mods.watch_content.WatchContent"}]}]
+                "req-mods":[{"class":"knot.core.mods.watch_content.WatchContent"}]},
+               {"name":"line-edit",
+                "painter":"knot.forms.painters.line_edit_painter.LineEditPainter"}]
 }
