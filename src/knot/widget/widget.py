@@ -36,7 +36,6 @@ class Widget:
     def draw(self):
         """ Draw the widget given its parent """
         self.painter.draw(self)
-        [mod.afterDraw(self) for mod in self.mods]
         
     def canMove(self):
         """ Return if this widget can move """

@@ -6,12 +6,13 @@ from kao_resources import ResourceDirectory
 class WidgetConfig:
     """ Represents the configuration for a widget """
     
-    def __init__(self, name, painterClassname=None, template=None, controllerClassname=None):
+    def __init__(self, name, painterClassname=None, template=None, controllerClassname=None, reqMods=[]):
         """ Initialize the widget config with its name and the painter classname """
         self.name = name
         self.controllerClassname = controllerClassname
         self.painterClassname = painterClassname
         self.template = template
+        self.reqMods = reqMods
         
         self.namespacedPainterClass = self.tryToBuildNamespacedClass(painterClassname)
         self.namespacedControllerClass = self.tryToBuildNamespacedClass(controllerClassname)
@@ -24,8 +25,9 @@ class WidgetConfig:
         """ Return the proper widget object """
         controller = self.tryToIntantiateClass(self.namespacedControllerClass, *args, **kwargs)
         painter = self.tryToIntantiateClass(self.namespacedPainterClass, content, controller)
+        mods = [reqMod.build() for reqMod in self.reqMods]
         
-        widget = Widget(painter, controller=controller, positioning=positioning, sizing=sizing)
+        widget = Widget(painter, controller=controller, positioning=positioning, sizing=sizing, mods=mods)
         self.tryToLoadChildren(widget)
         return widget
         

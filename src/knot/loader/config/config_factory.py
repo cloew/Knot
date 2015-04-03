@@ -1,5 +1,6 @@
 from .package_config import PackageConfig
 from .policy_config import PolicyConfig
+from .required_mod_config import RequiredModConfig
 from .service_config import ServiceConfig
 from .widget_config import WidgetConfig
 
@@ -7,10 +8,15 @@ from kao_factory.factory import Factory
 from kao_factory.Parameter.complex_parameter import ComplexParameter
 from kao_factory.Parameter.primitive_parameter import PrimitiveParameter
 
+reqModsParameters = [PrimitiveParameter("class")]
+                     
+ReqModsConfigFactory = Factory(RequiredModConfig, reqModsParameters)
+
 widgetParameters = [PrimitiveParameter("name"),
                     PrimitiveParameter("painter", optional=True),
                     PrimitiveParameter("template", optional=True),
-                    PrimitiveParameter("controller", optional=True)]
+                    PrimitiveParameter("controller", optional=True),
+                    ComplexParameter("req-mods", ReqModsConfigFactory.loadAll, optional=True, default=[])]
                      
 WidgetConfigFactory = Factory(WidgetConfig, widgetParameters)
 
