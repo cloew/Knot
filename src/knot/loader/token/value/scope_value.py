@@ -1,4 +1,4 @@
-from kao_xobj import xobj_attrgetter
+from knot.scope.scoped_value import ScopedValue
 
 class ScopeValue:
     """ Represents a Value from the current scope """
@@ -10,8 +10,8 @@ class ScopeValue:
     
     def __init__(self, valueText):
         """ Initialize the value token """
-        self.attrgetter = xobj_attrgetter(valueText.split('$.', 1)[1])
+        self.attrName = valueText.split('$.', 1)[1]
         
     def getValue(self, scope):
         """ Return the actual value of the given token """
-        return self.attrgetter(scope)
+        return ScopedValue(scope, self.attrName)

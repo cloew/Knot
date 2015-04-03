@@ -4,11 +4,10 @@ from knot.events.signal import Signal
 class Content:
     """ Represents the content in a widget """
     
-    def __init__(self, text, valueTokens, scope):
+    def __init__(self, text, scopedValues):
         """ Initialize the Content """
         self.textFormat = text
-        self.valueTokens = valueTokens
-        self.scope = scope
+        self.scopedValues = scopedValues
         self.changed = Signal()
         
     def addWatch(self, app):
@@ -18,4 +17,4 @@ class Content:
     @property
     def text(self):
         """ Return the current text for the Content """
-        return self.textFormat.format(*[value.getValue(self.scope) for value in self.valueTokens])
+        return self.textFormat.format(*[value.get() for value in self.scopedValues])

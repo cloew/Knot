@@ -30,7 +30,7 @@ class ContentToken:
         
     def build(self, scope):
         """ Return the Content """
-        return Content(self.text, self.valueTokens, scope)
+        return Content(self.text, [token.getValue(scope) for token in self.valueTokens])
         
     def __repr__(self):
         return "<ContentToken:{0}>".format(self.value)
