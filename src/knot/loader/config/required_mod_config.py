@@ -1,10 +1,11 @@
+from kao_modules import NamespacedClass
 
 class RequiredModConfig:
     """ Represents the configuration for a Mod Required for a widget """
     
     def __init__(self, classname):
-        """ Initialize the COnfig with the mod classname to generate """
-        self.modClassname = modClassname
+        """ Initialize the Config with the mod classname to generate """
+        self.modClassname = classname
         self.namespacedClass = NamespacedClass(self.modClassname)
         
     def build(self, *args, **kwargs):

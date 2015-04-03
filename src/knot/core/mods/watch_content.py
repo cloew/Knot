@@ -1,8 +1,8 @@
 from knot import KnotService, use_knot_services
 from knot.events.event_types import WIDGET_CREATED
 
-class SetTextController:
-    """ Controller to set the text for a widget when its content changes """
+class WatchContent:
+    """ Mod to set the text for a widget when its content changes """
     
     @use_knot_services
     def __init__(self, app=KnotService):

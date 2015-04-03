@@ -1,5 +1,6 @@
 {
     "widgets":[{"name":"button",
                 "painter":"knot.forms.painters.button_painter.ButtonPainter",
-                "controller":"knot.forms.controllers.button_controller.ButtonController"}]
+                "controller":"knot.forms.controllers.button_controller.ButtonController",
+                "req-mods":[{"class":"knot.core.mods.watch_content.WatchContent"}]}]
 }

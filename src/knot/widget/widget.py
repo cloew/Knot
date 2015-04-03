@@ -30,8 +30,10 @@ class Widget:
         self.sizingHandler = SizingHandler(self, sizing)
         self.qtHandler = QtHandler(self)
         
-        if self.controller is not None and hasattr(self.controller, 'attachWidget'):
-            self.controller.attachWidget(self)
+        thingsToAttach = self.mods if self.controller is None else [self.controller] + self.mods
+        for thing in thingsToAttach:
+            if hasattr(thing, 'attachWidget'):
+                thing.attachWidget(self)
         
     def draw(self):
         """ Draw the widget given its parent """
