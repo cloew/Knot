@@ -14,11 +14,12 @@ class ModelController:
     def attachWidget(self, widget):
         """ Attach the widget """
         self.widget = widget
-        ModelController.model.addWatch(self, self.app, self.setDisplay)
-        widget.on(WIDGET_CREATED, self.attachSignal)
+        widget.on(WIDGET_CREATED, self.attachSignalAndWatch)
         
-    def attachSignal(self, widget, event=None):
-        """ Attach the signal to the qt signal """
+    def attachSignalAndWatch(self, widget, event=None):
+        """ Attach the signal to the qt signal and the watch to the application """
+        self.setDisplay(self.model)
+        self.app.watch(self, 'model', self.setDisplay)
         widget._qwidget.textChanged.connect(self.setModel)
         
     def setModel(self, text):
