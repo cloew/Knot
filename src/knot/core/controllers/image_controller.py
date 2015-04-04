@@ -1,9 +1,9 @@
-from knot import KnotService, use_knot_services
+from knot import KnotService
 
 class ImageController:
     """ Handle the image to determine the file to load """
+    fileLoader = KnotService('fileLoader')
     
-    @use_knot_services
-    def __init__(self, filename, fileLoader=KnotService):
+    def __init__(self, filename):
         """ Initialize the controller with the image to load """
-        self.filename = fileLoader.getProperPath(filename)
+        self.filename = self.fileLoader.getProperPath(filename)
