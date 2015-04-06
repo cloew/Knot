@@ -12,5 +12,8 @@
                 "controller":"knot.forms.controllers.combobox_controller.ComboboxController"},
                {"name":"line-edit",
                 "painter":"knot.forms.painters.line_edit_painter.LineEditPainter",
-                "controller":"knot.forms.controllers.model_controller.ModelController"}]
+                "controller":"knot.forms.controllers.model_controller.ModelController"},
+               {"name":"option",
+                "type":"semantic",
+                "controller":"knot.forms.controllers.option_controller.OptionController"}]
 }

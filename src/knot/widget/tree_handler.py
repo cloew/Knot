@@ -21,6 +21,10 @@ class TreeHandler:
         self.parent = parent
         self.widget.fire(PARENT_ADDED)
         
+    def getChildrenWithType(self, widgetType):
+        """ Return the widget's children with the given type """
+        return [child for child in self.children if child.widgetType == widgetType]
+        
     @property
     def siblings(self):
         """ Return the given widget's siblings """
