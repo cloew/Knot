@@ -1,13 +1,15 @@
-from PySide.QtGui import QCheckBox, QLabel, QLineEdit, QPushButton
+from PySide.QtGui import QComboBox, QCheckBox, QLabel, QLineEdit, QPushButton
 
 QT_WIDGET_TO_SET_CONTENT_FN = {QCheckBox: 'setText',
                                QLabel: 'setText',
                                QPushButton: 'setText'}
 
 QT_WIDGET_TO_SET_VALUE_FN = {QCheckBox: 'setChecked',
+                             QComboBox: 'setCurrentIndex',
                              QLineEdit: 'setText'}
 
 QT_WIDGET_TO_VALUE_SIGNAL = {QCheckBox: 'toggled',
+                             QComboBox: 'currentIndexChanged',
                              QLineEdit: 'textChanged'}
 
 class QtValueMap:
