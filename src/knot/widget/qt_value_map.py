@@ -1,11 +1,14 @@
-from PySide.QtGui import QLabel, QLineEdit, QPushButton
+from PySide.QtGui import QCheckBox, QLabel, QLineEdit, QPushButton
 
-QT_WIDGET_TO_SET_CONTENT_FN = {QLabel: 'setText',
+QT_WIDGET_TO_SET_CONTENT_FN = {QCheckBox: 'setText',
+                               QLabel: 'setText',
                                QPushButton: 'setText'}
 
-QT_WIDGET_TO_SET_VALUE_FN = {QLineEdit: 'setText'}
+QT_WIDGET_TO_SET_VALUE_FN = {QCheckBox: 'setChecked',
+                             QLineEdit: 'setText'}
 
-QT_WIDGET_TO_VALUE_SIGNAL = {QLineEdit: 'textChanged'}
+QT_WIDGET_TO_VALUE_SIGNAL = {QCheckBox: 'toggled',
+                             QLineEdit: 'textChanged'}
 
 class QtValueMap:
     """ Maps a Qt Widget class to its corresponding attribute """

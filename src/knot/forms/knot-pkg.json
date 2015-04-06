@@ -3,6 +3,10 @@
                 "painter":"knot.forms.painters.button_painter.ButtonPainter",
                 "controller":"knot.forms.controllers.button_controller.ButtonController",
                 "req-mods":[{"class":"knot.core.mods.watch_content.WatchContent"}]},
+               {"name":"checkbox",
+                "painter":"knot.forms.painters.checkbox_painter.CheckboxPainter",
+                "controller":"knot.forms.controllers.model_controller.ModelController",
+                "req-mods":[{"class":"knot.core.mods.watch_content.WatchContent"}]},
                {"name":"line-edit",
                 "painter":"knot.forms.painters.line_edit_painter.LineEditPainter",
                 "controller":"knot.forms.controllers.model_controller.ModelController"}]
