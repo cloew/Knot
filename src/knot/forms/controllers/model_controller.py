@@ -20,7 +20,7 @@ class ModelController:
         """ Attach the signal to the qt signal and the watch to the application """
         self.setDisplay(self.model)
         self.app.watch(self, 'model', self.setDisplay)
-        widget._qwidget.textChanged.connect(self.setModel)
+        widget.getValueSignal().connect(self.setModel)
         
     def setModel(self, text):
         """ Set the model value """

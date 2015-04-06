@@ -5,6 +5,8 @@ QT_WIDGET_TO_SET_CONTENT_FN = {QLabel: 'setText',
 
 QT_WIDGET_TO_SET_VALUE_FN = {QLineEdit: 'setText'}
 
+QT_WIDGET_TO_VALUE_SIGNAL = {QLineEdit: 'textChanged'}
+
 class QtValueMap:
     """ Maps a Qt Widget class to its corresponding attribute """
     
@@ -22,3 +24,4 @@ class QtValueMap:
             
 SetContentFnMap = QtValueMap(QT_WIDGET_TO_SET_CONTENT_FN)
 SetValueFnMap = QtValueMap(QT_WIDGET_TO_SET_VALUE_FN)
+GetValueSignalMap = QtValueMap(QT_WIDGET_TO_VALUE_SIGNAL)

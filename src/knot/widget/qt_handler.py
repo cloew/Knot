@@ -1,4 +1,4 @@
-from .qt_value_map import SetContentFnMap, SetValueFnMap
+from .qt_value_map import SetContentFnMap, SetValueFnMap, GetValueSignalMap
 from knot.events.event_types import WIDGET_CREATED
 
 def BuildQtSetMethod(mapping):
@@ -29,3 +29,9 @@ class QtHandler:
         self._qwidget = qwidget
         self.widget.eventHandler.attachEvents(qwidget)
         self.widget.fire(WIDGET_CREATED)
+        
+    def getValueSignal(self):
+        """ Return the internal qt signal fired when the value of a widget changes """
+        if self._qwidget in GetValueSignalMap:
+            return GetValueSignalMap[self._qwidget]
+        return None
