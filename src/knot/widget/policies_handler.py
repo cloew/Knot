@@ -8,7 +8,7 @@ class PoliciesHandler:
         self.widget = widget
         self.policy = policy
         
-    def apply(self):
+    def apply(self, widget=None, event=None):
         """ Apply the positionig policy """
         if self.policy is None:
             self.policies = self.getDefaultPolicies(BOTH)

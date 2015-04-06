@@ -3,6 +3,7 @@ from .qt_handler import QtHandler
 from .sizing_handler import SizingHandler
 from .tree_handler import TreeHandler
 from ..events.event_handler import EventHandler
+from ..events.event_types import PARENT_ADDED
 
 from knot.core.painters.container_painter import ContainerPainter
 
@@ -29,6 +30,9 @@ class Widget:
         self.positioningHandler = PositioningHandler(self, policy=positioning)
         self.sizingHandler = SizingHandler(self, sizing)
         self.qtHandler = QtHandler(self)
+        
+        self.on(PARENT_ADDED, self.positioningHandler.apply)
+        self.on(PARENT_ADDED, self.sizingHandler.apply)
         
         thingsToAttach = self.mods if self.controller is None else [self.controller] + self.mods
         for thing in thingsToAttach:

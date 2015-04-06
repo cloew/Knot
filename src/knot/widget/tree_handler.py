@@ -1,4 +1,4 @@
-from ..events.event_types import CHILD_ADDED
+from ..events.event_types import CHILD_ADDED, PARENT_ADDED
 from knot.sides import LEFT, RIGHT
 
 class TreeHandler:
@@ -19,8 +19,7 @@ class TreeHandler:
     def attachToParent(self, parent):
         """ Add the Child to this widget """
         self.parent = parent
-        self.widget.positioningHandler.apply()
-        self.widget.sizingHandler.apply()
+        self.widget.fire(PARENT_ADDED)
         
     @property
     def siblings(self):
