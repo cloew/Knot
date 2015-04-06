@@ -36,7 +36,7 @@ class Widget:
                 thing.attachWidget(self)
         
     def draw(self):
-        """ Draw the widget given its parent """
+        """ Draw the widget """
         self.painter.draw(self)
         
     def canMove(self):
