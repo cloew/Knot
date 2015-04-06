@@ -1,4 +1,4 @@
-from .qt_content_handler import QtContentHandler
+from .qt_value_map import SetContentFnMap
 from knot.events.event_types import WIDGET_CREATED
 
 class QtHandler:
@@ -8,7 +8,6 @@ class QtHandler:
         """ Initialize the Handler with the tree """
         self.widget = widget
         self._qwidget = None
-        self.contentHandler = QtContentHandler()
         
     def hasQWidget(self):
         """ Return if the underlying qt widget has been built """
@@ -22,4 +21,6 @@ class QtHandler:
         
     def setContent(self, value):
         """ Set the content of the widget """
-        self.contentHandler.setValue(self._qwidget, value)
+        if self._qwidget in SetContentFnMap:
+            fn = SetContentFnMap[self._qwidget]
+            fn(value)
