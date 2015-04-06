@@ -1,8 +1,19 @@
-from .qt_value_map import SetContentFnMap
+from .qt_value_map import SetContentFnMap, SetValueFnMap
 from knot.events.event_types import WIDGET_CREATED
+
+def BuildQtSetMethod(mapping):
+    """ Build the method for the Qt Handler to use a setter function from a QtValueMap """
+    
+    def set(self, value):
+        if self._qwidget in mapping:
+            fn = mapping[self._qwidget]
+            fn(value)
+    return set
 
 class QtHandler:
     """ Handle the underlying Qt widget data for a particular widget """
+    setContent = BuildQtSetMethod(SetContentFnMap)
+    setValue = BuildQtSetMethod(SetValueFnMap)
     
     def __init__(self, widget):
         """ Initialize the Handler with the tree """
@@ -18,9 +29,3 @@ class QtHandler:
         self._qwidget = qwidget
         self.widget.eventHandler.attachEvents(qwidget)
         self.widget.fire(WIDGET_CREATED)
-        
-    def setContent(self, value):
-        """ Set the content of the widget """
-        if self._qwidget in SetContentFnMap:
-            fn = SetContentFnMap[self._qwidget]
-            fn(value)

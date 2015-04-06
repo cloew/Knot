@@ -1,8 +1,9 @@
 from PySide.QtGui import QLabel, QLineEdit, QPushButton
 
 QT_WIDGET_TO_SET_CONTENT_FN = {QLabel: 'setText',
-                               QLineEdit: 'setText',
                                QPushButton: 'setText'}
+
+QT_WIDGET_TO_SET_VALUE_FN = {QLineEdit: 'setText'}
 
 class QtValueMap:
     """ Maps a Qt Widget class to its corresponding attribute """
@@ -20,3 +21,4 @@ class QtValueMap:
         return getattr(qwidget, self.mapping[qwidget.__class__])
             
 SetContentFnMap = QtValueMap(QT_WIDGET_TO_SET_CONTENT_FN)
+SetValueFnMap = QtValueMap(QT_WIDGET_TO_SET_VALUE_FN)
