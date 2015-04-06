@@ -12,7 +12,7 @@ class KnotWindow(Widget):
     
     def __init__(self, title=''):
         """ Initialize the window """
-        Widget.__init__(self, WindowPainter(''))
+        Widget.__init__(self, 'window', WindowPainter(''))
         self.title = title
         self.on(WIDGET_CREATED, self._setWindowTitle)
             
