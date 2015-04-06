@@ -18,5 +18,5 @@ class WatchContent:
         
     def changeText(self, text):
         """ Update the widget's text """
-        self.widget._qwidget.setText(text)
+        self.widget.setContent(text)
         self.widget.resizeWithPolicies()

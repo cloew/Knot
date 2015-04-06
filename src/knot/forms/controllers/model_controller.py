@@ -28,4 +28,4 @@ class ModelController:
         
     def setDisplay(self, value):
         """ Set the model value """
-        self.widget._qwidget.setText(value)
+        self.widget.setContent(value)
