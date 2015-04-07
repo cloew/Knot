@@ -28,7 +28,6 @@ class PixelSizing:
         height = widget.height
         
         if self.dimension is HORIZONTAL:
-            print('Setting size:', self.size)
             width = self.size
         if self.dimension is VERTICAL:
             height = self.size
