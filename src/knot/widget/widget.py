@@ -2,6 +2,7 @@ from .base_widget import BaseWidget
 from .positioning_handler import PositioningHandler
 from .qt_handler import QtHandler
 from .sizing_handler import SizingHandler
+from .style_handler import StyleHandler
 from ..events.event_types import PARENT_ADDED
 
 from knot.core.painters.container_painter import ContainerPainter
@@ -17,12 +18,13 @@ class Widget(BaseWidget):
     """ Represents a widget within Knot """
     
     @smart_defaults
-    def __init__(self, widgetType, content=None, painter=EvenIfNone(ContainerPainter()), controller=None, mods=PerCall([]), positionings=None, sizings=None):
+    def __init__(self, widgetType, content=None, painter=EvenIfNone(ContainerPainter()), controller=None, mods=PerCall([]), positionings=None, sizings=None, styling=''):
         """ Initialize the widget with its painters and policies """
         BaseWidget.__init__(self, widgetType, content=content, controller=controller, mods=mods)
         self.painter = painter
         self.positioningHandler = PositioningHandler(self, policies=positionings)
         self.sizingHandler = SizingHandler(self, policies=sizings)
+        self.styleHandler = StyleHandler(self, styling)
         self.qtHandler = QtHandler(self)
         
         self.on(PARENT_ADDED, self.positioningHandler.apply)
