@@ -43,15 +43,15 @@ class ComboboxController:
         self.options = [option.controller for option in options]
         
         for option in self.options:
-            option.valueChanged.register(self.changeValue)
+            option.textChanged.register(self.changeValue)
         
     def addOptionsToWidget(self):
         """ Add the current options to the Combo Box widget """
         for option in self.options:
-            self.widget._qwidget.addItem(option.value)
+            self.widget._qwidget.addItem(option.text)
             
-    def changeValue(self, option, value):
-        """ Change the given value for the widget """
+    def changeValue(self, option, text):
+        """ Change the given text for the widget """
         index = self.options.index(option)
-        self.widget._qwidget.setItemText(index, option.value)
+        self.widget._qwidget.setItemText(index, option.text)
         self.widget.resizeWithPolicies()

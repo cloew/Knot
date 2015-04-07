@@ -8,9 +8,14 @@ class OptionController:
     @apply_knot_bindings
     def __init__(self, value):
         """ Initialize the Controller with its value """
-        self.valueChanged = Signal()
-        self.app.watch(self, 'value', self.fireSignal)
+        self.textChanged = Signal()
+        self.app.watch(self, 'text', self.fireSignal)
         
-    def fireSignal(self, value):
-        """ Fire the value changed signal """
-        self.valueChanged.emit(self, value)
+    @property
+    def text(self):
+        """ Return the text for this option """
+        return self.value
+        
+    def fireSignal(self, text):
+        """ Fire the text changed signal """
+        self.textChanged.emit(self, text)
