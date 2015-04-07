@@ -3,12 +3,12 @@ from knot.events.event_types import DISPLAYED, RESIZED
 from knot.events.tracker.parent_tracker import ParentTracker
 from knot.events.tracker.widget_tracker import WidgetTracker
 
-class PercentSizing:
+class PixelSizing:
     """ Size a widget by taking up a percentage of the size of its parent """
     
-    def __init__(self, percent, dimension):
-        """ Initialize the Percent Sizing """
-        self.percent = percent
+    def __init__(self, size, dimension):
+        """ Initialize the Pixel Sizing """
+        self.size = size
         self.dimension = dimension
         self.widgetTracker = WidgetTracker([DISPLAYED], self.resize)
         self.parentTracker = ParentTracker([RESIZED], self.resize)
@@ -28,8 +28,9 @@ class PercentSizing:
         height = widget.height
         
         if self.dimension is HORIZONTAL:
-            width = self.percent*widget.parent.width
+            print('Setting size:', self.size)
+            width = self.size
         if self.dimension is VERTICAL:
-            height = self.percent*widget.parent.height
+            height = self.size
         
         widget.resize(width, height)
