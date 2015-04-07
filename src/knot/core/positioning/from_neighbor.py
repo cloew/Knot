@@ -2,6 +2,8 @@ from knot.sides import LEFT
 
 from knot.events.event_types import DISPLAYED, MOVED, RESIZED
 from knot.events.tracker.previous_sibling_tracker import PreviousSiblingTracker
+from knot.events.tracker.parent_tracker import ParentTracker
+from knot.events.tracker.siblings_tracker import SiblingsTracker
 from knot.events.tracker.widget_tracker import WidgetTracker
 
 class FromNeighbor:
@@ -10,8 +12,9 @@ class FromNeighbor:
     def __init__(self, side):
         """ Initialize the Form neighbor policy with the edge it should clamp to """
         self.side = side
+        self.parentTracker = ParentTracker([RESIZED], self.reposition)
+        self.siblingsTracker = SiblingsTracker([MOVED, RESIZED], self.reposition)
         self.widgetTracker = WidgetTracker([DISPLAYED], self.reposition)
-        self.prevSiblingTracker = PreviousSiblingTracker([MOVED, RESIZED], self.reposition)
         
     def handlesDimension(self, dimension):
         """ Return if this policy positions widgets in the given dimension """
@@ -19,8 +22,9 @@ class FromNeighbor:
         
     def applyToWidget(self, widget):
         """ Apply the policy to the neighbor """
+        self.parentTracker.apply(widget)
+        self.siblingsTracker.apply(widget)
         self.widgetTracker.apply(widget)
-        self.prevSiblingTracker.apply(widget)
     
     def reposition(self, widget):
         """ Position this widget relative to its sibling """
