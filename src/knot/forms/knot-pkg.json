@@ -9,11 +9,11 @@
                 "req-mods":[{"class":"knot.core.mods.watch_content.WatchContent"}]},
                {"name":"drop-down",
                 "painter":"knot.forms.painters.drop_down_painter.DropDownPainter",
-                "controller":"knot.forms.controllers.drop_down_controller.DropDownController"},
+                "controller":"knot.forms.controllers.drop_down_controller.DropDownController",
+                "childWidgets":[{"name":"option",
+                                 "type":"semantic",
+                                 "controller":"knot.forms.controllers.option_controller.OptionController"}]},
                {"name":"line-edit",
                 "painter":"knot.forms.painters.line_edit_painter.LineEditPainter",
-                "controller":"knot.forms.controllers.model_controller.ModelController"},
-               {"name":"option",
-                "type":"semantic",
-                "controller":"knot.forms.controllers.option_controller.OptionController"}]
+                "controller":"knot.forms.controllers.model_controller.ModelController"}]
 }

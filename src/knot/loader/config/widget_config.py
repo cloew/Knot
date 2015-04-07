@@ -1,3 +1,5 @@
+from .config_helper import ConvertConfigsToDictionary
+
 from knot.widget.widget import Widget
 from knot.widget.semantic_widget import SemanticWidget
 
@@ -12,7 +14,7 @@ class WidgetConfig:
     WIDGET_BUILDERS = {WIDGET_TYPE: 'buildWidget',
                        SEMANTIC_TYPE: 'buildSemanticWidget'}
     
-    def __init__(self, name, type=WIDGET_TYPE, painterClassname=None, template=None, controllerClassname=None, reqMods=[]):
+    def __init__(self, name, type=WIDGET_TYPE, painterClassname=None, template=None, controllerClassname=None, reqMods=[], childWidgetConfigs=[]):
         """ Initialize the widget config with its name and the painter classname """
         self.name = name
         self.type = type
@@ -20,6 +22,7 @@ class WidgetConfig:
         self.painterClassname = painterClassname
         self.template = template
         self.reqMods = reqMods
+        self.childWidgetConfigs = ConvertConfigsToDictionary(childWidgetConfigs)
         
         self.namespacedPainterClass = self.tryToBuildNamespacedClass(painterClassname)
         self.namespacedControllerClass = self.tryToBuildNamespacedClass(controllerClassname)

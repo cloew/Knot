@@ -2,6 +2,8 @@ from .package_manager import PackageManager
 from ..attributes import POSITION, SIZING
 from ..factory.knot_config_factory import KnotConfigFactory
 
+from copy import deepcopy
+
 class LoaderConfig:
     """ Represents the configured widgets and attributes available to load """
     CORE_KNOT_PACKAGE = 'knot.core'
@@ -21,3 +23,9 @@ class LoaderConfig:
         self.widgetFactory.update(packageConfig.widgetConfigs)
         self.attributesFactory[POSITION].update(packageConfig.positioningConfigs)
         self.attributesFactory[SIZING].update(packageConfig.sizingConfigs)
+        
+    def copy(self, additionalWidgetConfigs=[]):
+        """ Return a new Loader Config with the given additional widget configs """
+        copy = deepcopy(self)
+        copy.widgetFactory.update(additionalWidgetConfigs)
+        return copy

@@ -11,14 +11,24 @@ class WidgetLoader:
     
     def load(self, widgetToken, scope=None):
         """ Load the given widget token """
+        widget = self.buildCurrentWidget(widgetToken, scope)
+        
+        childLoader = self.getChildLoader(widgetToken)
+        scope = GetScopeFor(widget, currentScope=scope)
+        
+        for childToken in widgetToken.children:
+            child = childLoader.load(childToken, scope=scope)
+            widget.addChild(child)
+        return widget
+        
+    def buildCurrentWidget(self, widgetToken, scope):
+        """ Build the widget for the widget Token """
         attrLoader = AttributeLoader(self.config)
         positioning = attrLoader.load(POSITION, widgetToken.attributes[POSITION], scope) if POSITION in widgetToken.attributes else None
         sizing = attrLoader.load(SIZING, widgetToken.attributes[SIZING], scope) if SIZING in widgetToken.attributes else None
         
-        widget = widgetToken.build(self.config.widgetFactory, scope, positioning=positioning, sizing=sizing)
+        return widgetToken.build(self.config.widgetFactory, scope, positioning=positioning, sizing=sizing)
         
-        scope = GetScopeFor(widget, currentScope=scope)
-        for childToken in widgetToken.children:
-            child = self.load(childToken, scope=scope)
-            widget.addChild(child)
-        return widget
+    def getChildLoader(self, widgetToken):
+        """ Return the loader to use for the widget's children """
+        return WidgetLoader(widgetToken.config)

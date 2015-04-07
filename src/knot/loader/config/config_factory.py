@@ -20,6 +20,7 @@ widgetParameters = [PrimitiveParameter("name"),
                     ComplexParameter("req-mods", ReqModsConfigFactory.loadAll, optional=True, default=[])]
                      
 WidgetConfigFactory = Factory(WidgetConfig, widgetParameters)
+WidgetConfigFactory.addParameter(ComplexParameter("childWidgets", WidgetConfigFactory.loadAll, optional=True, default=[]))
 
 policyParameters = [PrimitiveParameter("name"),
                     PrimitiveParameter("class")]

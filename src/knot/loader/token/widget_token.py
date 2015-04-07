@@ -20,13 +20,23 @@ class WidgetToken:
     def __init__(self, section, factory):
         """ Intialize the Widget Token with the section it was loaded from """
         self.widgetType = self.getWidgetType(section)
+        self.config = self.getChildConfig(factory)
+        childFactory = factory.__class__(self.config)
         
         self.children = []
         self.signals = []
         self.attributes = {}
         self.content = None
-        children = factory.loadAllTokens(section[1:])
+        children = childFactory.loadAllTokens(section[1:])
         self.processChildren(children)
+        
+    def getChildConfig(self, factory):
+        """ Return the config to be used for any child widgets """
+        config = factory.config
+        widgetConfig = factory.config.widgetFactory.config[self.widgetType.type]
+        if len(widgetConfig.childWidgetConfigs) > 0:
+            config = factory.config.copy(additionalWidgetConfigs=widgetConfig.childWidgetConfigs)
+        return config
         
     def processChildren(self, children):
         """ Process the children so theya re stored correctly """
@@ -58,6 +68,7 @@ class WidgetToken:
         """ Build this type form the factory """
         content = self.content.build(scope) if self.content is not None else None
         widget = factory.build(self.widgetType.type, content, *self.widgetType.getArgumentValues(scope), **kwargs)
+        
         for signal in self.signals:
             signal.attach(widget.controller, scope)
         return widget
