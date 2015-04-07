@@ -1,4 +1,5 @@
-from .token_roles import WIDGET, CONTENT, ATTRIBUTE, SIGNAL
+from .child_token_processor import ChildTokenProcessor
+from .token_roles import WIDGET
 from .type_token import TypeToken
 
 class WidgetToken:
@@ -20,33 +21,15 @@ class WidgetToken:
     def __init__(self, section, factory):
         """ Intialize the Widget Token with the section it was loaded from """
         self.widgetType = self.getWidgetType(section)
-        self.config = self.getChildConfig(factory)
-        childFactory = factory.__class__(self.config)
         
         self.children = []
         self.signals = []
         self.attributes = {}
         self.content = None
-        children = childFactory.loadAllTokens(section[1:])
-        self.processChildren(children)
         
-    def getChildConfig(self, factory):
-        """ Return the config to be used for any child widgets """
-        config = factory.config
-        widgetConfig = factory.config.widgetFactory.config[self.widgetType.type]
-        if len(widgetConfig.childWidgetConfigs) > 0:
-            config = factory.config.copy(additionalWidgetConfigs=widgetConfig.childWidgetConfigs)
-        return config
-        
-    def processChildren(self, children):
-        """ Process the children so theya re stored correctly """
-        roleHandler = {WIDGET: self.addChild,
-                       CONTENT: self.setContent,
-                       SIGNAL: self.setSignal,
-                       ATTRIBUTE: self.setAttribute}
-        
-        for childToken in children:
-            roleHandler[childToken.ROLE](childToken)
+        processor = ChildTokenProcessor(self, factory)
+        processor.process(section[1:])
+        self.config = process.config
         
     def addChild(self, child):
         """ Add the child to the list of tracked child widgets """
