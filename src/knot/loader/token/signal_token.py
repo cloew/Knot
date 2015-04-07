@@ -1,3 +1,4 @@
+from .knot_list_parser import KnotListParser
 from .token_roles import SIGNAL
 from .value.scope_value import ScopeValue
 
@@ -13,12 +14,14 @@ class SignalToken:
     def __init__(self, section):
         """ Initialize with the section for the signal """
         pieces = section[0].split(maxsplit=1)
-        self.signalName, valueText = [piece.strip() for piece in pieces[1].split('->')]
-        self.value = ScopeValue(valueText)
+        self.signalName, valuesText = [piece.strip() for piece in pieces[1].split('->')]
+        self.values = [ScopeValue(valueText) for valueText in KnotListParser().parse(valuesText)]
         
     def attach(self, controller, scope):
         """ Attach the signal and its callback """
-        getattr(controller, self.signalName).register(self.value.getValue(scope).get())
+        signal = getattr(controller, self.signalName)
+        for value in self.values:
+            signal.register(value.getValue(scope).get())
         
     def __repr__(self):
-        return "<ScopeToken:{0}:{1}>".format(self.signalName, self.value)
+        return "<ScopeToken:{0}:{1}>".format(self.signalName, self.values)
