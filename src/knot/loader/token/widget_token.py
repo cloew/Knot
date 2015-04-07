@@ -26,6 +26,7 @@ class WidgetToken:
         self.signals = []
         self.attributes = {}
         self.content = None
+        self.style = None
         
         processor = ChildTokenProcessor(self, factory)
         processor.process(section[1:])
@@ -39,6 +40,10 @@ class WidgetToken:
         """ Set the child content """
         self.content = content
         
+    def setStyle(self, style):
+        """ Set the style """
+        self.style = style
+        
     def setSignal(self, signal):
         """ Set the child content """
         self.signals.append(signal)
@@ -50,7 +55,8 @@ class WidgetToken:
     def build(self, factory, scope, **kwargs):
         """ Build this type form the factory """
         content = self.content.build(scope) if self.content is not None else None
-        widget = factory.build(self.widgetType.type, content, *self.widgetType.getArgumentValues(scope), **kwargs)
+        style = self.style.styling if self.style is not None else None
+        widget = factory.build(self.widgetType.type, content, *self.widgetType.getArgumentValues(scope), styling=style, **kwargs)
         
         for signal in self.signals:
             signal.attach(widget.controller, scope)

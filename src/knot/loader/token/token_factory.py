@@ -2,6 +2,7 @@ from .attribute_token import AttributeToken
 from .content_token import ContentToken
 from .import_token import ImportToken
 from .signal_token import SignalToken
+from .style_token import StyleToken
 from .widget_token import WidgetToken
 
 from .detector.token_detector import TokenDetector
@@ -46,6 +47,6 @@ class TokenFactory:
         if WidgetToken.isValidFor(section, self.config):
             return WidgetToken(section, self)
         else:
-            for tokenCls in [SignalToken, AttributeToken, ContentToken]:
+            for tokenCls in [SignalToken, StyleToken, AttributeToken, ContentToken]:
                 if tokenCls.isValidFor(section):
                     return tokenCls(section)

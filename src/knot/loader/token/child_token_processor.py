@@ -1,4 +1,4 @@
-from .token_roles import WIDGET, CONTENT, ATTRIBUTE, SIGNAL
+from .token_roles import WIDGET, CONTENT, ATTRIBUTE, SIGNAL, STYLE
 
 class ChildTokenProcessor:
     """ Helper class to load the child tokens for a widget token """
@@ -27,6 +27,7 @@ class ChildTokenProcessor:
         roleHandler = {WIDGET: self.parent.addChild,
                        CONTENT: self.parent.setContent,
                        SIGNAL: self.parent.setSignal,
+                       STYLE: self.parent.setStyle,
                        ATTRIBUTE: self.parent.setAttribute}
         
         for childToken in children:

@@ -31,20 +31,20 @@ class WidgetConfig:
         """ Set the package filename """
         self.packageDirectory = ResourceDirectory(filename)
         
-    def build(self, content, *args, positionings=None, sizings=None, **kwargs):
+    def build(self, content, *args, positionings=None, sizings=None, styling=None, **kwargs):
         """ Return the proper widget object """
         controller = self.tryToIntantiateClass(self.namespacedControllerClass, *args, **kwargs)
         mods = [reqMod.build() for reqMod in self.reqMods]
         
         builder = getattr(self, self.WIDGET_BUILDERS[self.type])
-        widget = builder(content, controller, mods, *args, positionings=positionings, sizings=sizings, **kwargs)
+        widget = builder(content, controller, mods, *args, positionings=positionings, sizings=sizings, styling=styling, **kwargs)
         self.tryToLoadChildren(widget)
         return widget
         
-    def buildWidget(self, content, controller, mods, *args, positionings=None, sizings=None, **kwargs):
+    def buildWidget(self, content, controller, mods, *args, positionings=None, sizings=None, styling=None, **kwargs):
         """ Build the widget object """
         painter = self.tryToIntantiateClass(self.namespacedPainterClass, content, controller)
-        return Widget(self.name, content, painter=painter, controller=controller, positionings=positionings, sizings=sizings, mods=mods)
+        return Widget(self.name, content, painter=painter, controller=controller, positionings=positionings, sizings=sizings, mods=mods, styling=styling)
         
     def buildSemanticWidget(self, content, controller, mods, *args, **kwargs):
         """ Build the semantic widget object """
