@@ -29,7 +29,7 @@ class WidgetToken:
         
         processor = ChildTokenProcessor(self, factory)
         processor.process(section[1:])
-        self.config = process.config
+        self.config = processor.config
         
     def addChild(self, child):
         """ Add the child to the list of tracked child widgets """

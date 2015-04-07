@@ -24,10 +24,10 @@ class WidgetLoader:
     def buildCurrentWidget(self, widgetToken, scope):
         """ Build the widget for the widget Token """
         attrLoader = AttributeLoader(self.config)
-        positioning = attrLoader.load(POSITION, widgetToken.attributes[POSITION], scope) if POSITION in widgetToken.attributes else None
-        sizing = attrLoader.load(SIZING, widgetToken.attributes[SIZING], scope) if SIZING in widgetToken.attributes else None
+        positionings = [attrLoader.load(POSITION, widgetToken.attributes[POSITION], scope)] if POSITION in widgetToken.attributes else None
+        sizings = [attrLoader.load(SIZING, widgetToken.attributes[SIZING], scope)] if SIZING in widgetToken.attributes else None
         
-        return widgetToken.build(self.config.widgetFactory, scope, positioning=positioning, sizing=sizing)
+        return widgetToken.build(self.config.widgetFactory, scope, positionings=positionings, sizings=sizings)
         
     def getChildLoader(self, widgetToken):
         """ Return the loader to use for the widget's children """

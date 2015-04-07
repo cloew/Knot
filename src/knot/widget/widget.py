@@ -17,12 +17,12 @@ class Widget(BaseWidget):
     """ Represents a widget within Knot """
     
     @smart_defaults
-    def __init__(self, widgetType, content=None, painter=EvenIfNone(ContainerPainter()), controller=None, mods=PerCall([]), positioning=None, sizing=None):
+    def __init__(self, widgetType, content=None, painter=EvenIfNone(ContainerPainter()), controller=None, mods=PerCall([]), positionings=None, sizings=None):
         """ Initialize the widget with its painters and policies """
         BaseWidget.__init__(self, widgetType, content=content, controller=controller, mods=mods)
         self.painter = painter
-        self.positioningHandler = PositioningHandler(self, policy=positioning)
-        self.sizingHandler = SizingHandler(self, sizing)
+        self.positioningHandler = PositioningHandler(self, policies=positionings)
+        self.sizingHandler = SizingHandler(self, policies=sizings)
         self.qtHandler = QtHandler(self)
         
         self.on(PARENT_ADDED, self.positioningHandler.apply)
