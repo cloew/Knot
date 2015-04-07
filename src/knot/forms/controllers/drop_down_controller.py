@@ -1,8 +1,8 @@
 from knot import apply_knot_bindings, TwoWayBinding, KnotService
 from knot.events.event_types import CHILD_ADDED, WIDGET_CREATED
 
-class ComboboxController:
-    """ Controller to handle mapping Combo Box Options to their values """
+class DropDownController:
+    """ Controller to handle mapping Drop Down Options to their values """
     app = KnotService('app')
     model = TwoWayBinding("model")
     

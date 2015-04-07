@@ -4,8 +4,8 @@ from knot.core.sizing.use_size_hint import UseSizeHint
 
 from PySide.QtGui import QComboBox
 
-class ComboboxPainter(Painter):
-    """ Handles creation of the Qt widget for drawing a combobox """
+class DropDownPainter(Painter):
+    """ Handles creation of the Qt widget for drawing a drop down """
     DEFAULT_SIZING = DefaultPoliciesViaClass(UseSizeHint)
     
     def __init__(self, content=None, controller=None):
