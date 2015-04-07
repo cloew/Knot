@@ -17,7 +17,8 @@ class TypeToken:
         
     def getArguments(self, argumentText):
         """ Return the arguments """
-        return [ValueFactory.build(arg.strip()) for arg in argumentText.split(')')[0].split(',') if arg.strip() != '']
+        argumentText = argumentText.split(')')[0]
+        return [ValueFactory.build(arg.strip()) for arg in KnotListParser().parse(argumentText) if arg.strip() != '']
         
     def getArgumentValues(self, scope):
         """ Return the argument values """
