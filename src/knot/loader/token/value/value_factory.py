@@ -1,10 +1,11 @@
 from .global_value import GlobalValue
+from .percent_value import PercentValue
 from .scope_value import ScopeValue
 from .string_value import StringValue
 
 class ValueFactory:
     """ Factory to construct the proper Value Object for a given text """
-    VALUE_CLASSES = [GlobalValue, ScopeValue, StringValue]
+    VALUE_CLASSES = [GlobalValue, PercentValue, ScopeValue, StringValue]
     
     def build(self, valueText):
         """ Build the value object for the given text """
