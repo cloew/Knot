@@ -24,4 +24,4 @@ class SignalToken:
             signal.register(value.getValue(scope).get())
         
     def __repr__(self):
-        return "<ScopeToken:{0}:{1}>".format(self.signalName, self.values)
+        return "<SignalToken:{0}:{1}>".format(self.signalName, self.values)
