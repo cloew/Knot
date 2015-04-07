@@ -10,9 +10,10 @@ class BaseWidget:
     """ Represents the base widget functionality """
     
     @smart_defaults
-    def __init__(self, widgetType, controller=None, mods=PerCall([])):
+    def __init__(self, widgetType, content=None, controller=None, mods=PerCall([])):
         """ Initialize the widget """
         self.widgetType = widgetType
+        self.content = content
         self.controller = controller
         self.mods = mods
         self.eventHandler = EventHandler(self)

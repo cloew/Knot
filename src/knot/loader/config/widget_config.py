@@ -41,11 +41,11 @@ class WidgetConfig:
     def buildWidget(self, content, controller, mods, *args, positioning=None, sizing=None, **kwargs):
         """ Build the widget object """
         painter = self.tryToIntantiateClass(self.namespacedPainterClass, content, controller)
-        return Widget(self.name, painter, controller=controller, positioning=positioning, sizing=sizing, mods=mods)
+        return Widget(self.name, content, painter=painter, controller=controller, positioning=positioning, sizing=sizing, mods=mods)
         
     def buildSemanticWidget(self, content, controller, mods, *args, **kwargs):
         """ Build the semantic widget object """
-        return SemanticWidget(self.name, controller=controller, mods=mods)
+        return SemanticWidget(self.name, content, controller=controller, mods=mods)
         
     def tryToLoadChildren(self, widget):
         """ Load children for this widget based on its configuration """
