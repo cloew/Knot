@@ -1,7 +1,13 @@
+from .knot_list_parser import KnotListParser
 from .value.value_factory import ValueFactory
 
 class TypeToken:
     """ Represents a tokenized type to be used to load from a factory """
+    
+    @classmethod
+    def loadAll(cls, text):
+        """ Load all the type tokens from the text """
+        return [cls(piece) for piece in KnotListParser().parse(text)]
     
     def __init__(self, text):
         """ Initialize the type """
@@ -20,3 +26,6 @@ class TypeToken:
     def build(self, factory, scope):
         """ Build this type form the factory """
         return factory.build(self.type, *self.getArgumentValues(scope))
+        
+    def __repr__(self):
+        return "<TypeToken:{0}:{1}>".format(self.type, self.args)

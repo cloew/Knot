@@ -25,7 +25,7 @@ class Stretch:
         
         if self.dimension is BOTH or self.dimension is HORIZONTAL:
             siblings = widget.siblings
-            requiredWidth = sum([sibling.width for sibling in siblings])
+            requiredWidth = sum([sibling.width for sibling in siblings if sibling.canMove()])
             width = widget.parent.width - requiredWidth
         if self.dimension is BOTH or self.dimension is VERTICAL:
             height = widget.parent.height

@@ -24,8 +24,8 @@ class WidgetLoader:
     def buildCurrentWidget(self, widgetToken, scope):
         """ Build the widget for the widget Token """
         attrLoader = AttributeLoader(self.config)
-        positionings = [attrLoader.load(POSITION, widgetToken.attributes[POSITION], scope)] if POSITION in widgetToken.attributes else None
-        sizings = [attrLoader.load(SIZING, widgetToken.attributes[SIZING], scope)] if SIZING in widgetToken.attributes else None
+        positionings = attrLoader.load(POSITION, widgetToken.attributes[POSITION], scope) if POSITION in widgetToken.attributes else None
+        sizings = attrLoader.load(SIZING, widgetToken.attributes[SIZING], scope) if SIZING in widgetToken.attributes else None
         
         return widgetToken.build(self.config.widgetFactory, scope, positionings=positionings, sizings=sizings)
         

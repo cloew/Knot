@@ -10,4 +10,4 @@ class AttributeLoader:
     def load(self, attribute, attrToken, scope):
         """ Load the given attribute token """
         factory = self.config.attributesFactory[attribute]
-        return attrToken.type.build(factory, scope)
+        return [type.build(factory, scope) for type in attrToken.types]

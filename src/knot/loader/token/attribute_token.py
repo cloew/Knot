@@ -14,7 +14,7 @@ class AttributeToken:
         """ Initialize with the section for the attribute """
         pieces = section[0].split(maxsplit=1)
         self.attribute = pieces[0].split('@')[1]
-        self.type = TypeToken(pieces[1])
+        self.types = TypeToken.loadAll(pieces[1])
         
     def __repr__(self):
         return "<AttributeToken:@{0}:{1}>".format(self.attribute, self.value)
