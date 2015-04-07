@@ -1,3 +1,4 @@
+from knot.exceptions import KnotParseError
 
 def LoopUntilCharMatches(text, match, specialCharacters):
     """ Loop until a matching character is found """
@@ -20,8 +21,7 @@ class KnotSpecialCharacter:
         """ Return the matching end of this special character """
         i = LoopUntilCharMatches(text, self.stop, specialCharacters)
         if i is None:
-            i = len(text)
-            # Throw an unmatched char exception..?
+            raise KnotParseError("Found unmatched '{0}' character".format(self.start))
         return i
         
 

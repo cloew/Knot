@@ -24,5 +24,6 @@ setup(name='knot',
                 'knot.scope',
                 'knot.forms.controllers',
                 'knot.policy',
-                'knot.watches'],
+                'knot.watches',
+                'knot.exceptions'],
      )
