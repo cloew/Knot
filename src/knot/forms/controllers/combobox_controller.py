@@ -10,7 +10,7 @@ class ComboboxController:
     def __init__(self, model):
         """ Initialize the Controller with its model """
         self.widget = None
-        self.values = []
+        self.options = []
         
     def attachWidget(self, widget):
         """ Attach the widget """
@@ -20,25 +20,38 @@ class ComboboxController:
         
     def attachSignalAndWatch(self, widget, event=None):
         """ Attach the signal to the qt signal and the watch to the application """
-        for value in self.values:
-            self.widget._qwidget.addItem(value)
-            
+        self.addOptionsToWidget()
         self.setDisplay(self.model)
         self.app.watch(self, 'model', self.setDisplay)
         widget.getValueSignal().connect(self.setModel)
         
     def setModel(self, index):
         """ Set the model value """
-        self.model = self.values[index]
+        self.model = self.options[index].value
         
     def setDisplay(self, value):
         """ Set the displayed value """
-        if value in self.values:
-            index = self.values.index(value)
+        values = [option.value for option in self.options]
+        
+        if value in values:
+            index = values.index(value)
             self.widget.setValue(index)
         
     def addOptions(self, widget=None, event=None):
         """ Add the options """
         options = self.widget.getChildrenWithType('option')
-        self.values = [option.controller.value for option in options]
+        self.options = [option.controller for option in options]
         
+        for option in self.options:
+            option.valueChanged.register(self.changeValue)
+        
+    def addOptionsToWidget(self):
+        """ Add the current options to the Combo Box widget """
+        for option in self.options:
+            self.widget._qwidget.addItem(option.value)
+            
+    def changeValue(self, option, value):
+        """ Change the given value for the widget """
+        index = self.options.index(option)
+        self.widget._qwidget.setItemText(index, option.value)
+        self.widget.resizeWithPolicies()
