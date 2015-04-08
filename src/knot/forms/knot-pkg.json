@@ -13,9 +13,9 @@
                 "childWidgets":[{"name":"option",
                                  "type":"semantic",
                                  "controller":"knot.forms.controllers.option_controller.OptionController"}]},
-               {"name":"file-dialog",
-                "template":"partials/file_dialog.knot",
-                "controller":"knot.forms.controllers.file_dialog_controller.FileDialogController"},
+               {"name":"file-picker",
+                "template":"partials/file_picker.knot",
+                "controller":"knot.forms.controllers.file_picker_controller.FilePickerController"},
                {"name":"line-edit",
                 "painter":"knot.forms.painters.line_edit_painter.LineEditPainter",
                 "controller":"knot.forms.controllers.model_controller.ModelController"}]

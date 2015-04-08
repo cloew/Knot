@@ -2,8 +2,8 @@ from knot import has_scope, apply_knot_bindings, TwoWayBinding
 from PySide.QtGui import QFileDialog
 
 @has_scope
-class FileDialogController:
-    """ Handles opening a file dialog """
+class FilePickerController:
+    """ Provides a widget that uses a file dialog to pick a file """
     filename = TwoWayBinding("model")
     
     @apply_knot_bindings
