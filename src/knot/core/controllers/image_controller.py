@@ -3,13 +3,18 @@ from knot.events.event_types import WIDGET_CREATED
 
 from PySide.QtGui import QPixmap
 
+import os
+
 class ImageController:
     """ Handle the image to determine the file to load """
     fileLoader = KnotService('fileLoader')
     
     def __init__(self, filename):
         """ Initialize the controller with the image to load """
-        self.filename = self.fileLoader.getProperPath(filename)
+        if os.path.isfile(filename):
+            self.filename = filename
+        else:
+            self.filename = self.fileLoader.getProperPath(filename)
         
     def attachWidget(self, widget):
         """ Attach the widget """
