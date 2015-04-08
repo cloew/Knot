@@ -4,12 +4,14 @@ class DefaultPolicies:
     """ Represents the default policies based on a requested dimension """
     
     def __init__(self, dimensionToPolicy):
-        """ Initialize the Defaults with the dimensiojn ot the corresponding policy(ies) """
+        """ Initialize the Defaults with the dimension ot the corresponding policy(ies) """
         self._dimensionToPolicy = dimensionToPolicy
-        self.dimensionToPolicy = dimensionToPolicy
+        self.dimensionToPolicy = {}
         
-        if BOTH not in self.dimensionToPolicy:
+        if BOTH not in self._dimensionToPolicy:
             self.dimensionToPolicy[BOTH] = [self._dimensionToPolicy[HORIZONTAL], self._dimensionToPolicy[VERTICAL]]
+        else:
+            self.dimensionToPolicy[BOTH] = self._dimensionToPolicy[BOTH]
             
         for dimension in [HORIZONTAL, VERTICAL]:
             self.dimensionToPolicy[dimension] = self.convertPolicyToList(dimension)
