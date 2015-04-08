@@ -7,10 +7,6 @@ from PySide.QtGui import QComboBox
 class DropDownPainter(Painter):
     """ Handles creation of the Qt widget for drawing a drop down """
     DEFAULT_SIZING = DefaultPoliciesViaClass(UseSizeHint)
-    
-    def __init__(self, content=None, controller=None):
-        """ Initialize the Painter with its internal content """
-        Painter.__init__(self)
         
     def buildQWidget(self, widget):
         """ Build the QComboBox """

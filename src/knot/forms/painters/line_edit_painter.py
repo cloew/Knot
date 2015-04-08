@@ -9,7 +9,7 @@ class LineEditPainter(Painter):
     """ Handles creation of the Qt widget for drawing a button """
     DEFAULT_SIZING = DefaultPoliciesViaClass(UseSizeHint)
     
-    def __init__(self, content=None, controller=None):
+    def __init__(self, content=None):
         """ Initialize the Painter with its internal content """
         Painter.__init__(self)
         

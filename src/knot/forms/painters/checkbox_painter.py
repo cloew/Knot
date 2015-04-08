@@ -8,7 +8,7 @@ class CheckboxPainter(Painter):
     """ Handles creation of the Qt widget for drawing a checkbox """
     DEFAULT_SIZING = DefaultPoliciesViaClass(UseSizeHint)
     
-    def __init__(self, content, controller=None):
+    def __init__(self, content):
         """ Initialize the Painter with its internal content """
         Painter.__init__(self)
         self.content = content

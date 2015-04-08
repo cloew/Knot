@@ -12,7 +12,7 @@ class MultiLineTextPainter(Painter):
     DEFAULT_SIZING = DefaultPolicies({HORIZONTAL:Stretch(dimension=HORIZONTAL),
                                       VERTICAL:  UseSizeHint(dimension=VERTICAL)})
     
-    def __init__(self, content, controller=None):
+    def __init__(self, content):
         """ Initialize the Painter with its internal content """
         Painter.__init__(self)
         self.content = content

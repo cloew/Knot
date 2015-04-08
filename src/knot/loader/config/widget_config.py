@@ -43,7 +43,7 @@ class WidgetConfig:
         
     def buildWidget(self, content, controller, mods, *args, positionings=None, sizings=None, styling=None, **kwargs):
         """ Build the widget object """
-        painter = self.tryToIntantiateClass(self.namespacedPainterClass, content, controller)
+        painter = self.tryToIntantiateClass(self.namespacedPainterClass, content)
         return Widget(self.name, content, painter=painter, controller=controller, positionings=positionings, sizings=sizings, mods=mods, styling=styling)
         
     def buildSemanticWidget(self, content, controller, mods, *args, **kwargs):
