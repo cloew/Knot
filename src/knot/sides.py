@@ -1,4 +1,5 @@
 from .dimensions import HORIZONTAL, VERTICAL
+
 class Side:
     """ Represents a side of the widget """
     
