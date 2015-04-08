@@ -1,4 +1,5 @@
 from ..events.event_types import CHILD_ADDED, PARENT_ADDED
+from knot.directions import L2R
 from knot.sides import LEFT, RIGHT
 
 class TreeHandler:
@@ -9,6 +10,7 @@ class TreeHandler:
         self.widget = widget
         self.parent = None
         self.children = []
+        self.direction = L2R
         
     def addChild(self, child):
         """ Add the Child to this widget """
@@ -32,10 +34,11 @@ class TreeHandler:
         
     def getSiblingOn(self, side):
         """ Return the sibling on the given side """
-        if side is LEFT:
-            return self.getPreviousSibling()
-        elif side is RIGHT:
-            return self.getNextSibling()
+        if side.dimension is self.direction.dimension:
+            if side is self.direction.startingSide:
+                return self.getPreviousSibling()
+            else:
+                return self.getNextSibling()
         else:
             return None
         
