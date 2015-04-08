@@ -1,19 +1,19 @@
 from .base_widget import BaseWidget
-from .positioning_handler import PositioningHandler
+from .policies_handler import PoliciesHandler
+from .positioning_defaults_provider import PositioningDefaultsProvider
 from .qt_handler import QtHandler
-from .sizing_handler import SizingHandler
+from .sizing_defaults_provider import SizingDefaultsProvider
 from .style_handler import StyleHandler
-from ..events.event_types import PARENT_ADDED
 
+from knot.sides import LEFT, RIGHT, TOP, BOTTOM
 from knot.core.painters.container_painter import ContainerPainter
 
 from kao_decorators import proxy_for
 from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
-@proxy_for('positioningHandler', ['apply', 'getDefaultChildrenPolicies', 'getSidePosition', 'getInternalSidePosition', 'setSidePosition'])
+@proxy_for('positioningDefaults', ['getDefaultChildrenPolicies'])
 @proxy_for('qtHandler', ['hasQWidget', 'setQWidget', 'setContent', 'setValue', 'getValueSignal', '_qwidget'])
-@proxy_for('sizingHandler', ['apply', 'resizeWithPolicies'])
 class Widget(BaseWidget):
     """ Represents a widget within Knot """
     
@@ -22,14 +22,16 @@ class Widget(BaseWidget):
                        mods=PerCall([]), positionings=None, sizings=None, styling=EvenIfNone('')):
         """ Initialize the widget with its painters and policies """
         BaseWidget.__init__(self, widgetType, content=content, controller=controller, mods=mods)
+        
         self.painter = painter
-        self.positioningHandler = PositioningHandler(self, policies=positionings)
-        self.sizingHandler = SizingHandler(self, policies=sizings)
+        self.positioningDefaults = PositioningDefaultsProvider(self)
+        self.positioningHandler = PoliciesHandler(self, self.positioningDefaults, policies=positionings)
+        self.sizingHandler = PoliciesHandler(self, SizingDefaultsProvider(self), policies=sizings)
         self.styleHandler = StyleHandler(self, styling)
         self.qtHandler = QtHandler(self)
         
-        self.on(PARENT_ADDED, self.positioningHandler.apply)
-        self.on(PARENT_ADDED, self.sizingHandler.apply)
+        # self.on(PARENT_ADDED, self.positioningHandler.apply)
+        # self.on(PARENT_ADDED, self.sizingHandler.apply)
         
     def draw(self):
         """ Draw the widget """
@@ -88,3 +90,40 @@ class Widget(BaseWidget):
     def bottom(self, value):
         self._qwidget.move(value-self.height, self.top)
         self._qwidget.show()
+        
+    def getSidePosition(self, side):
+        """ Return the pixel position of the given side """
+        if side is LEFT:
+            return self.left
+        elif side is RIGHT:
+            return self.right
+        elif side is TOP:
+            return self.top
+        elif side is BOTTOM:
+            return self.bottom
+        
+    def getInternalSidePosition(self, side):
+        """ Return the pixel position of the given side for use for children """
+        if side is LEFT:
+            return 0
+        elif side is RIGHT:
+            return self.width
+        elif side is TOP:
+            return 0
+        elif side is BOTTOM:
+            return self.height
+        
+    def setSidePosition(self, side, value):
+        """ Set the pixel position of the given side """
+        if side is LEFT:
+            self.left = value
+        elif side is RIGHT:
+            self.right = value
+        elif side is TOP:
+            self.top = value
+        elif side is BOTTOM:
+            self.bottom = value
+            
+    def resizeWithPolicies(self):
+        """ Resize the widget """
+        [policy.resize(self) for policy in self.sizingHandler.policies]

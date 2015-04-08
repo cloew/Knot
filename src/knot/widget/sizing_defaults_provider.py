@@ -1,9 +1,11 @@
-from .policies_handler import PoliciesHandler
+from knot.dimensions import BOTH
 
-from knot.dimensions import HORIZONTAL, VERTICAL, BOTH
-
-class SizingHandler(PoliciesHandler):
-    """ Handles the sizing policy(ies) for the parent widget """
+class SizingDefaultsProvider:
+    """ Handles providing the default sizing policy(ies) """
+    
+    def __init__(self, widget):
+        """ Initialize with the current widget """
+        self.widget = widget
         
     def getDefaultPolicies(self, dimension=BOTH):
         """ Return the default policies to be used for children """
