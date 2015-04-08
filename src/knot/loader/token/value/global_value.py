@@ -1,4 +1,5 @@
 from knot.dimensions import HORIZONTAL, VERTICAL
+from knot.directions import L2R, R2L, T2B, B2T
 from knot.sides import LEFT, RIGHT, TOP, BOTTOM
 
 class GlobalValue:
@@ -8,7 +9,11 @@ class GlobalValue:
                     "LEFT":LEFT,
                     "RIGHT":RIGHT,
                     "TOP":TOP,
-                    "BOTTOM":BOTTOM}
+                    "BOTTOM":BOTTOM,
+                    "L2R":L2R,
+                    "R2L":R2L,
+                    "T2B":T2B,
+                    "B2T":B2T}
              
     @classmethod
     def isValidFor(cls, valueText):

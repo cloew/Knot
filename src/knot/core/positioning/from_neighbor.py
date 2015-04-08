@@ -36,3 +36,7 @@ class FromNeighbor:
             else:
                 edgePosition = widget.parent.getInternalSidePosition(self.side)
             widget.setSidePosition(self.side, edgePosition)
+            
+    def __repr__(self):
+        """ Return the String representation of this object """
+        return "<FromNeighbor({0})>".format(self.side)

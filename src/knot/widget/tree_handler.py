@@ -27,15 +27,24 @@ class TreeHandler:
         """ Return the widget's children with the given type """
         return [child for child in self.children if child.widgetType == widgetType]
         
+    def setDirection(self, direction):
+        """ Set the Tree Handler's direction """
+        self.direction = direction
+        
     @property
     def siblings(self):
         """ Return the given widget's siblings """
         return [child for child in self.parent.children if child is not self.widget]
         
+    @property
+    def containerDirection(self):
+        """ Return the direction of this widget's parent """
+        return self.widget.parent.direction if self.widget.parent is not None else self.direction
+        
     def getSiblingOn(self, side):
         """ Return the sibling on the given side """
-        if side.dimension is self.direction.dimension:
-            if side is self.direction.startingSide:
+        if side.dimension is self.containerDirection.dimension:
+            if side is self.containerDirection.startingSide:
                 return self.getPreviousSibling()
             else:
                 return self.getNextSibling()

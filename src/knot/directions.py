@@ -9,6 +9,10 @@ class Direction:
         self.dimension = dimension
         self.startingSide = startingSide
         
+    def __repr__(self):
+        """ Return the String representation of the direction """
+        return "<Direction({0}, {1})>".format(self.dimension, self.startingSide)
+        
 L2R = Direction(HORIZONTAL, LEFT)
 R2L = Direction(HORIZONTAL, RIGHT)
 T2B = Direction(VERTICAL, TOP)

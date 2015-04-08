@@ -1,6 +1,7 @@
 {
     "widgets":[{"name":"div",
-                "painter":"knot.core.painters.container_painter.ContainerPainter"},
+                "painter":"knot.core.painters.container_painter.ContainerPainter",
+                "controller":"knot.core.controllers.div_controller.DivController"},
                {"name":"img",
                 "painter":"knot.core.painters.image_painter.ImagePainter",
                 "controller":"knot.core.controllers.image_controller.ImageController"},
