@@ -1,0 +1,8 @@
+import knot.forms
+
+text
+    @position center(VERTICAL)
+    $.filename
+button
+    @when clicked -> $.openFileDialog
+    Choose a File
