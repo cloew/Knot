@@ -5,7 +5,7 @@ from kao_decorators import proxy_for
 from smart_defaults import smart_defaults, PerCall
 
 @proxy_for('eventHandler', ['fire', 'on', 'unregister'])
-@proxy_for('treeHandler', ['parent', 'children', 'siblings', 'addChild', 'attachToParent', 'getChildrenWithType', 'getSiblingOn', 'getPreviousSibling'])
+@proxy_for('treeHandler', ['parent', 'children', 'direction', 'siblings', 'addChild', 'attachToParent', 'getChildrenWithType', 'getSiblingOn', 'getPreviousSibling'])
 class BaseWidget:
     """ Represents the base widget functionality """
     
