@@ -15,7 +15,7 @@ class KnotAppConfig:
     def load(cls, filename):
         """ Load the Knot App Config from the given file """
         global configParameters
-        config = partial(KnotAppConfig, filename)
+        config = partial(cls, filename)
         source = JsonSource(filename)
         data = source.data
         return Factory(config, configParameters).load(data)
