@@ -31,5 +31,6 @@ setup(name='knot',
                 'knot.watches',
                 'knot.widget'],
       package_data = {'knot.core':['knot-pkg.json'], 
-                      'knot.forms':['knot-pkg.json']},
+                      'knot.forms':['knot-pkg.json'], 
+                      'knot.forms.partials':['*.knot']},
      )
