@@ -19,4 +19,7 @@ class KnotScopeDetector:
         if line.isLastLine():
             return True
         else:
-            return LeadingWhitespace(line.next()) <= LeadingWhitespace(self.startingLine)
+            nextLine = line.next()
+            hasText = not (nextLine.strip() == '')
+            lessWhitespace = LeadingWhitespace(line.next()) <= LeadingWhitespace(self.startingLine)
+            return hasText and lessWhitespace
