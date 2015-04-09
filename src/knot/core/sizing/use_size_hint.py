@@ -29,4 +29,4 @@ class UseSizeHint:
         if self.dimension is BOTH or self.dimension is VERTICAL:
             height = size.height()
         
-        widget.resize(width, height)
+        widget.resizeTo(width, height)

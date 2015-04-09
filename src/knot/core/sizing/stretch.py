@@ -30,4 +30,4 @@ class Stretch:
         if self.dimension is BOTH or self.dimension is VERTICAL:
             height = widget.parent.height
         
-        widget.resize(width, height)
+        widget.resizeTo(width, height)

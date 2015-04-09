@@ -32,4 +32,4 @@ class PercentSizing:
         if self.dimension is VERTICAL:
             height = self.percent*widget.parent.height
         
-        widget.resize(width, height)
+        widget.resizeTo(width, height)

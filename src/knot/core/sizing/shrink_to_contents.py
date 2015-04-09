@@ -28,7 +28,7 @@ class ShrinkToContents:
         if self.dimension is BOTH or self.dimension is VERTICAL:
             height = self.getHeight(widget)
             
-        widget.resize(width, height)
+        widget.resizeTo(width, height)
         
     def getWidth(self, widget):
         """ Return the proper width for the widget """

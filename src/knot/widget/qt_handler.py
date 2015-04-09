@@ -35,3 +35,11 @@ class QtHandler:
         if self._qwidget in GetValueSignalMap:
             return GetValueSignalMap[self._qwidget]
         return None
+        
+    def moveTo(self, *args):
+        """ Move the widget to the given position """
+        return self._qwidget.move(*args)
+        
+    def resizeTo(self, *args):
+        """ Resize the widget to the given size """
+        return self._qwidget.resize(*args)

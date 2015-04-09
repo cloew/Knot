@@ -32,4 +32,4 @@ class PixelSizing:
         if self.dimension is VERTICAL:
             height = self.size
         
-        widget.resize(width, height)
+        widget.resizeTo(width, height)
