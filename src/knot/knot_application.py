@@ -11,16 +11,16 @@ import sys
 class KnotApplication:
     """ Represents a Knot Application """
     
-    def __init__(self, filename, root):
+    def __init__(self, config):
         """ Initialize the Knot Application """
         self.app = QApplication(sys.argv)
-        self.resourceDirectory = ResourceDirectory(root)
+        self.resourceDirectory = config.rootDirectory
         
         ServiceManager.addService('app', self)
         self.watchManager = WatchManager()
         
-        self.window = KnotWindow(title="Knot Test -- Dun Dun DUN!")
-        self.loadWidgets(filename)
+        self.window = KnotWindow(title=config.title)
+        self.loadWidgets(config.knotFilename)
         
     def loadWidgets(self, filename):
         """ Load the widgets onto the window """

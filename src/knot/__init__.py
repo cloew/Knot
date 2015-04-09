@@ -1,3 +1,4 @@
+from .knot_app_config import KnotAppConfig
 from .knot_application import KnotApplication
 from .knot_service import KnotService
 
