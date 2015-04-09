@@ -1,8 +1,8 @@
 import knot.forms
 
-text
+text:
     @position center(VERTICAL)
     $.filename
-button
+button:
     @when clicked -> $.openFileDialog
     Choose a File
