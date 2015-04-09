@@ -13,4 +13,6 @@ class FilePickerController:
         
     def openFileDialog(self):
         """ Open the file dialog """
-        self.filename, filter = QFileDialog.getOpenFileName()
+        filename, filter = QFileDialog.getOpenFileName()
+        if not filename == '':
+            self.filename = filename
