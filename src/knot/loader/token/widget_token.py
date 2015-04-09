@@ -69,7 +69,7 @@ class WidgetToken:
         """ Return the config to be used for any child widgets """
         widgetConfig = config.widgetFactory.config[self.widgetType.type]
         if len(widgetConfig.childWidgetConfigs) > 0:
-            config = factory.config.copy(additionalWidgetConfigs=widgetConfig.childWidgetConfigs)
+            config = config.copy(additionalWidgetConfigs=widgetConfig.childWidgetConfigs)
         return config
         
     def __repr__(self):
