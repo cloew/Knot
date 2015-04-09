@@ -64,23 +64,7 @@ class KnotRectangle:
     def getSidePosition(self, side):
         """ Return the pixel position of the given side """
         return getattr(self, self.SIDE_TO_VAR_NAME[side])
-        # if side is LEFT:
-            # return self.left
-        # elif side is RIGHT:
-            # return self.right
-        # elif side is TOP:
-            # return self.top
-        # elif side is BOTTOM:
-            # return self.bottom
         
     def setSidePosition(self, side, value):
         """ Set the pixel position of the given side """
         setattr(self, self.SIDE_TO_VAR_NAME[side], value)
-        # if side is LEFT:
-            # self.left = value
-        # elif side is RIGHT:
-            # self.right = value
-        # elif side is TOP:
-            # self.top = value
-        # elif side is BOTTOM:
-            # self.bottom = value
