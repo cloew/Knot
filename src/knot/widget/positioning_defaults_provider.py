@@ -19,10 +19,6 @@ class PositioningDefaultsProvider:
             policies = self.widget.getDefaultChildrenPolicies(dimension=dimension)
         return policies
         
-    def getProperDefaults(self):
-        """ Ensure the defaults are properly set up to match the direction of the children """
-        self.defaults = self.DEFAULT_POSITIONING.copy(override={self.widget.direction.dimension: FromNeighbor(self.widget.direction.startingSide)})
-        
     def getContainerDefaultPolicies(self, dimension=BOTH):
         """ Return the Container's default positioning policies """
         if self.widget.parent is not None:
