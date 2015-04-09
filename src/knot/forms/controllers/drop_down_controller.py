@@ -54,4 +54,4 @@ class DropDownController:
         """ Change the given text for the widget """
         index = self.options.index(option)
         self.widget._qwidget.setItemText(index, option.text)
-        self.widget.resizeWithPolicies()
+        self.widget.resize()
