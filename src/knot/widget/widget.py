@@ -1,4 +1,5 @@
 from .base_widget import BaseWidget
+from .container_handler import ContainerHandler
 from .policies_handler import PoliciesHandler
 from .positioning_defaults_provider import PositioningDefaultsProvider
 from .qt_handler import QtHandler
@@ -12,7 +13,7 @@ from kao_decorators import proxy_for
 from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
 @proxy_for('_qwidget', ['resize', 'show', 'sizeHint'])
-@proxy_for('positioningDefaults', ['getDefaultChildrenPolicies'])
+@proxy_for('containerHandler', ['direction', 'setDirection', 'getDefaultChildrenPolicies', 'getContainerSidePosition'])
 @proxy_for('qtHandler', ['hasQWidget', 'setQWidget', 'setContent', 'setValue', 'getValueSignal', '_qwidget'])
 class Widget(BaseWidget):
     """ Represents a widget within Knot """
@@ -21,17 +22,15 @@ class Widget(BaseWidget):
     def __init__(self, widgetType, content=None, painter=EvenIfNone(ContainerPainter()), controller=None,
                        mods=PerCall([]), positionings=None, sizings=None, styling=EvenIfNone('')):
         """ Initialize the widget with its painters and policies """
+        self.painter = painter
+        self.containerHandler = ContainerHandler(self)
         BaseWidget.__init__(self, widgetType, content=content, controller=controller, mods=mods)
         
-        self.painter = painter
         self.positioningDefaults = PositioningDefaultsProvider(self)
         self.positioningHandler = PoliciesHandler(self, self.positioningDefaults, policies=positionings)
         self.sizingHandler = PoliciesHandler(self, SizingDefaultsProvider(self), policies=sizings)
         self.styleHandler = StyleHandler(self, styling)
         self.qtHandler = QtHandler(self)
-        
-        # self.on(PARENT_ADDED, self.positioningHandler.apply)
-        # self.on(PARENT_ADDED, self.sizingHandler.apply)
         
     def draw(self):
         """ Draw the widget """
@@ -101,17 +100,6 @@ class Widget(BaseWidget):
             return self.top
         elif side is BOTTOM:
             return self.bottom
-        
-    def getInternalSidePosition(self, side):
-        """ Return the pixel position of the given side for use for children """
-        if side is LEFT:
-            return 0
-        elif side is RIGHT:
-            return self.width
-        elif side is TOP:
-            return 0
-        elif side is BOTTOM:
-            return self.height
         
     def setSidePosition(self, side, value):
         """ Set the pixel position of the given side """

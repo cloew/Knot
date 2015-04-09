@@ -16,7 +16,7 @@ class PositioningDefaultsProvider:
         """ Return the default policies to be used for children """
         policies = self.getContainerDefaultPolicies(dimension=dimension)
         if policies is None:
-            policies = self.getDefaultChildrenPolicies(dimension=dimension)
+            policies = self.widget.getDefaultChildrenPolicies(dimension=dimension)
         return policies
         
     def getProperDefaults(self):
@@ -29,8 +29,3 @@ class PositioningDefaultsProvider:
             return self.widget.parent.getDefaultChildrenPolicies(dimension=dimension)
         else:
             return None
-        
-    def getDefaultChildrenPolicies(self, dimension=BOTH):
-        """ Return the default policies to be used for children """
-        self.getProperDefaults()
-        return self.defaults.getPolicies(dimension)

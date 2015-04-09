@@ -10,7 +10,6 @@ class TreeHandler:
         self.widget = widget
         self.parent = None
         self.children = []
-        self.direction = L2R
         
     def addChild(self, child):
         """ Add the Child to this widget """
@@ -27,10 +26,6 @@ class TreeHandler:
         """ Return the widget's children with the given type """
         return [child for child in self.children if child.widgetType == widgetType]
         
-    def setDirection(self, direction):
-        """ Set the Tree Handler's direction """
-        self.direction = direction
-        
     @property
     def siblings(self):
         """ Return the given widget's siblings """
@@ -39,7 +34,7 @@ class TreeHandler:
     @property
     def containerDirection(self):
         """ Return the direction of this widget's parent """
-        return self.widget.parent.direction if self.widget.parent is not None else self.direction
+        return self.widget.parent.direction if self.widget.parent is not None else self.widget.direction
         
     def getSiblingOn(self, side):
         """ Return the sibling on the given side """

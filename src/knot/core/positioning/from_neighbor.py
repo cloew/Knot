@@ -34,7 +34,7 @@ class FromNeighbor:
             if sibling is not None:
                 edgePosition = sibling.getSidePosition(self.side.oppositeSide)
             else:
-                edgePosition = widget.parent.getInternalSidePosition(self.side)
+                edgePosition = widget.parent.getContainerSidePosition(self.side)
             widget.setSidePosition(self.side, edgePosition)
             
     def __repr__(self):
