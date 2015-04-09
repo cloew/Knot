@@ -33,4 +33,4 @@ class ContentToken:
         return Content(self.text, [token.getValue(scope) for token in self.valueTokens])
         
     def __repr__(self):
-        return "<ContentToken:{0}>".format(self.value)
+        return "<ContentToken:{0}, {1}>".format(self.text, self.valueTokens)
