@@ -17,7 +17,7 @@ class KnotLoader:
         self.filename = filename
         self.file = KaoFile.open(self.filename)
         self.config = LoaderConfig()
-        self.factory = TokenFactory(self.config)
+        self.factory = TokenFactory()
         
     def loadOnto(self, widget):
         """ Load the contents of the given file and place them on the given widget """

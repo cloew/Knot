@@ -31,4 +31,4 @@ class WidgetLoader:
         
     def getChildLoader(self, widgetToken):
         """ Return the loader to use for the widget's children """
-        return WidgetLoader(widgetToken.config)
+        return WidgetLoader(widgetToken.getChildConfig(self.config))
