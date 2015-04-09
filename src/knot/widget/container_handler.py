@@ -15,10 +15,6 @@ class ContainerHandler:
         self.direction = L2R
         self.defaults = self.DEFAULT_POSITIONING
         
-    def setDirection(self, direction):
-        """ Set the Tree Handler's direction """
-        self.direction = direction
-        
     def getProperDefaults(self):
         """ Ensure the defaults are properly set up to match the direction of the children """
         self.defaults = self.DEFAULT_POSITIONING.copy(override={self.direction.dimension: FromNeighbor(self.direction.startingSide)})

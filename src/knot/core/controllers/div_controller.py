@@ -9,4 +9,4 @@ class DivController:
         
     def attachWidget(self, widget):
         """ Set the widget's direction """
-        widget.setDirection(self.direction)
+        widget.direction = self.direction
