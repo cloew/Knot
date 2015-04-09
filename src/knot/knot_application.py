@@ -1,3 +1,4 @@
+from .knot_app_config import KnotAppConfig
 from .knot_window import KnotWindow
 from .service_manager import ServiceManager
 from .watch_manager import WatchManager
@@ -10,6 +11,11 @@ import sys
 
 class KnotApplication:
     """ Represents a Knot Application """
+    
+    @classmethod
+    def load(cls, filename):
+        """ Load the Knot App Config from the given file """
+        return cls(KnotAppConfig.load(filename))
     
     def __init__(self, config):
         """ Initialize the Knot Application """
