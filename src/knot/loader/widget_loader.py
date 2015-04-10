@@ -1,6 +1,5 @@
 from .attributes import POSITION, SIZING
 from .attribute_loader import AttributeLoader
-from .scope_getter import GetScopeFor
 
 class WidgetLoader:
     """ Helper class to load widgets from knot tokens """
