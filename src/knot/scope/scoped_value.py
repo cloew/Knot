@@ -11,7 +11,7 @@ class ScopedValue:
         
     def get(self):
         """ Return the current value """
-        return self.getter(self.scope)
+        return self.getter(self.scope, None)
         
     def set(self, value):
         """ Set the value """
