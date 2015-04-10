@@ -21,5 +21,13 @@ class BaseWidget:
         
         thingsToAttach = self.mods if self.controller is None else [self.controller] + self.mods
         for thing in thingsToAttach:
-            if hasattr(thing, 'attachWidget'):
-                thing.attachWidget(self)
+            self.attachWidgetToMod(thing)
+        
+    def addMod(self, mod):
+        """ Add the mod  """
+        self.mods.append(mod)
+        self.attachWidgetToMod(mod)
+        
+    def attachWidgetToMod(self, mod):
+        if hasattr(mod, 'attachWidget'):
+            mod.attachWidget(self)

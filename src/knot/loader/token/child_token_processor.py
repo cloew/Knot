@@ -1,4 +1,4 @@
-from .token_roles import WIDGET, CONTENT, ATTRIBUTE, SIGNAL, STYLE
+from .token_roles import WIDGET, CONTENT, ATTRIBUTE, SIGNAL, STYLE, MOD
 
 class ChildTokenProcessor:
     """ Helper class to load the child tokens for a widget token """
@@ -6,7 +6,8 @@ class ChildTokenProcessor:
                     CONTENT: 'setContent',
                     SIGNAL: 'setSignal',
                     STYLE: 'setStyle',
-                    ATTRIBUTE: 'setAttribute'}
+                    ATTRIBUTE: 'setAttribute',
+                    MOD: 'addChild'}
     
     def __init__(self, parent, factory):
         """ Initialize the Child Token Processor with its parent """

@@ -1,5 +1,6 @@
 from .attribute_token import AttributeToken
 from .content_token import ContentToken
+from .for_loop_token import ForLoopToken
 from .import_token import ImportToken
 from .signal_token import SignalToken
 from .style_token import StyleToken
@@ -40,8 +41,9 @@ class TokenFactory:
     
     def load(self, section):
         """ Load a token from the given section """
-        if WidgetToken.isValidFor(section):
-            return WidgetToken(section, self)
+        for tokenCls in [ForLoopToken, WidgetToken]:
+            if tokenCls.isValidFor(section):
+                return tokenCls(section, self)
         else:
             for tokenCls in [SignalToken, StyleToken, AttributeToken, ContentToken]:
                 if tokenCls.isValidFor(section):
