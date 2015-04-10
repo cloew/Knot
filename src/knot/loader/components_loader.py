@@ -15,7 +15,7 @@ class ComponentsLoader:
         
     def loadAll(self, tokens, scope=None, onto=None):
         """ Load all tokens from the given scope """
-        scope = self.getScope(scope, onto)
+        scope = GetScopeFor(onto, currentScope=scope)
         children = [self.load(token, scope=scope) for token in tokens if token.ROLE is WIDGET]
         
         if onto is not None:
@@ -26,11 +26,10 @@ class ComponentsLoader:
     @smart_defaults
     def load(self, widgetToken, scope=EvenIfNone(PerCall(KnotScope()))):
         """ Load the given widget token """
-        return self.widgetLoader.load(widgetToken, scope=scope)
-        
-    def getScope(self, scope, widget):
-        """ Return the proper scope to use """
-        return scope if scope is not None else GetScopeFor(widget)
+        widget = self.widgetLoader.load(widgetToken, scope)
+        config = widgetToken.getChildConfig(self.config)
+        ComponentsLoader(config).loadAll(widgetToken.children, scope=scope, onto=widget)
+        return widget
         
     def attachChildren(self, widget, children):
         """ Attach children to the parent widget """

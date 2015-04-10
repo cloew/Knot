@@ -5,4 +5,7 @@ def GetScopeFor(widget, currentScope=None):
     if widget is not None and hasattr(widget, 'controller') and hasattr(widget.controller, 'HasKnotScope') and widget.controller.HasKnotScope:
         return KnotScope(widget.controller)
     else:
-        return currentScope
+        if currentScope is None:
+            return KnotScope()
+        else:
+            return currentScope

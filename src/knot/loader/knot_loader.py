@@ -13,8 +13,8 @@ class KnotLoader:
         self.componentsLoader = ComponentsLoader(self.config)
         self.importLoader = ImportLoader(self.config)
         
-    def load(self, scope=None, onto=None):
+    def load(self, onto=None):
         """ Load the widgets from the filename """
         importTokens, componentTokens = self.tokenizer.tokenize()
         self.importLoader.loadAll(importTokens)
-        return self.componentsLoader.loadAll(componentTokens, scope=scope, onto=onto)
+        return self.componentsLoader.loadAll(componentTokens, onto=onto)
