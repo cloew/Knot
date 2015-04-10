@@ -1,3 +1,4 @@
+from .scope_getter import GetScopeFor
 from .widget_loader import WidgetLoader
 from .token.token_roles import WIDGET
 from knot.scope.knot_scope import KnotScope
@@ -12,12 +13,26 @@ class ComponentsLoader:
         self.config = config
         self.widgetLoader = WidgetLoader(self.config)
         
-    @smart_defaults
-    def loadAll(self, tokens, scope=EvenIfNone(PerCall(KnotScope()))):
+    def loadAll(self, tokens, scope=None, onto=None):
         """ Load all tokens from the given scope """
-        return [self.load(token, scope=scope) for token in tokens if token.ROLE is WIDGET]
+        scope = self.getScope(scope, onto)
+        children = [self.load(token, scope=scope) for token in tokens if token.ROLE is WIDGET]
+        
+        if onto is not None:
+            self.attachChildren(onto, children)
+            
+        return children
     
     @smart_defaults
     def load(self, widgetToken, scope=EvenIfNone(PerCall(KnotScope()))):
         """ Load the given widget token """
         return self.widgetLoader.load(widgetToken, scope=scope)
+        
+    def getScope(self, scope, widget):
+        """ Return the proper scope to use """
+        return scope if scope is not None else GetScopeFor(widget)
+        
+    def attachChildren(self, widget, children):
+        """ Attach children to the parent widget """
+        for child in children:
+            widget.addChild(child)

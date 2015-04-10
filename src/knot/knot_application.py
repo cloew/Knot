@@ -31,7 +31,7 @@ class KnotApplication:
     def loadWidgets(self, filename):
         """ Load the widgets onto the window """
         loader = KnotLoader(filename)
-        loader.loadOnto(self.window)
+        loader.load(onto=self.window)
         
     def run(self):
         """ Run the application """

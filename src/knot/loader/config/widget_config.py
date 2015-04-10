@@ -57,7 +57,7 @@ class WidgetConfig:
             
         from ..knot_loader import KnotLoader
         knotLoader = KnotLoader(self.packageDirectory.getProperPath(self.template))
-        knotLoader.loadOnto(widget)
+        knotLoader.load(onto=widget)
         
     def __repr__(self):
         """ Return the string representation of the config """
