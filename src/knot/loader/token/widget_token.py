@@ -4,6 +4,9 @@ from .type_token import TypeToken
 
 from knot.exceptions import KnotParseError
 
+from kao_decorators import proxy_for
+
+@proxy_for('processor', ['children', 'signals', 'attributes', 'content', 'style'])
 class WidgetToken:
     """ Represents a tokenized widget from a knot file """
     ROLE = WIDGET
@@ -22,35 +25,8 @@ class WidgetToken:
     def __init__(self, section, factory):
         """ Intialize the Widget Token with the section it was loaded from """
         self.widgetType = self.getWidgetType(section)
-        
-        self.children = []
-        self.signals = []
-        self.attributes = {}
-        self.content = None
-        self.style = None
-        
-        processor = ChildTokenProcessor(self, factory)
-        processor.process(section[1:])
-        
-    def addChild(self, child):
-        """ Add the child to the list of tracked child widgets """
-        self.children.append(child)
-        
-    def setContent(self, content):
-        """ Set the child content """
-        self.content = content
-        
-    def setStyle(self, style):
-        """ Set the style """
-        self.style = style
-        
-    def setSignal(self, signal):
-        """ Set the child content """
-        self.signals.append(signal)
-        
-    def setAttribute(self, token):
-        """ Set the attribute """
-        self.attributes[token.attribute] = token
+        self.processor = ChildTokenProcessor(self, factory)
+        self.processor.process(section[1:])
         
     def build(self, factory, scope, **kwargs):
         """ Build this type from the factory """
