@@ -23,9 +23,10 @@ class ImageController:
         
     def setImage(self, widget=None, event=None):
         """ Set the image for the underlying qt widget """
-        pixmap = QPixmap(self.filename)
-        self.widget._qwidget.setPixmap(pixmap)
-        self.widget.resize()
+        if self._filename is not None:
+            pixmap = QPixmap(self.filename)
+            self.widget._qwidget.setPixmap(pixmap)
+            self.widget.resize()
        
     @property
     def filename(self):
