@@ -1,6 +1,4 @@
-from .knot_list_parser import KnotListParser
 from .token_roles import STYLE
-from .value.scope_value import ScopeValue
 
 class StyleToken:
     """ Represents a tokenized Style dictionary """

@@ -1,5 +1,5 @@
 from .token_roles import CONTENT
-from .value.scope_value import ScopeValue
+from .value.value_factory import ValueFactory
 
 from knot.widget.content import Content
 
@@ -23,8 +23,9 @@ class ContentToken:
     def handle(self, piece):
         """ Handle the piece by storing the value token and return the proper placeholder string """
         text = piece
-        if ScopeValue.isValidFor(piece):
-            self.valueTokens.append(ScopeValue(piece))
+        valueToken = ValueFactory.buildScopeValues(piece)
+        if valueToken is not None:
+            self.valueTokens.append(valueToken)
             text = '{}'
         return text
         

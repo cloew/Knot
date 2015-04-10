@@ -1,6 +1,6 @@
 from .knot_list_parser import KnotListParser
 from .token_roles import SIGNAL
-from .value.scope_value import ScopeValue
+from .value.value_factory import ValueFactory
 
 class SignalToken:
     """ Represents a tokenized Signal callback """
@@ -15,7 +15,7 @@ class SignalToken:
         """ Initialize with the section for the signal """
         pieces = section[0].split(maxsplit=1)
         self.signalName, valuesText = [piece.strip() for piece in pieces[1].split('->')]
-        self.values = [ScopeValue(valueText) for valueText in KnotListParser().parse(valuesText)]
+        self.values = [ValueFactory.buildScopeValues(valueText) for valueText in KnotListParser().parse(valuesText)]
         
     def attach(self, controller, scope):
         """ Attach the signal and its callback """

@@ -7,7 +7,9 @@ from .token.token_factory import TokenFactory
 from .token.token_roles import IMPORT, WIDGET
 from .token.detector.imports_detector import ImportsDetector
 
+from knot.scope.knot_scope import KnotScope
 from kao_file import KaoFile, SectionFinder
+from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
 class KnotLoader:
     """ Loads Knot files and converts them to the proper widget tree """
@@ -25,7 +27,7 @@ class KnotLoader:
         for child in children:
             widget.addChild(child)
         
-    def load(self, scope=None):
+    def load(self, scope=EvenIfNone(PerCall(KnotScope()))):
         """ Load the widgets from the filename """
         self.findSections()
         self.loadImports()
@@ -49,7 +51,7 @@ class KnotLoader:
         importLoader = ImportLoader(self.config)
         return [importLoader.load(token) for token in tokens if token.ROLE is IMPORT]
         
-    def loadWidgets(self, scope=None):
+    def loadWidgets(self, scope=EvenIfNone(PerCall(KnotScope()))):
         """ Load the widget section of the Knot File """
         tokens = self.factory.loadAllTokens(self.widgetsLines)
         widgetLoader = WidgetLoader(self.config)

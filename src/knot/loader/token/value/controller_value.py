@@ -1,7 +1,7 @@
 from knot.scope.scoped_value import ScopedValue
 
-class ScopeValue:
-    """ Represents a Value from the current scope """
+class ControllerValue:
+    """ Represents a Value from the current scope's controller """
              
     @classmethod
     def isValidFor(cls, valueText):
@@ -10,7 +10,7 @@ class ScopeValue:
     
     def __init__(self, valueText):
         """ Initialize the value token """
-        self.attrName = valueText.split('$.', 1)[1]
+        self.attrName = "controller.{0}".format(valueText.split('$.', 1)[1])
         
     def getValue(self, scope):
         """ Return the actual value of the given token """
