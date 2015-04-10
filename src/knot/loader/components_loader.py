@@ -7,6 +7,7 @@ from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
 class ComponentsLoader:
     """ Helper class to load components from knot tokens """
+    LOAD_METHODS = {WIDGET: 'loadWidget'}
     
     def __init__(self, config):
         """ Initialize the loader with the configuration to use """
@@ -16,7 +17,7 @@ class ComponentsLoader:
     def loadAll(self, tokens, scope=None, onto=None):
         """ Load all tokens from the given scope """
         scope = GetScopeFor(onto, currentScope=scope)
-        children = [self.load(token, scope=scope) for token in tokens if token.ROLE is WIDGET]
+        children = [self.load(token, scope=scope) for token in tokens if token.ROLE in self.LOAD_METHODS]
         
         if onto is not None:
             self.attachChildren(onto, children)
@@ -24,7 +25,11 @@ class ComponentsLoader:
         return children
     
     @smart_defaults
-    def load(self, widgetToken, scope=EvenIfNone(PerCall(KnotScope()))):
+    def load(self, token, scope=EvenIfNone(PerCall(KnotScope()))):
+        """ Load the given token """
+        return getattr(self, self.LOAD_METHODS[token.ROLE])(token, scope)
+        
+    def loadWidget(self, widgetToken, scope):
         """ Load the given widget token """
         widget = self.widgetLoader.load(widgetToken, scope)
         config = widgetToken.getChildConfig(self.config)
