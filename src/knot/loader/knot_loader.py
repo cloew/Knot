@@ -1,14 +1,8 @@
 from .components_loader import ComponentsLoader
 from .import_loader import ImportLoader
-from .widget_loader import WidgetLoader
 from .scope_getter import GetScopeFor
 from .tokenizer import Tokenizer
 from .config.loader_config import LoaderConfig
-
-from .token.token_roles import IMPORT, WIDGET
-
-from knot.scope.knot_scope import KnotScope
-from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
 class KnotLoader:
     """ Loads Knot files and converts them to the proper widget tree """
@@ -29,10 +23,5 @@ class KnotLoader:
     def load(self, scope=None):
         """ Load the widgets from the filename """
         importTokens, componentTokens = self.tokenizer.tokenize()
-        # self.loadImports(importTokens)
         self.importLoader.loadAll(importTokens)
         return self.componentsLoader.loadAll(componentTokens, scope=scope)
-        
-    def loadImports(self, tokens):
-        """ Load the widget section of the Knot File """
-        return [importLoader.load(token) for token in tokens if token.ROLE is IMPORT]
