@@ -15,7 +15,7 @@ class SignalToken:
         """ Initialize with the section for the signal """
         pieces = section[0].split(maxsplit=1)
         self.signalName, valuesText = [piece.strip() for piece in pieces[1].split('->')]
-        self.values = [ValueFactory.buildScopeValues(valueText) for valueText in KnotListParser().parse(valuesText)]
+        self.values = [ValueFactory.buildScopeValue(valueText) for valueText in KnotListParser().parse(valuesText)]
         
     def attach(self, controller, scope):
         """ Attach the signal and its callback """

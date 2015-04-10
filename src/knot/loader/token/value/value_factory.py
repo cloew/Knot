@@ -18,7 +18,7 @@ class ValueFactory:
         else:
             return None
     
-    def buildScopeValues(self, valueText):
+    def buildScopeValue(self, valueText):
         """ Build the value object's only from the scope """
         for cls in self.SCOPE_VALUE_CLASSES:
             if cls.isValidFor(valueText):

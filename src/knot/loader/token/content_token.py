@@ -23,7 +23,7 @@ class ContentToken:
     def handle(self, piece):
         """ Handle the piece by storing the value token and return the proper placeholder string """
         text = piece
-        valueToken = ValueFactory.buildScopeValues(piece)
+        valueToken = ValueFactory.buildScopeValue(piece)
         if valueToken is not None:
             self.valueTokens.append(valueToken)
             text = '{}'
