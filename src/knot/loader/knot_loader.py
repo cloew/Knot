@@ -1,3 +1,4 @@
+from .components_loader import ComponentsLoader
 from .import_loader import ImportLoader
 from .widget_loader import WidgetLoader
 from .scope_getter import GetScopeFor
@@ -16,6 +17,7 @@ class KnotLoader:
         """ Initialize with the file to load from """
         self.tokenizer = Tokenizer(filename)
         self.config = LoaderConfig()
+        self.componentsLoader = ComponentsLoader(self.config)
         
     def loadOnto(self, widget):
         """ Load the contents of the given file and place them on the given widget """
@@ -23,18 +25,13 @@ class KnotLoader:
         for child in children:
             widget.addChild(child)
         
-    def load(self, scope=EvenIfNone(PerCall(KnotScope()))):
+    def load(self, scope=None):
         """ Load the widgets from the filename """
         importTokens, componentTokens = self.tokenizer.tokenize()
         self.loadImports(importTokens)
-        return self.loadWidgets(componentTokens, scope=scope)
+        return self.componentsLoader.loadAll(componentTokens, scope=scope)
         
     def loadImports(self, tokens):
         """ Load the widget section of the Knot File """
         importLoader = ImportLoader(self.config)
         return [importLoader.load(token) for token in tokens if token.ROLE is IMPORT]
-        
-    def loadWidgets(self, tokens, scope=EvenIfNone(PerCall(KnotScope()))):
-        """ Load the widget section of the Knot File """
-        widgetLoader = WidgetLoader(self.config)
-        return [widgetLoader.load(token, scope=scope) for token in tokens if token.ROLE is WIDGET]
