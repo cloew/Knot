@@ -1,8 +1,11 @@
-from .token_roles import STYLE
+from .token_roles import MOD
+
+from knot.core.mods.set_styling import SetStyling
+
 
 class StyleToken:
     """ Represents a tokenized Style dictionary """
-    ROLE = STYLE
+    ROLE = MOD
     
     @classmethod
     def isValidFor(cls, section):
@@ -12,6 +15,10 @@ class StyleToken:
     def __init__(self, section):
         """ Initialize with the section for the style """
         attribute, self.styling = section[0].split(maxsplit=1)
+        
+    def build(self, config, scope):
+        """ Build this type from the config """
+        return SetStyling(self.styling)
         
     def __repr__(self):
         return "<StyleToken:{0}>".format(self.styling)
