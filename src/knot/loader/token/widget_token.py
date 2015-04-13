@@ -36,9 +36,6 @@ class WidgetToken:
         content = self.content.build(scope) if self.content is not None else None
         style = self.style.styling if self.style is not None else None
         widget = factory.build(self.widgetType.type, content, *self.widgetType.getArgumentValues(scope), styling=style, **kwargs)
-        
-        for signal in self.signals:
-            signal.attach(widget.controller, scope)
         return widget
         
     def getChildConfig(self, config):
