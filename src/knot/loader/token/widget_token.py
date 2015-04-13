@@ -6,7 +6,7 @@ from knot.exceptions import KnotParseError
 
 from kao_decorators import proxy_for
 
-@proxy_for('processor', ['children', 'signals', 'attributes', 'content', 'style'])
+@proxy_for('processor', ['children', 'attributes', 'content'])
 class WidgetToken:
     """ Represents a tokenized widget from a knot file """
     ROLE = WIDGET
@@ -34,8 +34,7 @@ class WidgetToken:
             raise KnotParseError('Unknown widget: {0}'.format(self.widgetType.type))
         
         content = self.content.build(scope) if self.content is not None else None
-        style = self.style.styling if self.style is not None else None
-        widget = factory.build(self.widgetType.type, content, *self.widgetType.getArgumentValues(scope), styling=style, **kwargs)
+        widget = factory.build(self.widgetType.type, content, *self.widgetType.getArgumentValues(scope), **kwargs)
         return widget
         
     def getChildConfig(self, config):

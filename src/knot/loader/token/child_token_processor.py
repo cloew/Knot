@@ -1,11 +1,9 @@
-from .token_roles import WIDGET, CONTENT, ATTRIBUTE, SIGNAL, STYLE, MOD
+from .token_roles import WIDGET, CONTENT, ATTRIBUTE, MOD
 
 class ChildTokenProcessor:
     """ Helper class to load the child tokens for a widget token """
     ROLE_HANDLER = {WIDGET: 'addChild',
                     CONTENT: 'setContent',
-                    SIGNAL: 'setSignal',
-                    STYLE: 'setStyle',
                     ATTRIBUTE: 'setAttribute',
                     MOD: 'addChild'}
     
@@ -14,10 +12,8 @@ class ChildTokenProcessor:
         self.factory = factory
         
         self.children = []
-        self.signals = []
         self.attributes = {}
         self.content = None
-        self.style = None
     
     def process(self, section):
         """ Process the given section in the context of the given parent token """
@@ -36,14 +32,6 @@ class ChildTokenProcessor:
     def setContent(self, content):
         """ Set the child content """
         self.content = content
-        
-    def setStyle(self, style):
-        """ Set the style """
-        self.style = style
-        
-    def setSignal(self, signal):
-        """ Set the child content """
-        self.signals.append(signal)
         
     def setAttribute(self, token):
         """ Set the attribute """
