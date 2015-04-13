@@ -1,10 +1,12 @@
 from .knot_list_parser import KnotListParser
-from .token_roles import SIGNAL
+from .token_roles import MOD
 from .value.value_factory import ValueFactory
+
+from knot.core.mods.attach_to_signal import AttachToSignal
 
 class SignalToken:
     """ Represents a tokenized Signal callback """
-    ROLE = SIGNAL
+    ROLE = MOD
     
     @classmethod
     def isValidFor(cls, section):
@@ -22,6 +24,10 @@ class SignalToken:
         signal = getattr(controller, self.signalName)
         for value in self.values:
             signal.register(value.getValue(scope).get())
+        
+    def build(self, config, scope):
+        """ Build this type from the config """
+        return AttachToSignal(self.signalName, [value.getValue(scope) for value in self.values])
         
     def __repr__(self):
         return "<SignalToken:{0}:{1}>".format(self.signalName, self.values)
