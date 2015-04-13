@@ -14,11 +14,11 @@ class ForLoopToken:
     def isValidFor(cls, section):
         """ Return if this token is valid for the given section """
         firstLine = section[0].strip()
-        return firstLine.startswith('#') and firstLine.endswith(':')
+        return firstLine.startswith('@for')
     
     def __init__(self, section, factory):
         """ Initialize the For Loop Token """
-        loopDef = section[0].strip()[5:-1]
+        loopDef = section[0].strip()[5:]
         entryVarName, listVarName = loopDef.split(' in ', maxsplit=1)
         self.entryName = entryVarName.strip()
         self.listValueToken = ValueFactory.buildScopeValue(listVarName.strip())
