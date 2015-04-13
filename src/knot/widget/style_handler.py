@@ -12,3 +12,7 @@ class StyleHandler:
     def applyStyling(self, widget=None, event=None):
         """ Apply the styling """
         self.widget._qwidget.setStyleSheet(self.styling)
+        
+    def setStyling(self, styling):
+        """ Set the styling """
+        self.styling = styling

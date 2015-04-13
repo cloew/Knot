@@ -14,8 +14,9 @@ from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
 @proxy_for('_qwidget', ['show', 'sizeHint'])
 @proxy_for('containerHandler', ['direction', 'setDirection', 'getDefaultChildrenPolicies', 'getContainerSidePosition'])
-@proxy_for('rectangle', ['width', 'height', 'left', 'right', 'top', 'bottom', 'getSidePosition', 'setSidePosition'])
 @proxy_for('qtHandler', ['hasQWidget', 'setQWidget', 'setContent', 'setValue', 'getValueSignal', '_qwidget', 'moveTo', 'resizeTo'])
+@proxy_for('rectangle', ['width', 'height', 'left', 'right', 'top', 'bottom', 'getSidePosition', 'setSidePosition'])
+@proxy_for('styleHandler', ['setStyling'])
 class Widget(BaseWidget):
     """ Represents a widget within Knot """
     
