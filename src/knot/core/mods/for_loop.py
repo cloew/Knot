@@ -26,7 +26,8 @@ class ForLoop:
         
     def addChildren(self, values):
         """ Add a child for each value in values """
-        for value in values:
+        for i, value in enumerate(values):
             newScope = copy(self.scope)
+            newScope.index = i
             setattr(newScope, self.entryName, value)
             self.componentsLoader.loadAll(self.tokens, scope=newScope, onto=self.widget)
