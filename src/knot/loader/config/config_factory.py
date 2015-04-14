@@ -5,6 +5,8 @@ from .required_mod_config import RequiredModConfig
 from .service_config import ServiceConfig
 from .widget_config import WidgetConfig, WIDGET_TYPE
 
+from .args.arg_factory import ModArgsConfigFactory
+
 from kao_factory.factory import Factory
 from kao_factory.Parameter.complex_parameter import ComplexParameter
 from kao_factory.Parameter.primitive_parameter import PrimitiveParameter
@@ -24,7 +26,9 @@ WidgetConfigFactory = Factory(WidgetConfig, widgetParameters)
 WidgetConfigFactory.addParameter(ComplexParameter("childWidgets", WidgetConfigFactory.loadAll, optional=True, default=[]))
 
 modParameters = [PrimitiveParameter("name"),
-                 PrimitiveParameter("class")]
+                 PrimitiveParameter("class"),
+                 PrimitiveParameter("token", optional=True),
+                 ComplexParameter("args", ModArgsConfigFactory.loadAll, optional=True, default=[])]
                      
 ModConfigFactory = Factory(ModConfig, modParameters)
 
