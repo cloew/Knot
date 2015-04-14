@@ -14,7 +14,7 @@ class ContentToken:
         """ Return if this token is valid for the given section """
         return True
     
-    def __init__(self, section):
+    def __init__(self, section, factory=None):
         """ Initialize the Content Token """
         self.valueTokens = []
         text = section[0].strip()

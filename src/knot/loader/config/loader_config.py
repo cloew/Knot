@@ -14,6 +14,7 @@ class LoaderConfig:
         self.attributesFactory = {}
         self.attributesFactory[POSITION] = KnotConfigFactory()
         self.attributesFactory[SIZING] = KnotConfigFactory()
+        self.modFactory = KnotConfigFactory()
         
         self.importPackage(self.CORE_KNOT_PACKAGE)
         
@@ -23,6 +24,7 @@ class LoaderConfig:
         self.widgetFactory.update(packageConfig.widgetConfigs)
         self.attributesFactory[POSITION].update(packageConfig.positioningConfigs)
         self.attributesFactory[SIZING].update(packageConfig.sizingConfigs)
+        self.modFactory.update(packageConfig.modConfigs)
         
     def copy(self, additionalWidgetConfigs=[]):
         """ Return a new Loader Config with the given additional widget configs """

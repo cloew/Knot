@@ -1,3 +1,4 @@
+from .mod_config import ModConfig
 from .package_config import PackageConfig
 from .policy_config import PolicyConfig
 from .required_mod_config import RequiredModConfig
@@ -22,6 +23,11 @@ widgetParameters = [PrimitiveParameter("name"),
 WidgetConfigFactory = Factory(WidgetConfig, widgetParameters)
 WidgetConfigFactory.addParameter(ComplexParameter("childWidgets", WidgetConfigFactory.loadAll, optional=True, default=[]))
 
+modParameters = [PrimitiveParameter("name"),
+                 PrimitiveParameter("class")]
+                     
+ModConfigFactory = Factory(ModConfig, modParameters)
+
 policyParameters = [PrimitiveParameter("name"),
                     PrimitiveParameter("class")]
                      
@@ -29,6 +35,7 @@ PolicyConfigFactory = Factory(PolicyConfig, policyParameters)
 ServiceConfigFactory = Factory(ServiceConfig, policyParameters)
 
 packageParameters = [ComplexParameter("widgets", WidgetConfigFactory.loadAll, optional=True, default=[]),
+                     ComplexParameter("mods", ModConfigFactory.loadAll, optional=True, default=[]),
                      ComplexParameter("positioning", PolicyConfigFactory.loadAll, optional=True, default=[]),
                      ComplexParameter("sizing", PolicyConfigFactory.loadAll, optional=True, default=[]),
                      ComplexParameter("services", ServiceConfigFactory.loadAll, optional=True, default=[])]
