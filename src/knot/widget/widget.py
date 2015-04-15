@@ -15,7 +15,7 @@ from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
 @proxy_for('_qwidget', ['sizeHint'])
 @proxy_for('containerHandler', ['direction', 'setDirection', 'getDefaultChildrenPolicies', 'getContainerSidePosition'])
-@proxy_for('displayHandler', ['show', 'hide', 'isVisible', 'isHidden'])
+@proxy_for('displayHandler', ['show', 'hide', 'visible', 'hidden'])
 @proxy_for('qtHandler', ['hasQWidget', 'setQWidget', 'setContent', 'setValue', 'getValueSignal', '_qwidget', 'moveTo', 'resizeTo'])
 @proxy_for('rectangle', ['width', 'height', 'left', 'right', 'top', 'bottom', 'getSidePosition', 'setSidePosition'])
 @proxy_for('styleHandler', ['setStyling'])
@@ -28,10 +28,10 @@ class Widget(BaseWidget):
         """ Initialize the widget with its painters and policies """
         self.painter = painter
         self.containerHandler = ContainerHandler(self)
-        self.displayHandler = DisplayHandler(self)
         self.rectangle = KnotRectangle(self)
         BaseWidget.__init__(self, widgetType, content=content, controller=controller, mods=mods)
         
+        self.displayHandler = DisplayHandler(self)
         self.positioningDefaults = PositioningDefaultsProvider(self)
         self.positioningHandler = PoliciesHandler(self, self.positioningDefaults, policies=positionings)
         self.sizingHandler = PoliciesHandler(self, SizingDefaultsProvider(self), policies=sizings)

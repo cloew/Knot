@@ -71,6 +71,6 @@ class KnotRectangle:
         
     def showChanges(self):
         """ Show changes to the underlying qwidget """
-        if self.widget.isVisible:
+        if self.widget.visible:
             self.widget.show()
         
