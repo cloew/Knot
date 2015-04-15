@@ -14,7 +14,7 @@
     "mods":[{"name":"display-if",
              "class":"knot.core.mods.display_if.DisplayIf",
              "token":"$arg",
-             "args":[{"type":"value"}]},
+             "args":[{"type":"expr"}]},
             {"name":"for",
              "class":"knot.core.mods.for_loop.ForLoop",
              "token":"$arg in $arg",

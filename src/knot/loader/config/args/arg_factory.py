@@ -1,6 +1,7 @@
-from .arg_types import CONFIG, SCOPE, TEXT, TOKENS, VALUE, VALUE_LIST
+from .arg_types import CONFIG, EXPRESSION, SCOPE, TEXT, TOKENS, VALUE, VALUE_LIST
 
 from .config_arg import ConfigArg
+from .expression_arg import ExpressionArg
 from .scope_arg import ScopeArg
 from .text_arg import TextArg
 from .tokens_arg import TokensArg
@@ -11,6 +12,7 @@ from kao_factory.factory import Factory
 from kao_factory.typed_factory import TypedFactory
 
 modArgFactories = {CONFIG:Factory(ConfigArg, []),
+                   EXPRESSION:Factory(ExpressionArg, []),
                    SCOPE:Factory(ScopeArg, []),
                    TEXT:Factory(TextArg, []),
                    TOKENS:Factory(TokensArg, []),

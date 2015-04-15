@@ -1,4 +1,3 @@
-from .scoped_value import ScopedValue
 
 class OneWayBinding:
     """ Represents a scoped value or a static value """
@@ -18,6 +17,6 @@ class OneWayBinding:
     def getValue(self, obj):
         """ Return the value """
         value = getattr(obj, self.argName)
-        if value.__class__ is ScopedValue:
+        if hasattr(value, 'get'):
             value = value.get()
         return value
