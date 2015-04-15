@@ -1,5 +1,6 @@
 from .base_widget import BaseWidget
 from .container_handler import ContainerHandler
+from .display_handler import DisplayHandler
 from .knot_rectangle import KnotRectangle
 from .policies_handler import PoliciesHandler
 from .positioning_defaults_provider import PositioningDefaultsProvider
@@ -12,8 +13,9 @@ from knot.core.painters.container_painter import ContainerPainter
 from kao_decorators import proxy_for
 from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
-@proxy_for('_qwidget', ['show', 'sizeHint'])
+@proxy_for('_qwidget', ['sizeHint'])
 @proxy_for('containerHandler', ['direction', 'setDirection', 'getDefaultChildrenPolicies', 'getContainerSidePosition'])
+@proxy_for('displayHandler', ['show', 'hide', 'isVisible', 'isHidden'])
 @proxy_for('qtHandler', ['hasQWidget', 'setQWidget', 'setContent', 'setValue', 'getValueSignal', '_qwidget', 'moveTo', 'resizeTo'])
 @proxy_for('rectangle', ['width', 'height', 'left', 'right', 'top', 'bottom', 'getSidePosition', 'setSidePosition'])
 @proxy_for('styleHandler', ['setStyling'])
@@ -26,6 +28,7 @@ class Widget(BaseWidget):
         """ Initialize the widget with its painters and policies """
         self.painter = painter
         self.containerHandler = ContainerHandler(self)
+        self.displayHandler = DisplayHandler(self)
         self.rectangle = KnotRectangle(self)
         BaseWidget.__init__(self, widgetType, content=content, controller=controller, mods=mods)
         
