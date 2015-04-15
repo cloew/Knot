@@ -17,4 +17,4 @@ class DisplayHandler:
     @property
     def isHidden(self):
         """ Return whether the widget is hidden """
-        return self._qwidget.isHidden()
+        return not self.isVisible

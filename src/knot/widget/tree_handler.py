@@ -48,7 +48,10 @@ class TreeHandler:
         
     def getPreviousSibling(self):
         """ Return the previous sibling of this widget """
-        siblings = self.parent.children
+        if self.widget.isHidden:
+            return None
+            
+        siblings = self.visibleSiblings
         currentWidgetIndex = siblings.index(self.widget)
         if currentWidgetIndex == 0:
             return None
@@ -57,9 +60,17 @@ class TreeHandler:
         
     def getNextSibling(self):
         """ Return the next sibling of this widget """
-        siblings = self.parent.children
+        if self.widget.isHidden:
+            return None
+            
+        siblings = self.visibleSiblings
         currentWidgetIndex = siblings.index(self.widget)
         if currentWidgetIndex == (len(siblings)-1):
             return None
         else:
             return siblings[currentWidgetIndex+1]
+            
+    @property
+    def visibleSiblings(self):
+        """ Return the visible siblings """
+        return [child for child in self.parent.children if child.isVisible]
