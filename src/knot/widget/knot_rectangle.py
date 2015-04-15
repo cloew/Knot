@@ -29,7 +29,7 @@ class KnotRectangle:
     @left.setter
     def left(self, value):
         self.widget._qwidget.move(value, self.top)
-        self.widget._qwidget.show()
+        self.showChanges()
         
     @property
     def right(self):
@@ -39,7 +39,7 @@ class KnotRectangle:
     @right.setter
     def right(self, value):
         self.widget._qwidget.move(value-self.width, self.top)
-        self.widget._qwidget.show()
+        self.showChanges()
         
     @property
     def top(self):
@@ -49,7 +49,7 @@ class KnotRectangle:
     @top.setter
     def top(self, value):
         self.widget._qwidget.move(self.left, value)
-        self.widget._qwidget.show()
+        self.showChanges()
         
     @property
     def bottom(self):
@@ -59,7 +59,7 @@ class KnotRectangle:
     @bottom.setter
     def bottom(self, value):
         self.widget._qwidget.move(value-self.height, self.top)
-        self.widget._qwidget.show()
+        self.showChanges()
         
     def getSidePosition(self, side):
         """ Return the pixel position of the given side """
@@ -68,3 +68,9 @@ class KnotRectangle:
     def setSidePosition(self, side, value):
         """ Set the pixel position of the given side """
         setattr(self, self.SIDE_TO_VAR_NAME[side], value)
+        
+    def showChanges(self):
+        """ Show changes to the underlying qwidget """
+        if self.widget.isVisible:
+            self.widget.show()
+        

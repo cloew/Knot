@@ -1,12 +1,12 @@
 from knot.events.event_group import EventGroup
-from knot.events.event_types import CHILD_ADDED
+from knot.events.event_types import CHILD_ADDED, DISPLAYED, HIDDEN
 
 class ChildrenTracker:
     """ Helper class to track events on a widget's children """
     
     def __init__(self, events, callback):
         """ Initialize the widget tracker """
-        self.events = events
+        self.events = events + [DISPLAYED, HIDDEN]
         self.callback = callback
         
     def apply(self, widget):
