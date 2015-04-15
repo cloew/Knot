@@ -27,6 +27,9 @@ class QtHandler:
     def setQWidget(self, qwidget):
         """ Set the underlying Qt Widget for this widget """
         self._qwidget = qwidget
+        if self.widget.parent is not None:
+            self._qwidget.setParent(self.widget.parent._qwidget)
+        
         self.widget.eventHandler.attachEvents(qwidget)
         self.widget.fire(WIDGET_CREATED)
         

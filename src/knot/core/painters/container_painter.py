@@ -24,5 +24,3 @@ class ContainerPainter(Painter):
     def drawChild(self, child, qwidget):
         """ Draw the child """
         child.draw()
-        child._qwidget.setParent(qwidget)
-        child.show()
