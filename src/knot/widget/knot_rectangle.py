@@ -1,5 +1,14 @@
 from knot.sides import LEFT, RIGHT, TOP, BOTTOM
 
+def qwidget_dimension(fn):
+    """ Decorate a fn so that it is only called when the underlying qwidget exists """
+    def checkQWidget(self):
+        if self.widget._qwidget is None:
+            return 0
+        else:
+            return fn(self)
+    return checkQWidget
+
 class KnotRectangle:
     """ Represents the pixel coordinates and dimension sizes of a Knot Widget """
     SIDE_TO_VAR_NAME = {LEFT: 'left',
@@ -12,16 +21,19 @@ class KnotRectangle:
         self.widget = widget
         
     @property
+    @qwidget_dimension
     def height(self):
         """ Return the widget's height """
         return self.widget._qwidget.height()
         
     @property
+    @qwidget_dimension
     def width(self):
         """ Return the widget's width """
         return self.widget._qwidget.width()
         
     @property
+    @qwidget_dimension
     def left(self):
         """ Return the widget's left x coordinate """
         return self.widget._qwidget.x()
@@ -42,6 +54,7 @@ class KnotRectangle:
         self.showChanges()
         
     @property
+    @qwidget_dimension
     def top(self):
         """ Return the widget's top y coordinate """
         return self.widget._qwidget.y()
@@ -54,7 +67,7 @@ class KnotRectangle:
     @property
     def bottom(self):
         """ Return the widget's bottom y coordinate """
-        return self.widget._qwidget.y() + self.height
+        return self.top + self.height
 
     @bottom.setter
     def bottom(self, value):
