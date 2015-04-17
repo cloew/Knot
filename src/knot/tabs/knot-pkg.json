@@ -1,0 +1,9 @@
+{
+    "widgets":[{"name":"tab-view",
+                "painter":"knot.tabs.painters.tab_painter.TabPainter",
+                "controller":"knot.tabs.controllers.tab_view_controller.TabViewController",
+                "childWidgets":[{"name":"tab",
+                                 "controller":"knot.tabs.controllers.tab_controller.TabController",
+                                 "childWidgets":[{"name":"label",
+                                                  "type":"semantic"}]}]}]
+}
