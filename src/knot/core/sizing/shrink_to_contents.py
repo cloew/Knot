@@ -32,14 +32,19 @@ class ShrinkToContents:
         
     def getWidth(self, widget):
         """ Return the proper width for the widget """
-        width = 0
-        if len(widget.children) > 0:
-            width = max([child.right for child in widget.children])
-        return width
+        return self._getDimensionValue(widget, 'width', HORIZONTAL)
         
     def getHeight(self, widget):
         """ Return the proper height for the widget """
-        height = 0
+        return self._getDimensionValue(widget, 'height', VERTICAL)
+        
+    def _getDimensionValue(self, widget, fieldName, dimension):
+        """ Return the dimension value for the widget """
+        value = 0
         if len(widget.children) > 0:
-            height = max([child.bottom for child in widget.children])
-        return height
+            values = [getattr(child, fieldName) for child in widget.children]
+            if widget.direction.dimension is dimension:
+                value = sum(values)
+            else:
+                value = max(values)
+        return value
