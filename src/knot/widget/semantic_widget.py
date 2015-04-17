@@ -6,3 +6,8 @@ class SemanticWidget(BaseWidget):
     def draw(self):
         """ Draw the widget """
         pass
+        
+    @property
+    def visible(self):
+        """ Return false since semantic widgets should never be visible """
+        return False
