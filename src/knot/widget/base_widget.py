@@ -31,3 +31,7 @@ class BaseWidget:
     def attachWidgetToMod(self, mod):
         if hasattr(mod, 'attachWidget'):
             mod.attachWidget(self)
+            
+    def __repr__(self):
+        """ Return the string representation of this widget """
+        return "<{0}({1})>".format(self.__class__.__name__, self.widgetType)
