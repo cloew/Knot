@@ -11,7 +11,7 @@ class Center:
         """ Initialize the Centerer """
         self.dimension = dimension
         self.widgetTracker = WidgetTracker([DISPLAYED, RESIZED], self.reposition)
-        self.parentTracker = WidgetTracker([RESIZED], self.reposition)
+        self.parentTracker = ParentTracker([RESIZED], self.reposition)
         
     def handlesDimension(self, dimension):
         """ Return if this policy positions widgets in the given dimension """
@@ -36,6 +36,6 @@ class Center:
         
         if self.dimension is BOTH or self.dimension is VERTICAL:
             newTop = centery - widget.height/2
-        
+            
         widget.left = newLeft
         widget.top = newTop
