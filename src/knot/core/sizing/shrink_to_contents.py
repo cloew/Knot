@@ -41,8 +41,8 @@ class ShrinkToContents:
     def _getDimensionValue(self, widget, fieldName, dimension):
         """ Return the dimension value for the widget """
         value = 0
-        if len(widget.children) > 0:
-            values = [getattr(child, fieldName) for child in widget.children]
+        values = [getattr(child, fieldName) for child in widget.children if child.visible]
+        if len(values) > 0:
             if widget.direction.dimension is dimension:
                 value = sum(values)
             else:
