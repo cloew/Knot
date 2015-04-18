@@ -1,7 +1,9 @@
+from knot import KnotService
 from knot.events.event_types import CHILD_ADDED, WIDGET_CREATED
 
 class TabViewController:
     """ Controller to handle mapping Tabs """
+    app = KnotService('app')
     
     def __init__(self):
         """ Initialize the controller """
@@ -21,6 +23,11 @@ class TabViewController:
     def addTab(self, tab):
         """ Add the tab to the underlying QTabWidget """
         tab.draw()
+        
+        def updateTabLabel(value):
+            self.widget._qwidget.setTabText(self._tabs.index(tab), value)
+            
+        self.app.watch(tab, 'controller.label', updateTabLabel)
         self.widget._qwidget.addTab(tab._qwidget, tab.controller.label)
         
     def trackChildTab(self, widget=None, event=None):
