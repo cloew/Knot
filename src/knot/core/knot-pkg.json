@@ -1,7 +1,10 @@
 {
     "widgets":[{"name":"context-menu",
                 "type":"semantic",
-                "controller":"knot.core.controllers.context_menu_controller.ContextMenuController"},
+                "controller":"knot.core.controllers.context_menu_controller.ContextMenuController",
+                "childWidgets":[{"name":"entry",
+                                 "type":"semantic",
+                                 "controller":"knot.core.controllers.menu_entry_controller.MenuEntryController"}]},
                {"name":"div",
                 "painter":"knot.core.painters.container_painter.ContainerPainter",
                 "controller":"knot.core.controllers.div_controller.DivController"},

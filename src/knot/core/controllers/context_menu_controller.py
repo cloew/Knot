@@ -7,9 +7,6 @@ from PySide.QtGui import QMenu
 
 class ContextMenuController:
     """ Handles the management of a Right-Click Context Menu """
-    
-    def __init__(self):
-        """ Initialize the Context Menu Controller """
         
     def attachWidget(self, widget):
         """ Attach to the widget """
