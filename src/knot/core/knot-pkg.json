@@ -1,5 +1,8 @@
 {
-    "widgets":[{"name":"div",
+    "widgets":[{"name":"context-menu",
+                "type":"semantic",
+                "controller":"knot.core.controllers.context_menu_controller.ContextMenuController"},
+               {"name":"div",
                 "painter":"knot.core.painters.container_painter.ContainerPainter",
                 "controller":"knot.core.controllers.div_controller.DivController"},
                {"name":"img",
