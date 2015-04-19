@@ -26,5 +26,5 @@ class MenuEntryController:
         
     @property
     def actionText(self):
-        """ Return the parent menu """
+        """ Return the text for the action """
         return self.widget.content.text if self.widget.content is not None else ''
