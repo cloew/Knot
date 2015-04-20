@@ -13,7 +13,7 @@ from knot.core.painters.container_painter import ContainerPainter
 from kao_decorators import proxy_for
 from smart_defaults import smart_defaults, EvenIfNone, PerCall
 
-@proxy_for('_qwidget', ['sizeHint'])
+@proxy_for('_qwidget', ['sizeHint', 'geometry'])
 @proxy_for('containerHandler', ['direction', 'setDirection', 'getDefaultChildrenPolicies', 'getContainerSidePosition'])
 @proxy_for('displayHandler', ['show', 'hide', 'visible', 'hidden'])
 @proxy_for('qtHandler', ['hasQWidget', 'setQWidget', 'setContent', 'setValue', 'getValueSignal', '_qwidget', 'moveTo', 'resizeTo'])

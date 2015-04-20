@@ -11,3 +11,7 @@ class SemanticWidget(BaseWidget):
     def visible(self):
         """ Return false since semantic widgets should never be visible """
         return False
+        
+    def geometry(self):
+        """ Retutn the geometry """
+        return None
