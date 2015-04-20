@@ -1,5 +1,6 @@
 from knot.dimensions import HORIZONTAL, VERTICAL
 from knot.events.event_types import WIDGET_CREATED
+from knot.core.sizing.stretch import Stretch
 from .widget.widget import Widget
 
 from .core.painters.window_painter import WindowPainter
@@ -14,7 +15,8 @@ class KnotWindow(Widget):
         """ Initialize the window """
         Widget.__init__(self, 'window', painter=WindowPainter(''))
         self.title = title
-        self.on(WIDGET_CREATED, self._setWindowTitle)
+        self.centralWidget = Widget('body')
+        self.on(WIDGET_CREATED, self.onQWidgetCreated)
             
     @property
     def title(self):
@@ -27,15 +29,32 @@ class KnotWindow(Widget):
         self.__title = value
         self._setWindowTitle()
         
-    def _setWindowTitle(self, parent=None, event=None):
+    def onQWidgetCreated(self, widget=None, event=None):
+        """ Update the QWidget """
+        self._setWindowTitle()
+        self.setCentralWidget()
+        
+    def _setWindowTitle(self):
         """ Set the title on the window """
         if self.hasQWidget():
             self.setWindowTitle(self.__title)
+            
+    def addChild(self, child):
+        """ Add the child """
+        if child.widgetType in ['body', 'menu-bar']:
+            super().addChild(child)
+        else:
+            self.centralWidget.addChild(child)
+    
+    def setCentralWidget(self, widget=None, event=None):
+        """ Set the central widget of the window """
+        self.centralWidget.draw()
+        self._qwidget.setCentralWidget(self.centralWidget._qwidget)
         
     def printChildren(self, parent=None, event=None):
         """ """
         if parent is None:
             parent = self
         for child in parent.children:
-            print(child, child._qwidget.geometry())
+            print(child, child.geometry())
             self.printChildren(parent=child)
