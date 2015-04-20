@@ -24,10 +24,10 @@ class QtHandler:
         """ Return if the underlying qt widget has been built """
         return self._qwidget is not None
         
-    def setQWidget(self, qwidget):
+    def setQWidget(self, qwidget, ignoreParent=False):
         """ Set the underlying Qt Widget for this widget """
         self._qwidget = qwidget
-        if self.widget.parent is not None:
+        if self.widget.parent is not None and not ignoreParent:
             self._qwidget.setParent(self.widget.parent._qwidget)
         
         self.widget.eventHandler.attachEvents(qwidget)

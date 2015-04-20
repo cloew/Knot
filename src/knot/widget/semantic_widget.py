@@ -5,7 +5,8 @@ class SemanticWidget(BaseWidget):
         
     def draw(self):
         """ Draw the widget """
-        pass
+        for child in self.children:
+            child.draw()
         
     @property
     def visible(self):

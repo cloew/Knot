@@ -41,7 +41,7 @@ class KnotWindow(Widget):
             
     def addChild(self, child):
         """ Add the child """
-        if child.widgetType in ['body', 'menu-bar']:
+        if child.widgetType in ['body', 'menu-bar', 'status-bar']:
             super().addChild(child)
         else:
             self.centralWidget.addChild(child)

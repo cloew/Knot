@@ -11,7 +11,7 @@ class DefaultPolicies:
         if BOTH not in self._dimensionToPolicy:
             self.dimensionToPolicy[BOTH] = [self._dimensionToPolicy[HORIZONTAL], self._dimensionToPolicy[VERTICAL]]
         else:
-            self.dimensionToPolicy[BOTH] = self._dimensionToPolicy[BOTH]
+            self.dimensionToPolicy[BOTH] = self.convertPolicyToList(self._dimensionToPolicy[BOTH])
             
         for dimension in [HORIZONTAL, VERTICAL]:
             self.dimensionToPolicy[dimension] = self.convertPolicyToList(dimension)
