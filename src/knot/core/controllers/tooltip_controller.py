@@ -1,9 +1,7 @@
-from knot import KnotService
 from knot.events.event_types import PARENT_ADDED, WIDGET_CREATED
 
 class TooltipController:
     """ Handles adding a tooltip to a widget """
-    app = KnotService('app')
         
     def attachWidget(self, widget):
         """ Attach to the widget """
@@ -14,7 +12,6 @@ class TooltipController:
         """ Track the parent widget """
         self.widget.parent.on(WIDGET_CREATED, self.addTooltip)
         if self.widget.content is not None:
-            self.widget.content.addWatch(self.app)
             self.widget.content.changed.register(self.addTooltip)
         
     def addTooltip(self, widget=None, event=None):

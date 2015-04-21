@@ -1,8 +1,9 @@
-from knot.service_manager import ServiceManager
+from knot import KnotService
 from knot.events.signal import Signal
 
 class Content:
     """ Represents the content in a widget """
+    app = KnotService('app')
     
     def __init__(self, text, scopedValues):
         """ Initialize the Content """
@@ -10,9 +11,8 @@ class Content:
         self.scopedValues = scopedValues
         self.changed = Signal()
         
-    def addWatch(self, app):
-        """ Add the watch for this content to the app """
-        app.watch(self, 'text', self.changed.emit)
+        if len(self.scopedValues) > 0:
+            self.app.watch(self, 'text', self.changed.emit)
         
     @property
     def text(self):
