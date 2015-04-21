@@ -68,7 +68,9 @@
                "class":"knot.core.sizing.shrink_to_contents.ShrinkToContents"},
               {"name":"stretch",
                "class":"knot.core.sizing.stretch.Stretch"}],
-    "services":[{"name":"fileLoader",
+    "services":[{"name":"cli-args",
+                 "class":"knot.core.services.command_line_arguments.CommandLineArguments"},
+                {"name":"fileLoader",
                  "class":"knot.core.services.file_loader.FileLoader"},
                 {"name":"window",
                  "class":"knot.core.services.window.Window"}]
