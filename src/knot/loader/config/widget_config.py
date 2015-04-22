@@ -1,17 +1,20 @@
 from .config_helper import ConvertConfigsToDictionary
 
 from knot.widget.widget import Widget
+from knot.widget.passthrough_widget import PassthroughWidget
 from knot.widget.semantic_widget import SemanticWidget
 
 from kao_modules import NamespacedClass
 from kao_resources import ResourceDirectory
 
 WIDGET_TYPE = "widget"
+PASSTHROUGH_TYPE = "passthrough"
 SEMANTIC_TYPE = "semantic"
 
 class WidgetConfig:
     """ Represents the configuration for a widget """
     WIDGET_BUILDERS = {WIDGET_TYPE: 'buildWidget',
+                       PASSTHROUGH_TYPE: 'buildPassthroughWidget',
                        SEMANTIC_TYPE: 'buildSemanticWidget'}
     
     def __init__(self, name, type=WIDGET_TYPE, painterClassname=None, template=None, controllerClassname=None, reqMods=[], childWidgetConfigs=[]):
@@ -45,6 +48,10 @@ class WidgetConfig:
         """ Build the widget object """
         painter = self.tryToIntantiateClass(self.namespacedPainterClass, content)
         return Widget(self.name, content, painter=painter, controller=controller, positionings=positionings, sizings=sizings, mods=mods, styling=styling)
+        
+    def buildPassthroughWidget(self, content, controller, mods, *args, **kwargs):
+        """ Build the passthrough widget object """
+        return PassthroughWidget(self.name, content, controller=controller, mods=mods)
         
     def buildSemanticWidget(self, content, controller, mods, *args, **kwargs):
         """ Build the semantic widget object """
