@@ -9,7 +9,7 @@ class ModConfig:
         self.tokenClass = NamespacedClass(tokenClass)
         
         if token is not None:
-            self.tokenPieces = [tokenPiece.strip() for tokenPiece in token.split('$arg') if tokenPiece.strip() != '']
+            self.tokenPieces = [tokenPiece for tokenPiece in token.split('$arg') if tokenPiece.strip() != '']
         else:
             self.tokenPieces = []
         self.args = args
