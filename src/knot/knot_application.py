@@ -3,6 +3,7 @@ from .knot_window import KnotWindow
 from .service_manager import ServiceManager
 from .watch_manager import WatchManager
 from .loader.knot_loader import KnotLoader
+from .loader.config.loader_config import LoaderConfig
 
 from kao_resources import ResourceDirectory
 from PySide.QtGui import QApplication
@@ -30,7 +31,7 @@ class KnotApplication:
         
     def loadWidgets(self, filename):
         """ Load the widgets onto the window """
-        loader = KnotLoader(filename)
+        loader = KnotLoader(filename, LoaderConfig())
         loader.load(onto=self.window)
         
     def run(self):

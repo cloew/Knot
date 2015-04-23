@@ -25,6 +25,7 @@ class WidgetToken:
     def __init__(self, section, factory):
         """ Intialize the Widget Token with the section it was loaded from """
         self.parent = None
+        self.config = None
         self.widgetType = self.getWidgetType(section)
         self.processor = ChildTokenProcessor(self, factory)
         self.processor.process(section[1:])
@@ -34,8 +35,9 @@ class WidgetToken:
         if not factory.isValidType(self.widgetType.type):
             raise KnotParseError('Unknown widget: {0}'.format(self.widgetType.type))
         
+        self.config = factory.config[self.widgetType.type]
         content = self.content.build(scope) if self.content is not None else None
-        widget = factory.build(self.widgetType.type, content, *self.widgetType.getArgumentValues(scope), **kwargs)
+        widget = factory.build(self.widgetType.type, self, content, *self.widgetType.getArgumentValues(scope), **kwargs)
         return widget
         
     def getChildConfig(self, config):
