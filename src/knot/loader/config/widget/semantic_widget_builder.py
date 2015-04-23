@@ -3,7 +3,7 @@ from knot.widget.semantic_widget import SemanticWidget
 class SemanticWidgetBuilder:
     """ Helper class to build Semantic Widgets """
     
-    def __init__(self, name):
+    def __init__(self, name, painterClassname=None):
         """ Initialize the Semantic Widget Builder """
         self.name = name
     
