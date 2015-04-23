@@ -1,4 +1,5 @@
 from .config_helper import ConvertConfigsToDictionary
+from .optional_namespaced_class import OptionalNamespacedClass
 
 from knot.widget.widget import Widget
 from knot.widget.passthrough_widget import PassthroughWidget
@@ -21,14 +22,11 @@ class WidgetConfig:
         """ Initialize the widget config with its name and the painter classname """
         self.name = name
         self.type = type
-        self.controllerClassname = controllerClassname
-        self.painterClassname = painterClassname
+        self.controllerClass = OptionalNamespacedClass(controllerClassname)
+        self.painterClass = OptionalNamespacedClass(painterClassname)
         self.template = template
         self.reqMods = reqMods
         self.childWidgetConfigs = ConvertConfigsToDictionary(childWidgetConfigs)
-        
-        self.namespacedPainterClass = self.tryToBuildNamespacedClass(painterClassname)
-        self.namespacedControllerClass = self.tryToBuildNamespacedClass(controllerClassname)
         
     def setPackageFilename(self, filename):
         """ Set the package filename """
@@ -36,7 +34,7 @@ class WidgetConfig:
         
     def build(self, content, *args, positionings=None, sizings=None, styling=None, **kwargs):
         """ Return the proper widget object """
-        controller = self.tryToIntantiateClass(self.namespacedControllerClass, *args, **kwargs)
+        controller = self.controllerClass.tryToIntantiateClass(*args, **kwargs)
         mods = [reqMod.build() for reqMod in self.reqMods]
         
         builder = getattr(self, self.WIDGET_BUILDERS[self.type])
@@ -46,7 +44,7 @@ class WidgetConfig:
         
     def buildWidget(self, content, controller, mods, *args, positionings=None, sizings=None, styling=None, **kwargs):
         """ Build the widget object """
-        painter = self.tryToIntantiateClass(self.namespacedPainterClass, content)
+        painter = self.painterClass.tryToIntantiateClass(content)
         return Widget(self.name, content, painter=painter, controller=controller, positionings=positionings, sizings=sizings, mods=mods, styling=styling)
         
     def buildPassthroughWidget(self, content, controller, mods, *args, **kwargs):
@@ -69,11 +67,3 @@ class WidgetConfig:
     def __repr__(self):
         """ Return the string representation of the config """
         return "<WidgetConfig({0}, {1}, {2})>".format(self.name, self.painterClassname, self.controllerClassname)
-        
-    def tryToBuildNamespacedClass(self, classname):
-        """ Build the Namespaced Class object for the given name if the name is not None """
-        return None if classname is None else NamespacedClass(classname)
-        
-    def tryToIntantiateClass(self, namespacedClass, *args, **kwargs):
-        """ Instantiate the Namespaced Class object for the given name if the name is not None """
-        return None if namespacedClass is None else namespacedClass.instantiate(*args, **kwargs)
