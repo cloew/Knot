@@ -1,6 +1,8 @@
 from knot.dimensions import HORIZONTAL, VERTICAL
 from knot.events.event_types import WIDGET_CREATED
 from knot.core.sizing.stretch import Stretch
+
+from .knot_body import KnotBody
 from .widget.widget import Widget
 
 from .core.painters.window_painter import WindowPainter
@@ -15,7 +17,8 @@ class KnotWindow(Widget):
         """ Initialize the window """
         Widget.__init__(self, 'window', painter=WindowPainter(''))
         self.title = title
-        self.centralWidget = Widget('body')
+        self.centralWidget = KnotBody()
+        self.centralWidget.parent = self
         self.on(WIDGET_CREATED, self.onQWidgetCreated)
             
     @property
