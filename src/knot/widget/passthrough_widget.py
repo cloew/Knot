@@ -8,6 +8,10 @@ class PassthroughWidget(BaseWidget):
         """ Initialize the widget """
         BaseWidget.__init__(self, *args, **kwargs)
         self.on(PARENT_ADDED, self.addAllChildrenToParent)
+        
+    def draw(self):
+        """ Draw the widget """
+        pass
     
     def addChild(self, child):
         """ Add the given child to this widget's parent """
