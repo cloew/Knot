@@ -3,7 +3,8 @@ from .package_config import PackageConfig
 from .policy_config import PolicyConfig
 from .required_mod_config import RequiredModConfig
 from .service_config import ServiceConfig
-from .widget_config import WidgetConfig, WIDGET_TYPE
+from .widget_config import WidgetConfig
+from .widget.builder_factory import WIDGET_TYPE
 
 from .args.arg_factory import ModArgsConfigFactory
 

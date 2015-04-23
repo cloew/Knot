@@ -1,29 +1,18 @@
 from .config_helper import ConvertConfigsToDictionary
 from .optional_namespaced_class import OptionalNamespacedClass
+from .widget import builder_factory
 
-from knot.widget.widget import Widget
-from knot.widget.passthrough_widget import PassthroughWidget
-from knot.widget.semantic_widget import SemanticWidget
-
-from kao_modules import NamespacedClass
 from kao_resources import ResourceDirectory
-
-WIDGET_TYPE = "widget"
-PASSTHROUGH_TYPE = "passthrough"
-SEMANTIC_TYPE = "semantic"
 
 class WidgetConfig:
     """ Represents the configuration for a widget """
-    WIDGET_BUILDERS = {WIDGET_TYPE: 'buildWidget',
-                       PASSTHROUGH_TYPE: 'buildPassthroughWidget',
-                       SEMANTIC_TYPE: 'buildSemanticWidget'}
     
-    def __init__(self, name, type=WIDGET_TYPE, painterClassname=None, template=None, controllerClassname=None, reqMods=[], childWidgetConfigs=[]):
+    def __init__(self, name, type=builder_factory.WIDGET_TYPE, painterClassname=None, template=None, controllerClassname=None, reqMods=[], childWidgetConfigs=[]):
         """ Initialize the widget config with its name and the painter classname """
         self.name = name
         self.type = type
+        self.builder = builder_factory.getBuilder(type, name, painterClassname)
         self.controllerClass = OptionalNamespacedClass(controllerClassname)
-        self.painterClass = OptionalNamespacedClass(painterClassname)
         self.template = template
         self.reqMods = reqMods
         self.childWidgetConfigs = ConvertConfigsToDictionary(childWidgetConfigs)
@@ -36,24 +25,9 @@ class WidgetConfig:
         """ Return the proper widget object """
         controller = self.controllerClass.tryToIntantiateClass(*args, **kwargs)
         mods = [reqMod.build() for reqMod in self.reqMods]
-        
-        builder = getattr(self, self.WIDGET_BUILDERS[self.type])
-        widget = builder(content, controller, mods, *args, positionings=positionings, sizings=sizings, styling=styling, **kwargs)
+        widget = self.builder.build(content, controller, mods, *args, positionings=positionings, sizings=sizings, styling=styling, **kwargs)
         self.tryToLoadChildren(widget)
         return widget
-        
-    def buildWidget(self, content, controller, mods, *args, positionings=None, sizings=None, styling=None, **kwargs):
-        """ Build the widget object """
-        painter = self.painterClass.tryToIntantiateClass(content)
-        return Widget(self.name, content, painter=painter, controller=controller, positionings=positionings, sizings=sizings, mods=mods, styling=styling)
-        
-    def buildPassthroughWidget(self, content, controller, mods, *args, **kwargs):
-        """ Build the passthrough widget object """
-        return PassthroughWidget(self.name, content, controller=controller, mods=mods)
-        
-    def buildSemanticWidget(self, content, controller, mods, *args, **kwargs):
-        """ Build the semantic widget object """
-        return SemanticWidget(self.name, content, controller=controller, mods=mods)
         
     def tryToLoadChildren(self, widget):
         """ Load children for this widget based on its configuration """
