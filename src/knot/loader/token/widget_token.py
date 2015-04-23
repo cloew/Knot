@@ -40,13 +40,10 @@ class WidgetToken:
         widget = factory.build(self.widgetType.type, self, content, *self.widgetType.getArgumentValues(scope), **kwargs)
         return widget
         
-    def getChildConfig(self, config, widgetConfig=None):
+    def getChildConfig(self, config):
         """ Return the config to be used for any child widgets """
-        if widgetConfig is None:
-            widgetConfig = self.config
-            
-        if len(widgetConfig.childWidgetConfigs) > 0:
-            config = config.copy(additionalWidgetConfigs=widgetConfig.childWidgetConfigs)
+        if len(self.config.childWidgetConfigs) > 0:
+            config = config.copy(additionalWidgetConfigs=self.config.childWidgetConfigs)
         return config
         
     def __repr__(self):
