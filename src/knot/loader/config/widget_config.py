@@ -37,6 +37,8 @@ class WidgetConfig:
             
         from .loader_config import LoaderConfig
         config = LoaderConfig()
+        if token.parent is not None and self.type == builder_factory.PASSTHROUGH_TYPE:
+            config = config.copy(additionalWidgetConfigs=token.parent.config.childWidgetConfigs)
         knotLoader = KnotLoader(self.packageDirectory.getProperPath(self.template), config)
         knotLoader.load(onto=widget)
         
