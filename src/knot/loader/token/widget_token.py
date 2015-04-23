@@ -24,6 +24,7 @@ class WidgetToken:
     
     def __init__(self, section, factory):
         """ Intialize the Widget Token with the section it was loaded from """
+        self.parent = None
         self.widgetType = self.getWidgetType(section)
         self.processor = ChildTokenProcessor(self, factory)
         self.processor.process(section[1:])

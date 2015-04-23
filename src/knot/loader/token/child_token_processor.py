@@ -10,7 +10,7 @@ class ChildTokenProcessor:
     def __init__(self, parent, factory):
         """ Initialize the Child Token Processor with its parent """
         self.factory = factory
-        
+        self.parent = parent
         self.children = []
         self.attributes = {}
         self.content = None
@@ -28,6 +28,7 @@ class ChildTokenProcessor:
     def addChild(self, child):
         """ Add the child to the list of tracked child widgets """
         self.children.append(child)
+        child.parent = self.parent
         
     def setContent(self, content):
         """ Set the child content """
