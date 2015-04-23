@@ -2,7 +2,7 @@ from knot.dimensions import HORIZONTAL, VERTICAL
 from knot.events.event_types import WIDGET_CREATED
 from knot.core.sizing.stretch import Stretch
 
-from .knot_body import KnotBody
+from .knot_body import KnotBody, window_widgets
 from .widget.widget import Widget
 
 from .core.painters.window_painter import WindowPainter
@@ -44,7 +44,7 @@ class KnotWindow(Widget):
             
     def addChild(self, child):
         """ Add the child """
-        if child.widgetType in ['body', 'menu-bar', 'status-bar']:
+        if child.widgetType in window_widgets:
             super().addChild(child)
         else:
             self.centralWidget.addChild(child)
