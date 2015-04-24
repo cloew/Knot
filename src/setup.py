@@ -38,4 +38,5 @@ setup(name='knot',
       package_data = {'knot.core':['knot-pkg.json'],
                       'knot.forms':['knot-pkg.json'],
                       'knot.forms.partials':['*.knot']},
+      install_requires=['kao_resources>=0.0.1']
      )
