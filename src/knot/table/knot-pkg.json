@@ -1,0 +1,5 @@
+{
+    "widgets":[{"name":"table",
+                "painter":"knot.table.painters.table_painter.TablePainter",
+                "controller":"knot.table.controllers.table_controller.TableController"}]
+}
