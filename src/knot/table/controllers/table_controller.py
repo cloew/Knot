@@ -1,8 +1,10 @@
 from knot import KnotService
 from knot.events.event_types import CHILD_ADDED, WIDGET_CREATED
 
+from .knot_table_model import KnotTableModel
+
 class TableController:
-    """ Controller to handle managin a table """
+    """ Controller to handle managing a table """
     app = KnotService('app')
     
     def __init__(self):
@@ -12,20 +14,14 @@ class TableController:
     def attachWidget(self, widget):
         """ Attach the widget """
         self.widget = widget
-        widget.on(WIDGET_CREATED, self.addColumnsOnQCreation)
+        widget.on(WIDGET_CREATED, self.addModelOnQCreation)
         widget.on(CHILD_ADDED, self.trackColumns)
         
-    def addColumnsOnQCreation(self, widget, event=None):
-        """ Add actual columns to the table widget """
-        for column in self._columns:
-            self.addColumn(column)
-        
-    def addColumn(self, column):
-        """ Add the column to the underlying QTableWidget """
-        column.draw()
-            
-        # self.app.watch(tab, 'controller.label', updateTabLabel)
-        self.widget._qwidget.setColumnCount(len(self._columns))
+    def addModelOnQCreation(self, widget, event=None):
+        """ Add Table model to the table widget """
+        tableModel = KnotTableModel([column.controller for column in self._columns])
+        self.widget._qwidget.setModel(tableModel)
+        self.widget._qwidget.resizeColumnsToContents()
         
     def trackColumns(self, widget=None, event=None):
         """ Track the columns """
@@ -34,5 +30,3 @@ class TableController:
         
         for column in newColumns:
             self._columns.append(column)
-            if self.widget.canMove():
-                self.addColumn(column)

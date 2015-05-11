@@ -1,5 +1,9 @@
 {
     "widgets":[{"name":"table",
                 "painter":"knot.table.painters.table_painter.TablePainter",
-                "controller":"knot.table.controllers.table_controller.TableController"}]
+                "controller":"knot.table.controllers.table_controller.TableController",
+                "childWidgets":[{"name":"column",
+                                 "controller":"knot.table.controllers.column_controller.ColumnController",
+                                 "childWidgets":[{"name":"header",
+                                                  "type":"semantic"}]}]}]
 }
