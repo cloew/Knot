@@ -5,5 +5,7 @@
                 "childWidgets":[{"name":"column",
                                  "controller":"knot.table.controllers.column_controller.ColumnController",
                                  "childWidgets":[{"name":"header",
+                                                  "type":"semantic"},
+                                                 {"name":"cell",
                                                   "type":"semantic"}]}]}]
 }

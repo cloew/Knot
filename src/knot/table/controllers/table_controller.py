@@ -1,4 +1,4 @@
-from knot import KnotService
+from knot import KnotService, OneWayBinding, apply_knot_bindings
 from knot.events.event_types import CHILD_ADDED, WIDGET_CREATED
 
 from .knot_table_model import KnotTableModel
@@ -6,8 +6,10 @@ from .knot_table_model import KnotTableModel
 class TableController:
     """ Controller to handle managing a table """
     app = KnotService('app')
+    records = OneWayBinding('records')
     
-    def __init__(self):
+    @apply_knot_bindings
+    def __init__(self, records):
         """ Initialize the controller """
         self._columns = []
         
@@ -19,7 +21,7 @@ class TableController:
         
     def addModelOnQCreation(self, widget, event=None):
         """ Add Table model to the table widget """
-        tableModel = KnotTableModel([column.controller for column in self._columns])
+        tableModel = KnotTableModel(self.records, [column.controller for column in self._columns])
         self.widget._qwidget.setModel(tableModel)
         self.widget._qwidget.resizeColumnsToContents()
         

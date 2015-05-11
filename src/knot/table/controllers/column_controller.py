@@ -8,6 +8,7 @@ class ColumnController:
     def __init__(self):
         """ Initialize the controller """
         self.headerWidget = None
+        self.cellWidget = None
     
     def attachWidget(self, widget):
         """ Attach the widget """
@@ -19,6 +20,19 @@ class ColumnController:
         headers = self.widget.getChildrenWithType('header')
         if len(headers) > 0:
             self.headerWidget = headers[-1]
+            
+        cells = self.widget.getChildrenWithType('cell')
+        if len(cells) > 0:
+            self.cellWidget = cells[-1]
+            
+    def getData(self, scope):
+        """ Return the data for the particular scope """
+        content = self.cellContent
+        if content is not None:
+            content.scope = scope
+            return content.text
+        else:
+            return ''
         
     @property
     def header(self):
@@ -27,3 +41,11 @@ class ColumnController:
             return ''
         else:
             return self.headerWidget.content.text
+        
+    @property
+    def cellContent(self):
+        """ Return the header for this column """
+        if self.cellWidget is None:
+            return None
+        else:
+            return self.cellWidget.content
