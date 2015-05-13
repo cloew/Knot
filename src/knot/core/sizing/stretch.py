@@ -1,6 +1,7 @@
 from knot.dimensions import HORIZONTAL, VERTICAL, BOTH
 from knot.events.event_types import MOVED, RESIZED
 from knot.events.tracker.siblings_tracker import SiblingsTracker
+from knot.events.tracker.parent_tracker import ParentTracker
 
 class Stretch:
     """ Size a widget by letting it take up as much space as needed """
@@ -9,6 +10,7 @@ class Stretch:
         """ Initialize the Centerer """
         self.dimension = dimension
         self.siblingsTracker = SiblingsTracker([MOVED, RESIZED], self.resize)
+        self.parentTracker = ParentTracker([RESIZED], self.resize)
         
     def handlesDimension(self, dimension):
         """ Return if this policy positions widgets in the given dimension """
@@ -17,6 +19,7 @@ class Stretch:
     def applyToWidget(self, widget):
         """ Apply the policy to the neighbor """
         self.siblingsTracker.apply(widget)
+        self.parentTracker.apply(widget)
         
     def resize(self, widget):
         """ Adjust the given widget so it is sized properly """
@@ -29,5 +32,6 @@ class Stretch:
             width = widget.parent.width - requiredWidth
         if self.dimension is BOTH or self.dimension is VERTICAL:
             height = widget.parent.height
-        
-        widget.resizeTo(width, height)
+            
+        if widget.canMove():
+            widget.resizeTo(width, height)
