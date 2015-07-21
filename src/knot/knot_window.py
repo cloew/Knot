@@ -17,8 +17,8 @@ class KnotWindow(Widget):
         """ Initialize the window """
         Widget.__init__(self, 'window', painter=WindowPainter(''))
         self.title = title
-        self.centralWidget = KnotBody()
-        self.centralWidget.parent = self
+        self.body = KnotBody()
+        self.body.parent = self
         self.on(WIDGET_CREATED, self.onQWidgetCreated)
             
     @property
@@ -47,12 +47,12 @@ class KnotWindow(Widget):
         if child.widgetType in window_widgets:
             super().addChild(child)
         else:
-            self.centralWidget.addChild(child)
+            self.body.addChild(child)
     
     def setCentralWidget(self, widget=None, event=None):
         """ Set the central widget of the window """
-        self.centralWidget.draw()
-        self._qwidget.setCentralWidget(self.centralWidget._qwidget)
+        self.body.draw()
+        self._qwidget.setCentralWidget(self.body._qwidget)
         
     def printChildren(self, parent=None, event=None):
         """ """

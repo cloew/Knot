@@ -1,5 +1,4 @@
 from kao_factory.factory import Factory
-from kao_factory.Parameter.complex_parameter import ComplexParameter
 from kao_factory.Parameter.primitive_parameter import PrimitiveParameter
 from kao_factory.Source.json_source import JsonSource
 
